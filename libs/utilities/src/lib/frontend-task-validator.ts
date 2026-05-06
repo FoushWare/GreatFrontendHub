@@ -46,8 +46,8 @@ class BaseValidator {
   }
 
   protected cleanup(iframe: HTMLIFrameElement) {
-    if (iframe && iframe.parentNode) {
-      document.body.removeChild(iframe);
+    if (iframe) {
+      iframe.remove();
     }
   }
 

@@ -69,10 +69,14 @@ export const InputGroup = ({
   placeholder = "",
 }: any) => {
   const styles = getFieldStyles(isDark);
+  const id = `input-${label.replace(/\s+/g, "-").toLowerCase()}`;
   return (
     <div className="space-y-2">
-      <label className={styles.label}>{label}</label>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -95,10 +99,14 @@ export const TextAreaGroup = ({
   placeholder = "",
 }: any) => {
   const styles = getFieldStyles(isDark);
+  const id = `textarea-${label.replace(/\s+/g, "-").toLowerCase()}`;
   return (
     <div className="space-y-2">
-      <label className={styles.label}>{label}</label>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
       <textarea
+        id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={rows}
@@ -120,10 +128,14 @@ export const SelectGroup = ({
   isDark,
 }: any) => {
   const styles = getFieldStyles(isDark);
+  const id = `select-${label.replace(/\s+/g, "-").toLowerCase()}`;
   return (
     <div className="space-y-2">
-      <label className={styles.label}>{label}</label>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
       <select
+        id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={styles.select}
