@@ -137,7 +137,10 @@ export const ProblemSolvingEditorMainContent: React.FC<MainContentProps> = ({
             value={formData.difficulty}
             options={["easy", "medium", "hard"]}
             onChange={(v: string) =>
-              setFormData({ ...formData, difficulty: v })
+              setFormData({
+                ...formData,
+                difficulty: v as "easy" | "medium" | "hard",
+              })
             }
             isDark={isDark}
           />
