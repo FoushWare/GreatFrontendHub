@@ -14,7 +14,7 @@ import { sanitizeInputServer } from "./sanitize-server";
 export const emailSchema = z
   .string()
   .min(1, "Email is required")
-  .email()
+  .email("Invalid email address")
   .transform((val) => sanitizeInputServer(val.toLowerCase().trim()));
 
 // Password validation
@@ -51,7 +51,7 @@ export const contentSchema = z
 // URL validation
 export const urlSchema = z
   .string()
-  .url()
+  .url("Invalid URL")
   .transform((val) => sanitizeInputServer(val));
 
 // ID validation (UUID or string ID)
@@ -346,7 +346,10 @@ function _handleValidationError(
     return _formatZodError(error);
   }
 
-  return _handleGenericError(error);
+  return {
+    success: false,
+    error: getErrorMessage(error, "Validation failed: Internal error"),
+  };
 }
 
 /**
@@ -362,21 +365,6 @@ function _logValidationErrorContext(error: any, data: unknown): void {
     "🔴 Input data being validated:",
     JSON.stringify(data, null, 2),
   );
-}
-
-/**
- * Handles non-Zod errors (like native exceptions).
- */
-function _handleGenericError(error: any): { success: false; error: string } {
-  if (error instanceof Error) {
-    console.error("Validation error (non-Zod):", error);
-    return { success: false, error: `Validation error: ${error.message}` };
-  }
-  console.error("Validation error (unknown type):", error);
-  return {
-    success: false,
-    error: `Validation failed: ${error?.message || "Unknown error"}`,
-  };
 }
 
 /**
@@ -407,15 +395,8 @@ function _logMultipleIssues(issues: z.ZodIssue[]): void {
  */
 function _formatZodError(error: z.ZodError): { success: false; error: string } {
   const issues = error.issues || [];
-
-  // Log summary for debugging
-  console.error("🔴 ZodError.issues count:", issues.length);
-
   if (issues.length === 0) {
-    return {
-      success: false,
-      error: "Validation failed: Unknown error (no details available)",
-    };
+    return { success: false, error: "Validation failed: Unknown details" };
   }
 
   const firstIssue = issues[0];

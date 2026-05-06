@@ -53,14 +53,20 @@ async function _lookupEntityId(
     if (data) return data.id;
   }
 
-  // Fallback for exact ID match if it's not a UUID but still could be an ID
+  return _fallbackIdLookup(supabase, table, trimmed);
+}
+
+/**
+ * Fallback helper for exact ID match if search fields fail.
+ */
+async function _fallbackIdLookup(supabase: any, table: string, id: string) {
   const { data } = await supabase
     .from(table)
     .select("id")
-    .eq("id", trimmed)
+    .eq("id", id)
     .maybeSingle();
 
-  if (!data) console.error(`${table} lookup failed for: ${trimmed}`);
+  if (!data) console.error(`${table} lookup failed for: ${id}`);
   return data?.id || null;
 }
 
