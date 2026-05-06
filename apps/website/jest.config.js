@@ -13,6 +13,19 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const config = {
   coverageProvider: "v8",
+  collectCoverageFrom: [
+    "src/**/*.{js,jsx,ts,tsx}",
+    "../../libs/common-ui/**/*.{js,jsx,ts,tsx}",
+    "../../libs/utilities/**/*.{js,jsx,ts,tsx}",
+    "!**/jest.*.js",
+    "!**/vite.config.*",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!**/__tests__/**",
+    "!**/test-utils/**",
+  ],
   testEnvironment: "jsdom",
   // Performance optimizations for 8GB RAM Mac M2
   // Use 1 worker for low memory systems, 2 for normal use

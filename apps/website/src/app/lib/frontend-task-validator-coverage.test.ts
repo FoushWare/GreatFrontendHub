@@ -113,7 +113,7 @@ describe("FrontendTaskValidator - Full Coverage Suite", () => {
       const mockIframe1 = {
         contentWindow: {
           React: { createElement: createElementFn },
-          ReactDOM: { render: renderFn },
+          ReactDOM: { createRoot: vi.fn(() => ({ render: renderFn })) },
           Counter: () => null,
         },
       } as unknown as HTMLIFrameElement;
@@ -194,7 +194,7 @@ describe("FrontendTaskValidator - Full Coverage Suite", () => {
         contentDocument: mockDoc,
         contentWindow: {
           React: { createElement: vi.fn() },
-          ReactDOM: { render: vi.fn() },
+          ReactDOM: { createRoot: vi.fn(() => ({ render: vi.fn() })) },
           Counter: () => null,
         },
       } as unknown as HTMLIFrameElement;

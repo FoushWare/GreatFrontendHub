@@ -185,10 +185,13 @@ describe("FrontendTaskValidator", () => {
 
       const createElementMock = vi.fn(() => ({}));
       const renderMock = vi.fn();
+      const createRootMock = vi.fn(() => ({
+        render: renderMock,
+      }));
       const mockIframe = {
         contentWindow: {
           React: { createElement: createElementMock },
-          ReactDOM: { render: renderMock },
+          ReactDOM: { createRoot: createRootMock, render: renderMock },
           Counter: () => null,
         },
       } as unknown as HTMLIFrameElement;

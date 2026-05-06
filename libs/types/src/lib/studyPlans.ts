@@ -12,10 +12,10 @@ export interface StudyPlan {
   color: string;
   features: string[];
   topics: StudyTopic[];
-  schedule: StudyWeek[];
+  milestones: StudyMilestone[];
   prerequisites: string[];
   outcomes: string[];
-  estimatedTimePerDay: number;
+  estimatedTotalTime: number;
   isActive?: boolean;
   progress?: number;
   startDate?: Date;
@@ -53,25 +53,15 @@ export interface StudyResource {
   isCompleted?: boolean;
 }
 
-export interface StudyWeek {
-  weekNumber: number;
+export interface StudyMilestone {
+  id: string;
   title: string;
   description: string;
+  order: number;
   topics: string[];
-  dailySchedule: DailySchedule[];
-  totalHours: number;
-  isCompleted?: boolean;
-  progress?: number;
-}
-
-export interface DailySchedule {
-  day: number;
-  title: string;
-  description: string;
-  topics: string[];
-  estimatedHours: number;
   tasks: StudyTask[];
   isCompleted?: boolean;
+  progress?: number;
 }
 
 export interface StudyTask {
@@ -93,8 +83,7 @@ export interface UserStudyPlan {
   progress: number;
   completedTopics: string[];
   completedTasks: string[];
-  currentWeek: number;
-  currentDay: number;
+  currentMilestoneId: string;
   is_active: boolean;
   customizations: PlanCustomization;
 }

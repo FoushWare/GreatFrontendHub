@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "target": "ES2022",
     "jsx": "react-jsx",
     "allowJs": false,
     "ignoreDeprecations": "5.0",

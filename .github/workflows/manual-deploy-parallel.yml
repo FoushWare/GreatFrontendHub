@@ -57,14 +57,23 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
 
       - name: Enable Corepack
         run: corepack enable
 
       - name: Install root dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Setup Vercel and Next.js Caching
+        uses: actions/cache@v4
+        with:
+          path: |
+            apps/website/.next/cache
+          key: ${{ runner.os }}-website-next-cache-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-website-next-cache-
 
       - name: Validate Vercel token
         run: |
@@ -79,113 +88,59 @@ jobs:
           curl -fsS -X PATCH \
             -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
             -H "Content-Type: application/json" \
-            -d '{"buildCommand":"npm run build","outputDirectory":"apps/website/.next"}' \
+            -d '{"buildCommand":"pnpm --filter website build","outputDirectory":"apps/website/.next","installCommand":"echo skip"}' \
             "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID_WEBSITE }}"
 
-      - name: Validate build locally (optional build check)
+      - name: Validate and build (Local Vercel Build)
         if: ${{ inputs.validate_build_website }}
-        run: pnpm --dir apps/website run build
+        run: |
+          npx vercel@latest pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          npx vercel@latest build --prod --token=${{ secrets.VERCEL_TOKEN }}
         env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEBSITE }}
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
           NEXT_PUBLIC_APP_ENV: production
           NEXT_TELEMETRY_DISABLED: 1
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
-      - name: Bypass Vercel Nx Plugin (website)
+      - name: Deploy website to Vercel (Prebuilt)
         run: |
-          if [ -f nx.json ]; then
-            mv nx.json nx.json.bak
-          fi
-
-      - name: Prepare website package manifest for Vercel build
-        run: |
-          node -e 'const fs=require("fs");const root=JSON.parse(fs.readFileSync("package.json","utf8"));const p="apps/website/package.json";const pkg=JSON.parse(fs.readFileSync(p,"utf8"));const internal=["@elzatona/common-ui","@elzatona/contexts","@elzatona/database","@elzatona/types","@elzatona/utilities"];const required=["@sentry/nextjs"];pkg.dependencies=pkg.dependencies||{};for(const name of internal){if(pkg.dependencies) delete pkg.dependencies[name]; if(pkg.devDependencies) delete pkg.devDependencies[name];}for(const name of required){if(!pkg.dependencies[name]){const v=(root.dependencies&&root.dependencies[name])||(root.devDependencies&&root.devDependencies[name]);if(v) pkg.dependencies[name]=v;}}fs.writeFileSync(p, JSON.stringify(pkg, null, 2)+"\n");'
-
-      - name: Set root build script for website deployment
-        run: |
-          node -e 'const fs=require("fs");const p="package.json";const pkg=JSON.parse(fs.readFileSync(p,"utf8"));pkg.scripts=pkg.scripts||{};pkg.scripts.build="pnpm --dir apps/website build";fs.writeFileSync(p, JSON.stringify(pkg, null, 2)+"\n");'
-
-      - name: Deploy website to Vercel
-        run: |
-          set -euo pipefail
-
-          ensure_website_ready() {
-            local deployment_url="$1"
-
-            for ready_attempt in 1 2 3 4 5 6; do
-              ready_log="$(mktemp)"
-              if timeout 2m npx vercel inspect "${deployment_url}" --wait --timeout 2m --token=${{ secrets.VERCEL_TOKEN }} >"$ready_log" 2>&1; then
-                cat "$ready_log"
-                return 0
-              fi
-
-              cat "$ready_log"
-              echo "Deployment readiness check ${ready_attempt}/6 did not pass yet."
-
-              if [ "$ready_attempt" -lt 6 ]; then
-                sleep 10
-              fi
-            done
-
-            return 1
-          }
+          set +e # Explicitly disable exit-on-error to allow retry loop to handle failures
+          set -uo pipefail
 
           set_website_aliases() {
             local deployment_url="$1"
             echo "Setting website aliases for: ${deployment_url}"
-            timeout 3m npx vercel alias set "${deployment_url}" elzatona-web.com --token=${{ secrets.VERCEL_TOKEN }}
+            timeout 3m npx vercel@latest alias set "${deployment_url}" elzatona-web.com --token=${{ secrets.VERCEL_TOKEN }}
 
             # Keep www alias best-effort because some projects intentionally omit it.
-            if ! timeout 3m npx vercel alias set "${deployment_url}" www.elzatona-web.com --token=${{ secrets.VERCEL_TOKEN }}; then
+            if ! timeout 3m npx vercel@latest alias set "${deployment_url}" www.elzatona-web.com --token=${{ secrets.VERCEL_TOKEN }}; then
               echo "www.elzatona-web.com alias not set (continuing)."
             fi
           }
 
-          timeout 8m npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           for attempt in 1 2 3 4 5 6; do
             echo "Deploy website attempt ${attempt}/6"
             deploy_log="$(mktemp)"
-            timeout 20m npx vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | tee "$deploy_log" || true
-            if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1' "$deploy_log"; then
-              echo "Deploy output indicates explicit build failure; failing deployment step."
+            if timeout 15m npx vercel@latest deploy --prebuilt --prod --yes --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | tee "$deploy_log"; then
+                prod_url=$(grep -Eo 'https://[^ ]+\.vercel\.app' "$deploy_log" | tail -n 1 || true)
+                if [ -z "$prod_url" ]; then
+                  echo "Warning: Could not extract specific deployment URL; using production domain fallback."
+                  # Fallback to the project's default production URL if extraction fails
+                  prod_url="elzatona-web.vercel.app" 
+                fi
+                echo "Website deployment is ready: $prod_url"
+                set_website_aliases "$prod_url"
+                exit 0
+            fi
+
+            if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1|Error: The request timed out' "$deploy_log"; then
+              echo "Deploy output indicates explicit failure or timeout; failing deployment step."
               exit 1
             fi
-            prod_url="$(grep -Eo 'https://[^ ]+\.vercel\.app' "$deploy_log" | tail -n 1 || true)"
-            if [ -n "$prod_url" ]; then
-              echo "Deploy command produced URL: $prod_url"
-              inspect_log="$(mktemp)"
-              if timeout 12m npx vercel inspect "$prod_url" --wait --timeout 12m --token=${{ secrets.VERCEL_TOKEN }} >"$inspect_log" 2>&1; then
-                cat "$inspect_log"
-                set_website_aliases "$prod_url"
-                echo "Website deployment is ready in production: $prod_url"
-                exit 0
-              fi
-              cat "$inspect_log"
 
-              if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1' "$inspect_log"; then
-                echo "Inspect indicates an explicit build failure; failing deployment step."
-                exit 1
-              fi
-              echo "Inspect did not confirm readiness; probing URL reachability as transient fallback..."
-              for probe in 1 2 3 4 5 6; do
-                http_code="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "$prod_url" || true)"
-                if [ "$http_code" != "000" ]; then
-                  echo "Website deployment URL is reachable (HTTP $http_code): $prod_url"
-
-                  if ensure_website_ready "$prod_url"; then
-                    set_website_aliases "$prod_url"
-                    echo "Website deployment is ready in production: $prod_url"
-                    exit 0
-                  fi
-
-                  echo "Website URL is reachable but deployment is still not ready; continuing retries."
-                  break
-                fi
-                echo "Website probe ${probe}/6 not reachable yet; retrying in 10s..."
-                sleep 10
-              done
-              echo "Inspect and reachability probe did not confirm readiness; retrying deployment attempt..."
-            fi
             if [ "$attempt" -eq 6 ]; then
               echo "Website deployment failed after 6 attempts"
               exit 1
@@ -197,6 +152,7 @@ jobs:
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEBSITE }}
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
   deploy-admin:
     name: Deploy Admin
@@ -220,14 +176,23 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
 
       - name: Enable Corepack
         run: corepack enable
 
       - name: Install root dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Setup Vercel and Next.js Caching
+        uses: actions/cache@v4
+        with:
+          path: |
+            apps/admin/.next/cache
+          key: ${{ runner.os }}-next-cache-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-next-cache-
 
       - name: Validate Vercel token
         run: |
@@ -242,71 +207,40 @@ jobs:
           curl -fsS -X PATCH \
             -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
             -H "Content-Type: application/json" \
-            -d '{"buildCommand":"npm run build","outputDirectory":".next"}' \
+            -d '{"buildCommand":"pnpm --filter admin build","outputDirectory":"apps/admin/.next","installCommand":"echo skip"}' \
             "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID_ADMIN }}"
 
-      - name: Validate build locally (optional build check)
+      - name: Validate and build (Local Vercel Build)
         if: ${{ inputs.validate_build_admin }}
-        run: pnpm --dir apps/admin run build
+        run: |
+          npx vercel@latest pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          npx vercel@latest build --prod --token=${{ secrets.VERCEL_TOKEN }}
         env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
           NEXT_PUBLIC_APP_ENV: production
           NEXT_TELEMETRY_DISABLED: 1
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
-      - name: Bypass Vercel Nx Plugin (admin)
+      - name: Deploy admin to Vercel (Prebuilt)
         run: |
-          if [ -f nx.json ]; then
-            mv nx.json nx.json.bak
-          fi
-
-      - name: Prepare admin package manifest for Vercel build
-        run: |
-          node -e 'const fs=require("fs");const root=JSON.parse(fs.readFileSync("package.json","utf8"));const p="apps/admin/package.json";const pkg=JSON.parse(fs.readFileSync(p,"utf8"));const internal=["@elzatona/common-ui","@elzatona/contexts","@elzatona/database","@elzatona/types","@elzatona/utilities"];const required=["@sentry/nextjs"];pkg.dependencies=pkg.dependencies||{};for(const name of internal){if(pkg.dependencies) delete pkg.dependencies[name]; if(pkg.devDependencies) delete pkg.devDependencies[name];}for(const name of required){if(!pkg.dependencies[name]){const v=(root.dependencies&&root.dependencies[name])||(root.devDependencies&&root.devDependencies[name]);if(v) pkg.dependencies[name]=v;}}fs.writeFileSync(p, JSON.stringify(pkg, null, 2)+"\n");'
-
-      - name: Set root build script for admin deployment
-        run: |
-          node -e 'const fs=require("fs");const p="package.json";const pkg=JSON.parse(fs.readFileSync(p,"utf8"));pkg.scripts=pkg.scripts||{};pkg.scripts.build="pnpm --dir apps/admin build";fs.writeFileSync(p, JSON.stringify(pkg, null, 2)+"\n");'
-
-      - name: Deploy admin to Vercel
-        run: |
-          set -euo pipefail
-          timeout 8m npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          set +e
+          set -uo pipefail
           for attempt in 1 2 3 4 5 6; do
             echo "Deploy admin attempt ${attempt}/6"
             deploy_log="$(mktemp)"
-            timeout 20m npx vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | tee "$deploy_log" || true
-            if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1' "$deploy_log"; then
-              echo "Deploy output indicates explicit build failure; failing deployment step."
+            if timeout 15m npx vercel@latest deploy --prebuilt --prod --yes --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | tee "$deploy_log"; then
+              echo "Admin deployment is ready in production."
+              exit 0
+            fi
+
+            if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1|Error: The request timed out' "$deploy_log"; then
+              echo "Deploy output indicates explicit failure or timeout; failing deployment step."
               exit 1
             fi
-            prod_url="$(grep -Eo 'https://[^ ]+\.vercel\.app' "$deploy_log" | tail -n 1 || true)"
-            if [ -n "$prod_url" ]; then
-              echo "Deploy command produced URL: $prod_url"
-              inspect_log="$(mktemp)"
-              if timeout 12m npx vercel inspect "$prod_url" --wait --timeout 12m --token=${{ secrets.VERCEL_TOKEN }} >"$inspect_log" 2>&1; then
-                cat "$inspect_log"
-                echo "Admin deployment is ready in production: $prod_url"
-                exit 0
-              fi
-              cat "$inspect_log"
 
-              if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1' "$inspect_log"; then
-                echo "Inspect indicates an explicit build failure; failing deployment step."
-                exit 1
-              fi
-              echo "Inspect did not confirm readiness; probing URL reachability as transient fallback..."
-              for probe in 1 2 3 4 5 6; do
-                http_code="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "$prod_url" || true)"
-                if [ "$http_code" != "000" ]; then
-                  echo "Admin deployment URL is reachable (HTTP $http_code): $prod_url"
-                  exit 0
-                fi
-                echo "Admin probe ${probe}/6 not reachable yet; retrying in 10s..."
-                sleep 10
-              done
-              echo "Inspect and reachability probe did not confirm readiness; retrying deployment attempt..."
-            fi
             if [ "$attempt" -eq 6 ]; then
               echo "Admin deployment failed after 6 attempts"
               exit 1
@@ -318,3 +252,4 @@ jobs:
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}

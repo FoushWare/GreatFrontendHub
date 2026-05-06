@@ -84,10 +84,10 @@ export default function LearningCardsPage() {
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <AdminNavbar />
         <div className="flex-1 flex items-center justify-center">
-          <div
-            role="status"
+          <output
             className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"
-          ></div>
+            aria-label="Loading"
+          ></output>
         </div>
       </div>
     );

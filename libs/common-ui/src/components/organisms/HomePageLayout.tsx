@@ -36,32 +36,45 @@ export function HomePageLayout({
   onFreestyleClick,
 }: HomePageLayoutProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
+    <div className="min-h-screen bg-[#fafafa] dark:bg-[#0a0a0b] relative overflow-hidden">
+      {/* Subtle depth layer */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.1),transparent_50%)] pointer-events-none" />
+
       <AnimatedBackground />
 
-      <HeroSection
-        personalizedContent={personalizedContent}
-        showAnimation={showAnimation}
-      />
-
-      <LearningStyleSelector
-        userType={userType}
-        onGuidedClick={onGuidedClick}
-        onFreestyleClick={onFreestyleClick}
-        showAnimation={showAnimation}
-      />
-
-      {userType && (
-        <PersonalizedContent
-          userType={userType}
-          showAnimation={showAnimation}
-          hasActivePlan={hasActivePlan}
-          activePlan={activePlan}
+      <div className="relative z-10 space-y-24 pb-32">
+        <HeroSection
           personalizedContent={personalizedContent}
+          showAnimation={showAnimation}
         />
-      )}
 
-      {!userType && <FinalCTASection showAnimation={showAnimation} />}
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <LearningStyleSelector
+            userType={userType}
+            onGuidedClick={onGuidedClick}
+            onFreestyleClick={onFreestyleClick}
+            showAnimation={showAnimation}
+          />
+        </div>
+
+        {userType && (
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <PersonalizedContent
+              userType={userType}
+              showAnimation={showAnimation}
+              hasActivePlan={hasActivePlan}
+              activePlan={activePlan}
+              personalizedContent={personalizedContent}
+            />
+          </div>
+        )}
+
+        {!userType && (
+          <div className="max-w-4xl mx-auto px-4">
+            <FinalCTASection showAnimation={showAnimation} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

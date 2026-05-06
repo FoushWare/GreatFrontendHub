@@ -35,38 +35,30 @@ export type Environment = "test" | "production" | "development";
 
 /**
  * Get the current environment based on multiple indicators
- *
- * Priority (highest to lowest):
- * 1. APP_ENV (NEW - simplest single variable to change)
- * 2. NEXT_PUBLIC_APP_ENV (explicit environment setting)
- * 3. NODE_ENV (Node.js environment)
- * 4. Supabase URL project reference (fallback)
- *
- * @returns 'test' | 'production' | 'development'
  */
 export function getEnvironment(): Environment {
-  // Check APP_ENV first (NEW - simplest way to switch)
-  const appEnv = process.env["APP_ENV"]?.toLowerCase();
-  if (appEnv === "test") return "test";
-  if (appEnv === "production" || appEnv === "prod") return "production";
-  if (appEnv === "development" || appEnv === "dev") return "development";
+  const checkEnv = (val?: string) => {
+    const v = val?.toLowerCase();
+    if (v === "test") return "test";
+    if (v === "production" || v === "prod") return "production";
+    if (v === "development" || v === "dev") return "development";
+    return null;
+  };
 
-  // Check NEXT_PUBLIC_APP_ENV (alternative)
-  const nextAppEnv = process.env["NEXT_PUBLIC_APP_ENV"]?.toLowerCase();
-  if (nextAppEnv === "test") return "test";
-  if (nextAppEnv === "production" || nextAppEnv === "prod") return "production";
-  if (nextAppEnv === "development" || nextAppEnv === "dev")
-    return "development";
+  return (
+    checkEnv(process.env["APP_ENV"]) ||
+    checkEnv(process.env["NEXT_PUBLIC_APP_ENV"]) ||
+    checkEnv(process.env["NODE_ENV"]) ||
+    _getEnvironmentFromUrl() ||
+    "development"
+  );
+}
 
-  // Check NODE_ENV
-  const nodeEnv = process.env["NODE_ENV"]?.toLowerCase();
-  if (nodeEnv === "test") return "test";
-  if (nodeEnv === "production") return "production";
-  // Note: NODE_ENV='development' is common, but we'll use Supabase URL as fallback
-
-  // Check Supabase URL to determine project (fallback)
+/**
+ * Internal helper to determine environment from Supabase URL
+ */
+function _getEnvironmentFromUrl(): Environment | null {
   const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"] || "";
-
   if (
     supabaseUrl.includes(TEST_PROJECT_REF) ||
     supabaseUrl.includes(OLD_TEST_PROJECT_REF_1) ||
@@ -74,13 +66,10 @@ export function getEnvironment(): Environment {
   ) {
     return "test";
   }
-
   if (supabaseUrl.includes(PRODUCTION_PROJECT_REF)) {
     return "production";
   }
-
-  // Default to development if nothing matches
-  return "development";
+  return null;
 }
 
 /**

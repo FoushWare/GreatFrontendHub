@@ -2,11 +2,11 @@
 
 import {
   Clock,
-  Target,
   CheckCircle,
   Star,
   ChevronRight,
   Trophy,
+  Calendar,
 } from "lucide-react";
 import { LearningPlan } from "../types";
 import { getGradeColor, getGradeText } from "../utils";
@@ -25,98 +25,119 @@ export function LearningPlanCard({
   onSelect,
 }: Readonly<LearningPlanCardProps>) {
   const difficultyColors = {
-    Beginner:
-      "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-    Intermediate:
-      "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
-    Advanced: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+    beginner:
+      "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
+    intermediate:
+      "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+    advanced:
+      "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400",
   };
+
+  const milestoneCount = plan.milestones?.length || 0;
+  const planDifficulty =
+    plan.difficulty.toLowerCase() as keyof typeof difficultyColors;
 
   return (
     <div
-      className={`relative bg-white dark:bg-gray-800 rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden ${
+      className={`relative bg-white dark:bg-gray-800 rounded-3xl border-2 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group ${
         isCompleted && grade !== undefined
           ? getGradeColor(grade)
-          : "border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600"
+          : "border-gray-100 dark:border-gray-700 hover:border-indigo-400 dark:hover:border-indigo-500"
       }`}
     >
       {/* Recommended Badge */}
       {plan.isRecommended && (
-        <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-bold rounded-full shadow-md">
-          <Star className="w-3 h-3" />
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-4 py-1.5 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg border border-white/20">
+          <Star className="w-3 h-3 fill-current" />
           Recommended
         </div>
       )}
 
       {/* Completed Badge */}
       {isCompleted && grade !== undefined && (
-        <div className="absolute top-4 left-4 flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold rounded-full shadow-md">
+        <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-4 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
           <Trophy className="w-3 h-3" />
           {getGradeText(grade)}
         </div>
       )}
 
-      <div className="p-6">
-        {/* Plan Name */}
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          {plan.name}
+      <div className="p-8">
+        {/* Plan Title */}
+        <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+          {plan.title}
         </h3>
 
-        {/* Difficulty */}
+        {/* Difficulty Badge */}
         <span
-          className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-4 ${
-            difficultyColors[plan.difficulty]
+          className={`inline-block px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 ${
+            difficultyColors[planDifficulty] || difficultyColors.intermediate
           }`}
         >
           {plan.difficulty}
         </span>
 
-        {/* Description */}
-        <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-          {plan.description}
+        {/* Subtitle/Description */}
+        <p className="text-gray-500 dark:text-gray-400 mb-8 text-sm leading-relaxed font-medium">
+          {plan.subtitle || plan.description}
         </p>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-            <Clock className="w-4 h-4" />
-            <span>{plan.duration} days</span>
+        {/* Stats Grid - Premium look */}
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="flex flex-col gap-1 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-2xl border border-gray-100 dark:border-gray-700">
+            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+              <Calendar className="w-4 h-4" />
+              <span className="text-[10px] font-bold uppercase tracking-wider">
+                Structure
+              </span>
+            </div>
+            <span className="text-sm font-bold text-gray-900 dark:text-white">
+              {milestoneCount} Milestones
+            </span>
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-            <Target className="w-4 h-4" />
-            <span>{plan.totalQuestions} questions</span>
+
+          <div className="flex flex-col gap-1 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-2xl border border-gray-100 dark:border-gray-700">
+            <div className="flex items-center gap-2 text-purple-600 dark:text-purple-400">
+              <Clock className="w-4 h-4" />
+              <span className="text-[10px] font-bold uppercase tracking-wider">
+                Estimate
+              </span>
+            </div>
+            <span className="text-sm font-bold text-gray-900 dark:text-white">
+              {plan.estimatedTotalTime || 0} Hours
+            </span>
           </div>
         </div>
 
-        {/* Daily Questions */}
-        <div className="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 mb-4">
-          <CheckCircle className="w-4 h-4" />
-          <span>{plan.dailyQuestions} questions per day</span>
-        </div>
-
-        {/* Features */}
-        {plan.features && plan.features.length > 0 && (
-          <div className="mb-4">
-            <div className="flex flex-wrap gap-2">
-              {plan.features.slice(0, 3).map((feature) => (
-                <span
-                  key={feature}
-                  className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-lg"
+        {/* Outcomes Preview */}
+        {plan.outcomes && plan.outcomes.length > 0 && (
+          <div className="mb-10">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">
+              Core Outcomes
+            </p>
+            <div className="space-y-2">
+              {plan.outcomes.slice(0, 2).map((outcome) => (
+                <div
+                  key={outcome}
+                  className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-300 font-medium"
                 >
-                  {feature}
-                </span>
+                  <CheckCircle className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                  <span className="line-clamp-1">{outcome}</span>
+                </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* CTA Button */}
+        {/* CTA Button - Enhanced premium feel */}
         <button
           onClick={() => onSelect(plan)}
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
+          className="group/btn relative w-full flex items-center justify-center gap-3 px-6 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
         >
-          {isCompleted ? "Retry Plan" : "Start Plan"}
-          <ChevronRight className="w-5 h-5" />
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+          <span className="relative z-10">
+            {isCompleted ? "Improve Results" : "Master This Path"}
+          </span>
+          <ChevronRight className="relative z-10 w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" />
         </button>
       </div>
     </div>

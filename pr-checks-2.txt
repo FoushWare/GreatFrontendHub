@@ -1,0 +1,21 @@
+SonarCloud Code Analysis	fail	1m15s	https://sonarcloud.io	
+Admin E2E Tests (Shard 1/4)	pass	1m38s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793063/job/73659968193	
+Admin E2E Tests (Shard 2/4)	pass	1m17s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793063/job/73659968216	
+Admin E2E Tests (Shard 3/4)	pass	2m25s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793063/job/73659968211	
+Admin E2E Tests (Shard 4/4)	pass	2m58s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793063/job/73659968212	
+Admin Unit Tests	pass	40s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793063/job/73659696177	
+Analyze (javascript)	pass	1m45s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793076/job/73659696631	
+Analyze (typescript)	pass	1m40s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793076/job/73659696622	
+Build Admin App	pass	1m40s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793063/job/73659696178	
+CodeQL	pass	2s	https://github.com/FoushWare/elzatona_web/runs/73659958193	
+CodeRabbit	pass	0		Review completed
+E2E Tests (Shard 1/3)	pass	1m7s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793049/job/73659696239	
+E2E Tests (Shard 2/3)	pass	58s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793049/job/73659696246	
+E2E Tests (Shard 3/3)	pass	54s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793049/job/73659696210	
+GitGuardian Security Checks	pass	1s	https://dashboard.gitguardian.com	
+Gitleaks	pass	2s	https://github.com/FoushWare/elzatona_web/runs/73659768129	
+Lint, Type Check, and Build	pass	1m19s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793089/job/73659696406	
+SonarQube	pass	2m46s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793066/job/73659696627	
+Trivy	pass	2s	https://github.com/FoushWare/elzatona_web/runs/73659828789	
+auto-assign	pass	5s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793064/job/73659696028	
+security-scan	pass	55s	https://github.com/FoushWare/elzatona_web/actions/runs/25131793057/job/73659696106	

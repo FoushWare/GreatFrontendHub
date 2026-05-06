@@ -270,113 +270,24 @@ export class FrontendTaskValidator {
     try {
       const doc = iframe.contentDocument!;
       const root = doc.getElementById("root");
+      if (!root) throw new Error("Root element not found");
 
-      if (!root) {
-        throw new Error("Root element not found");
-      }
+      // 1. Prepare Root and Libraries
+      const { React, ReactDOM } = this._getReactLibraries(iframe);
+      this._prepareRoot(root, React, ReactDOM, iframe);
 
-      // Clear previous content
-      root.innerHTML = "";
+      // 2. Wait for Initial Render
+      await this._waitForRender();
 
-      // Render the component
-      const React = (iframe.contentWindow as any).React;
-      const ReactDOM = (iframe.contentWindow as any).ReactDOM;
-
-      if (!React || !ReactDOM) {
-        throw new Error("React libraries not loaded");
-      }
-
-      // Get the component from the global scope
-      const Component =
-        (iframe.contentWindow as any).Counter ||
-        (iframe.contentWindow as any).TodoList;
-
-      if (!Component) {
-        throw new Error("Component not found in user code");
-      }
-
-      // Render component
-      const element = React.createElement(Component);
-      // eslint-disable-next-line react/no-deprecated
-      ReactDOM.render(element, root);
-
-      // Wait for render
-      await new Promise((resolve) => setTimeout(resolve, 100));
-
-      // Execute test case
-
-      let actualOutput: any;
-
-      switch (testCase.input) {
-        case "initial":
-          // Check initial state
-          const initialText = root.textContent || "";
-          actualOutput = initialText.includes("0") ? "0" : initialText;
-          break;
-
-        case "increment":
-          // Find and click increment button
-          const incrementBtn = Array.from(root.querySelectorAll("button")).find(
-            (btn) =>
-              btn.textContent?.includes("+1") || btn.textContent?.includes("+"),
-          );
-
-          if (incrementBtn) {
-            (incrementBtn as HTMLButtonElement).click();
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            const text = root.textContent || "";
-            actualOutput = text.includes("1") ? "1" : text;
-          } else {
-            throw new Error("Increment button not found");
-          }
-          break;
-
-        case "decrement":
-          // Find and click decrement button
-          const decrementBtn = Array.from(root.querySelectorAll("button")).find(
-            (btn) =>
-              btn.textContent?.includes("-1") || btn.textContent?.includes("-"),
-          );
-
-          if (decrementBtn) {
-            (decrementBtn as HTMLButtonElement).click();
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            const text = root.textContent || "";
-            actualOutput = text.includes("-1") ? "-1" : text;
-          } else {
-            throw new Error("Decrement button not found");
-          }
-          break;
-
-        case "reset":
-          // Find and click reset button
-          const resetBtn = Array.from(root.querySelectorAll("button")).find(
-            (btn) => btn.textContent?.toLowerCase().includes("reset"),
-          );
-
-          if (resetBtn) {
-            (resetBtn as HTMLButtonElement).click();
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            const text = root.textContent || "";
-            actualOutput = text.includes("0") ? "0" : text;
-          } else {
-            throw new Error("Reset button not found");
-          }
-          break;
-
-        default:
-          actualOutput = root.textContent || "";
-      }
-
-      const executionTime = Date.now() - startTime;
-      const passed = this.compareOutputs(actualOutput, testCase.expectedOutput);
+      // 3. Evaluate Test Case
+      const actualOutput = await this._evaluateReactTestCase(root, testCase);
 
       return {
         testCaseId: testCase.id,
-        passed,
+        passed: this.compareOutputs(actualOutput, testCase.expectedOutput),
         actualOutput,
         expectedOutput: testCase.expectedOutput,
-        executionTime,
+        executionTime: Date.now() - startTime,
       };
     } catch (error) {
       return {
@@ -387,6 +298,75 @@ export class FrontendTaskValidator {
         executionTime: Date.now() - startTime,
       };
     }
+  }
+
+  private _getReactLibraries(iframe: HTMLIFrameElement) {
+    const win = iframe.contentWindow as any;
+    const { React, ReactDOM } = win || {};
+    if (!React || !ReactDOM) throw new Error("React libraries not loaded");
+    return { React, ReactDOM };
+  }
+
+  private _prepareRoot(
+    root: HTMLElement,
+    React: any,
+    ReactDOM: any,
+    iframe: HTMLIFrameElement,
+  ) {
+    root.innerHTML = "";
+    const win = iframe.contentWindow as any;
+    const Component = win.Counter || win.TodoList;
+    if (!Component) throw new Error("Component not found in user code");
+
+    const element = React.createElement(Component);
+    // eslint-disable-next-line react/no-deprecated
+    ReactDOM.render(element, root);
+  }
+
+  private async _waitForRender(ms: number = 100) {
+    await new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  private async _evaluateReactTestCase(
+    root: HTMLElement,
+    testCase: TestCase,
+  ): Promise<any> {
+    const { input } = testCase;
+
+    if (input === "initial") return this._getDigitFromText(root, "0");
+
+    if (input === "increment") {
+      await this._clickButton(root, "+");
+      return this._getDigitFromText(root, "1");
+    }
+
+    if (input === "decrement") {
+      await this._clickButton(root, "-");
+      return this._getDigitFromText(root, "-1");
+    }
+
+    if (input === "reset") {
+      await this._clickButton(root, "reset");
+      return this._getDigitFromText(root, "0");
+    }
+
+    return root.textContent || "";
+  }
+
+  private async _clickButton(root: HTMLElement, label: string) {
+    const btn = Array.from(root.querySelectorAll("button")).find((b) => {
+      const t = b.textContent?.toLowerCase() || "";
+      return label === "reset" ? t.includes("reset") : t.includes(label);
+    });
+
+    if (!btn) throw new Error(`Button for ${label} not found`);
+    btn.click();
+    await this._waitForRender();
+  }
+
+  private _getDigitFromText(root: HTMLElement, digit: string) {
+    const text = root.textContent || "";
+    return text.includes(digit) ? digit : text;
   }
 
   private async runJavaScriptTestCase(

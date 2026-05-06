@@ -48,15 +48,15 @@ export function CTAButton({
           href={href}
           className={`${baseClasses} ${
             variant === "gradient" ? gradientClasses : solidClasses
-          }`}
+          } group/button`}
         >
           {/* Animated background effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover/button:translate-x-full transition-transform duration-700"></div>
 
           <span className="relative z-10 flex items-center space-x-2">
             {icon && <span>{icon}</span>}
             <span>{text}</span>
-            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover/button:translate-x-1" />
           </span>
         </Link>
       </div>

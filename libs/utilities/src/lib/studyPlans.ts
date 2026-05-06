@@ -1,5 +1,42 @@
-// Import StudyPlan from the types package
-import type { StudyPlan } from "@elzatona/types";
+import { StudyPlan, StudyMilestone, StudyTask } from "@elzatona/types";
+
+// Helper to create standardized milestones to reduce duplication
+const createMilestones = (
+  foundationsTasks: StudyTask[],
+  advancedTasks: StudyTask[],
+  practiceTasks: StudyTask[],
+): StudyMilestone[] => [
+  {
+    id: "m1",
+    title: "Foundations & Core Concepts",
+    description:
+      "Master JavaScript and React fundamentals to build a strong foundation.",
+    order: 1,
+    topics: ["JavaScript Fundamentals", "React Core Concepts", "CSS & Styling"],
+    tasks: foundationsTasks,
+  },
+  {
+    id: "m2",
+    title: "Advanced CSS & System Design",
+    description: "Deep dive into layout techniques and frontend system design.",
+    order: 2,
+    topics: [
+      "CSS & Styling",
+      "System Design Basics",
+      "JavaScript Fundamentals",
+    ],
+    tasks: advancedTasks,
+  },
+  {
+    id: "m3",
+    title: "Practice, Review & Mock Sessions",
+    description:
+      "Final preparation with comprehensive reviews and mock interviews.",
+    order: 3,
+    topics: ["All Topics", "System Design Basics", "JavaScript Fundamentals"],
+    tasks: practiceTasks,
+  },
+];
 
 export const studyPlans: StudyPlan[] = [
   {
@@ -131,193 +168,110 @@ export const studyPlans: StudyPlan[] = [
         ],
       },
     ],
-    schedule: [
-      {
-        weekNumber: 1,
-        title: "Intensive Preparation Week",
-        description: "Daily focused sessions covering all essential topics",
-        topics: [
-          "JavaScript Fundamentals",
-          "React Core Concepts",
-          "CSS & Styling",
-          "System Design Basics",
-        ],
-        totalHours: 14,
-        dailySchedule: [
-          {
-            day: 1,
-            title: "JavaScript Fundamentals Day 1",
-            description: "Focus on hoisting, closures, and scope",
-            topics: ["JavaScript Fundamentals"],
-            estimatedHours: 2,
-            tasks: [
-              {
-                id: "js-hoisting-study",
-                title: "Study Hoisting Concepts",
-                description:
-                  "Read about hoisting and complete practice problems",
-                type: "reading",
-                estimatedTime: 30,
-                resourceUrl: "/questions/quiz/explain-hoisting",
-              },
-              {
-                id: "js-closures-practice",
-                title: "Practice Closure Problems",
-                description: "Complete closure-related coding challenges",
-                type: "practice",
-                estimatedTime: 45,
-                resourceUrl: "/questions/javascript/closure",
-              },
-              {
-                id: "js-promises-study",
-                title: "Study Promises and Async/Await",
-                description: "Learn about promises and async programming",
-                type: "reading",
-                estimatedTime: 45,
-              },
-            ],
-          },
-          {
-            day: 2,
-            title: "React Core Concepts",
-            description: "Focus on React hooks and state management",
-            topics: ["React Core Concepts"],
-            estimatedHours: 2,
-            tasks: [
-              {
-                id: "react-hooks-practice",
-                title: "Practice React Hooks",
-                description: "Complete React hooks problems",
-                type: "practice",
-                estimatedTime: 60,
-                resourceUrl: "/questions/react/hooks",
-              },
-              {
-                id: "react-state-study",
-                title: "Study State Management",
-                description: "Learn about useState and useContext",
-                type: "reading",
-                estimatedTime: 60,
-              },
-            ],
-          },
-          {
-            day: 3,
-            title: "CSS & Styling",
-            description: "Focus on layout and responsive design",
-            topics: ["CSS & Styling"],
-            estimatedHours: 2,
-            tasks: [
-              {
-                id: "css-layout-practice",
-                title: "Practice CSS Layout",
-                description: "Complete CSS layout challenges",
-                type: "practice",
-                estimatedTime: 45,
-                resourceUrl: "/questions/user-interface/layout",
-              },
-              {
-                id: "responsive-design",
-                title: "Responsive Design Practice",
-                description: "Build responsive components",
-                type: "project",
-                estimatedTime: 75,
-              },
-            ],
-          },
-          {
-            day: 4,
-            title: "System Design Introduction",
-            description: "Learn basic system design concepts",
-            topics: ["System Design Basics"],
-            estimatedHours: 2,
-            tasks: [
-              {
-                id: "autocomplete-design",
-                title: "Design Autocomplete System",
-                description: "Practice autocomplete system design",
-                type: "practice",
-                estimatedTime: 90,
-                resourceUrl: "/questions/system-design/autocomplete",
-              },
-            ],
-          },
-          {
-            day: 5,
-            title: "Advanced JavaScript",
-            description: "Focus on advanced JavaScript concepts",
-            topics: ["JavaScript Fundamentals"],
-            estimatedHours: 2,
-            tasks: [
-              {
-                id: "js-advanced-practice",
-                title: "Advanced JavaScript Problems",
-                description: "Complete advanced JavaScript challenges",
-                type: "practice",
-                estimatedTime: 60,
-              },
-              {
-                id: "js-algorithms",
-                title: "JavaScript Algorithms",
-                description: "Practice algorithm problems in JavaScript",
-                type: "practice",
-                estimatedTime: 60,
-              },
-            ],
-          },
-          {
-            day: 6,
-            title: "Practice & Review",
-            description: "Review all concepts and practice problems",
-            topics: [
-              "JavaScript Fundamentals",
-              "React Core Concepts",
-              "CSS & Styling",
-            ],
-            estimatedHours: 2,
-            tasks: [
-              {
-                id: "comprehensive-review",
-                title: "Comprehensive Review",
-                description: "Review all learned concepts",
-                type: "review",
-                estimatedTime: 60,
-              },
-              {
-                id: "mock-practice",
-                title: "Mock Interview Practice",
-                description: "Practice with mock interview questions",
-                type: "practice",
-                estimatedTime: 60,
-              },
-            ],
-          },
-          {
-            day: 7,
-            title: "Mock Interview & Final Prep",
-            description: "Final preparation and mock interview",
-            topics: ["System Design Basics", "All Topics"],
-            estimatedHours: 2,
-            tasks: [
-              {
-                id: "mock-interview",
-                title: "Mock Interview",
-                description: "Complete a full mock interview",
-                type: "practice",
-                estimatedTime: 90,
-              },
-              {
-                id: "final-review",
-                title: "Final Review",
-                description: "Quick review of key concepts",
-                type: "review",
-                estimatedTime: 30,
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    milestones: createMilestones(
+      [
+        {
+          id: "js-hoisting-study",
+          title: "Study Hoisting Concepts",
+          description: "Read about hoisting and complete practice problems",
+          type: "reading",
+          estimatedTime: 30,
+          resourceUrl: "/questions/quiz/explain-hoisting",
+        },
+        {
+          id: "js-closures-practice",
+          title: "Practice Closure Problems",
+          description: "Complete closure-related coding challenges",
+          type: "practice",
+          estimatedTime: 45,
+          resourceUrl: "/questions/javascript/closure",
+        },
+        {
+          id: "js-promises-study",
+          title: "Study Promises and Async/Await",
+          description: "Learn about promises and async programming",
+          type: "reading",
+          estimatedTime: 45,
+        },
+        {
+          id: "react-hooks-practice",
+          title: "Practice React Hooks",
+          description: "Complete React hooks problems",
+          type: "practice",
+          estimatedTime: 60,
+          resourceUrl: "/questions/react/hooks",
+        },
+        {
+          id: "react-state-study",
+          title: "Study State Management",
+          description: "Learn about useState and useContext",
+          type: "reading",
+          estimatedTime: 60,
+        },
+      ],
+      [
+        {
+          id: "css-layout-practice",
+          title: "Practice CSS Layout",
+          description: "Complete CSS layout challenges",
+          type: "practice",
+          estimatedTime: 45,
+          resourceUrl: "/questions/user-interface/layout",
+        },
+        {
+          id: "responsive-design",
+          title: "Responsive Design Practice",
+          description: "Build responsive components",
+          type: "project",
+          estimatedTime: 75,
+        },
+        {
+          id: "autocomplete-design",
+          title: "Design Autocomplete System",
+          description: "Practice autocomplete system design",
+          type: "practice",
+          estimatedTime: 90,
+          resourceUrl: "/questions/system-design/autocomplete",
+        },
+        {
+          id: "js-advanced-practice",
+          title: "Advanced JavaScript Problems",
+          description: "Complete advanced JavaScript challenges",
+          type: "practice",
+          estimatedTime: 60,
+        },
+      ],
+      [
+        {
+          id: "comprehensive-review",
+          title: "Comprehensive Review",
+          description: "Review all learned concepts",
+          type: "review",
+          estimatedTime: 60,
+        },
+        {
+          id: "mock-practice",
+          title: "Mock Interview Practice",
+          description: "Practice with mock interview questions",
+          type: "practice",
+          estimatedTime: 60,
+        },
+        {
+          id: "mock-interview",
+          title: "Mock Interview",
+          description: "Complete a full mock interview",
+          type: "practice",
+          estimatedTime: 90,
+        },
+        {
+          id: "final-review",
+          title: "Final Review",
+          description: "Quick review of key concepts",
+          type: "review",
+          estimatedTime: 30,
+        },
+      ],
+    ),
     prerequisites: [
       "Basic JavaScript knowledge",
       "Familiarity with HTML and CSS",
@@ -330,7 +284,7 @@ export const studyPlans: StudyPlan[] = [
       "Understand system design principles",
       "Ready for technical interviews",
     ],
-    estimatedTimePerDay: 2,
+    estimatedTotalTime: 14,
   },
   {
     id: "one-month-balanced",
@@ -455,320 +409,104 @@ export const studyPlans: StudyPlan[] = [
         ],
       },
     ],
-    schedule: [
-      {
-        weekNumber: 1,
-        title: "JavaScript Fundamentals & React Basics",
-        description: "Build strong foundation in JavaScript and React",
-        topics: ["JavaScript Comprehensive", "React Advanced"],
-        totalHours: 6,
-        dailySchedule: [
-          {
-            day: 1,
-            title: "JavaScript ES6+ Features",
-            description: "Learn modern JavaScript features",
-            topics: ["JavaScript Comprehensive"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "es6-study",
-                title: "Study ES6+ Features",
-                description:
-                  "Learn about arrow functions, destructuring, and modules",
-                type: "reading",
-                estimatedTime: 45,
-                resourceUrl: "/questions/javascript/es6",
-              },
-              {
-                id: "es6-practice",
-                title: "Practice ES6+ Problems",
-                description: "Complete ES6+ coding challenges",
-                type: "practice",
-                estimatedTime: 45,
-              },
-            ],
-          },
-          {
-            day: 2,
-            title: "React Hooks Deep Dive",
-            description: "Master React hooks and state management",
-            topics: ["React Advanced"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "hooks-practice",
-                title: "Practice React Hooks",
-                description: "Complete advanced hooks problems",
-                type: "practice",
-                estimatedTime: 90,
-              },
-            ],
-          },
-          {
-            day: 3,
-            title: "Async JavaScript",
-            description: "Learn async programming patterns",
-            topics: ["JavaScript Comprehensive"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "async-practice",
-                title: "Async Programming Practice",
-                description: "Practice promises, async/await, and callbacks",
-                type: "practice",
-                estimatedTime: 90,
-              },
-            ],
-          },
-          {
-            day: 4,
-            title: "React Performance",
-            description: "Learn React performance optimization",
-            topics: ["React Advanced"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "performance-study",
-                title: "Study React Performance",
-                description: "Learn about React.memo, useMemo, and useCallback",
-                type: "reading",
-                estimatedTime: 45,
-                resourceUrl: "/questions/react/performance",
-              },
-              {
-                id: "performance-practice",
-                title: "Performance Optimization Practice",
-                description: "Practice optimizing React components",
-                type: "practice",
-                estimatedTime: 45,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        weekNumber: 2,
-        title: "Advanced React & State Management",
-        description: "Master advanced React concepts and state management",
-        topics: ["React Advanced"],
-        totalHours: 6,
-        dailySchedule: [
-          {
-            day: 1,
-            title: "Custom Hooks",
-            description: "Build custom React hooks",
-            topics: ["React Advanced"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "custom-hooks",
-                title: "Build Custom Hooks",
-                description: "Create reusable custom hooks",
-                type: "project",
-                estimatedTime: 90,
-              },
-            ],
-          },
-          {
-            day: 2,
-            title: "State Management",
-            description: "Learn advanced state management patterns",
-            topics: ["React Advanced"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "state-management",
-                title: "State Management Practice",
-                description: "Practice with Context API and state patterns",
-                type: "practice",
-                estimatedTime: 90,
-              },
-            ],
-          },
-          {
-            day: 3,
-            title: "React Forms",
-            description: "Build complex form systems",
-            topics: ["React Advanced"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "form-validation",
-                title: "Form Validation System",
-                description: "Build a comprehensive form validation system",
-                type: "project",
-                estimatedTime: 90,
-              },
-            ],
-          },
-          {
-            day: 4,
-            title: "React Testing",
-            description: "Learn React testing strategies",
-            topics: ["React Advanced"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "react-testing",
-                title: "React Testing Practice",
-                description: "Practice testing React components",
-                type: "practice",
-                estimatedTime: 90,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        weekNumber: 3,
-        title: "CSS, Styling & System Design",
-        description: "Master advanced CSS and system design concepts",
-        topics: ["CSS Advanced", "System Design Intermediate"],
-        totalHours: 6,
-        dailySchedule: [
-          {
-            day: 1,
-            title: "Advanced CSS",
-            description: "Learn advanced CSS techniques",
-            topics: ["CSS Advanced"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "css-animations-practice",
-                title: "CSS Animations Practice",
-                description: "Create complex CSS animations",
-                type: "practice",
-                estimatedTime: 90,
-                resourceUrl: "/questions/css/animations",
-              },
-            ],
-          },
-          {
-            day: 2,
-            title: "CSS Architecture",
-            description: "Learn CSS architecture patterns",
-            topics: ["CSS Advanced"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "css-architecture",
-                title: "CSS Architecture Study",
-                description:
-                  "Learn about BEM, CSS modules, and styled-components",
-                type: "reading",
-                estimatedTime: 90,
-              },
-            ],
-          },
-          {
-            day: 3,
-            title: "System Design Basics",
-            description: "Introduction to system design",
-            topics: ["System Design Intermediate"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "modal-design",
-                title: "Modal Dialog Design",
-                description: "Design a modal dialog system",
-                type: "practice",
-                estimatedTime: 90,
-                resourceUrl: "/questions/system-design/modal-dialog",
-              },
-            ],
-          },
-          {
-            day: 4,
-            title: "Advanced System Design",
-            description: "Complex system design problems",
-            topics: ["System Design Intermediate"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "advanced-design",
-                title: "Advanced System Design",
-                description: "Practice complex system design problems",
-                type: "practice",
-                estimatedTime: 90,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        weekNumber: 4,
-        title: "Practice, Mock Interviews & Review",
-        description: "Final preparation and mock interviews",
-        topics: ["All Topics"],
-        totalHours: 6,
-        dailySchedule: [
-          {
-            day: 1,
-            title: "Comprehensive Review",
-            description: "Review all learned concepts",
-            topics: ["All Topics"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "comprehensive-review",
-                title: "Comprehensive Review",
-                description: "Review all concepts and practice problems",
-                type: "review",
-                estimatedTime: 90,
-              },
-            ],
-          },
-          {
-            day: 2,
-            title: "Mock Interview 1",
-            description: "First mock interview session",
-            topics: ["All Topics"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "mock-interview-1",
-                title: "Mock Interview Session 1",
-                description: "Complete a full mock interview",
-                type: "practice",
-                estimatedTime: 90,
-              },
-            ],
-          },
-          {
-            day: 3,
-            title: "Practice Problems",
-            description: "Focus on weak areas",
-            topics: ["All Topics"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "weak-areas",
-                title: "Weak Areas Practice",
-                description: "Focus on identified weak areas",
-                type: "practice",
-                estimatedTime: 90,
-              },
-            ],
-          },
-          {
-            day: 4,
-            title: "Mock Interview 2",
-            description: "Final mock interview session",
-            topics: ["All Topics"],
-            estimatedHours: 1.5,
-            tasks: [
-              {
-                id: "mock-interview-2",
-                title: "Mock Interview Session 2",
-                description: "Complete final mock interview",
-                type: "practice",
-                estimatedTime: 90,
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    milestones: createMilestones(
+      [
+        {
+          id: "es6-study",
+          title: "Study ES6+ Features",
+          description:
+            "Learn about arrow functions, destructuring, and modules",
+          type: "reading",
+          estimatedTime: 45,
+          resourceUrl: "/questions/javascript/es6",
+        },
+        {
+          id: "es6-practice",
+          title: "Practice ES6+ Problems",
+          description: "Complete ES6+ coding challenges",
+          type: "practice",
+          estimatedTime: 45,
+        },
+        {
+          id: "hooks-practice",
+          title: "Practice React Hooks",
+          description: "Complete advanced hooks problems",
+          type: "practice",
+          estimatedTime: 90,
+          resourceUrl: "/questions/react/hooks",
+        },
+        {
+          id: "async-practice",
+          title: "Async Programming Practice",
+          description: "Practice promises, async/await, and callbacks",
+          type: "practice",
+          estimatedTime: 90,
+        },
+      ],
+      [
+        {
+          id: "performance-study",
+          title: "Study React Performance",
+          description: "Learn about React.memo, useMemo, and useCallback",
+          type: "reading",
+          estimatedTime: 45,
+          resourceUrl: "/questions/react/performance",
+        },
+        {
+          id: "performance-practice",
+          title: "Performance Optimization Practice",
+          description: "Practice optimizing React components",
+          type: "practice",
+          estimatedTime: 45,
+        },
+        {
+          id: "custom-hooks",
+          title: "Build Custom Hooks",
+          description: "Create reusable custom hooks",
+          type: "project",
+          estimatedTime: 90,
+        },
+        {
+          id: "css-animations-practice",
+          title: "CSS Animations Practice",
+          description: "Create complex CSS animations",
+          type: "practice",
+          estimatedTime: 90,
+          resourceUrl: "/questions/css/animations",
+        },
+      ],
+      [
+        {
+          id: "modal-design",
+          title: "Modal Dialog Design",
+          description: "Design a modal dialog system",
+          type: "practice",
+          estimatedTime: 90,
+          resourceUrl: "/questions/system-design/modal-dialog",
+        },
+        {
+          id: "comprehensive-review",
+          title: "Comprehensive Review",
+          description: "Review all learned concepts",
+          type: "review",
+          estimatedTime: 90,
+        },
+        {
+          id: "mock-interview-1",
+          title: "Mock Interview Session 1",
+          description: "Complete a full mock interview",
+          type: "practice",
+          estimatedTime: 90,
+        },
+        {
+          id: "mock-interview-2",
+          title: "Mock Interview Session 2",
+          description: "Complete final mock interview",
+          type: "practice",
+          estimatedTime: 90,
+        },
+      ],
+    ),
     prerequisites: [
       "Basic JavaScript knowledge",
       "Familiarity with React basics",
@@ -781,7 +519,7 @@ export const studyPlans: StudyPlan[] = [
       "Confident in technical interviews",
       "Ready for senior-level positions",
     ],
-    estimatedTimePerDay: 1.5,
+    estimatedTotalTime: 24,
   },
   {
     id: "three-months-comprehensive",
@@ -907,92 +645,44 @@ export const studyPlans: StudyPlan[] = [
         ],
       },
     ],
-    schedule: [
-      {
-        weekNumber: 1,
-        title: "Month 1: Core Fundamentals & React Mastery",
-        description: "Build strong foundation and master React",
-        topics: ["JavaScript Mastery", "React Expert Level"],
-        totalHours: 12,
-        dailySchedule: [
-          {
-            day: 1,
-            title: "JavaScript Deep Dive",
-            description: "Advanced JavaScript concepts",
-            topics: ["JavaScript Mastery"],
-            estimatedHours: 3,
-            tasks: [
-              {
-                id: "js-advanced-study",
-                title: "Study Advanced JavaScript",
-                description: "Learn advanced JavaScript patterns and concepts",
-                type: "reading",
-                estimatedTime: 90,
-                resourceUrl: "/questions/javascript/advanced-patterns",
-              },
-              {
-                id: "js-advanced-practice",
-                title: "Advanced JavaScript Practice",
-                description: "Practice advanced JavaScript problems",
-                type: "practice",
-                estimatedTime: 90,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        weekNumber: 2,
-        title: "Month 2: Advanced Concepts & System Design",
-        description: "Master advanced concepts and system design",
-        topics: ["System Design Expert", "Performance Optimization"],
-        totalHours: 12,
-        dailySchedule: [
-          {
-            day: 1,
-            title: "System Design Deep Dive",
-            description: "Complex system design problems",
-            topics: ["System Design Expert"],
-            estimatedHours: 3,
-            tasks: [
-              {
-                id: "complex-design",
-                title: "Complex System Design",
-                description: "Practice complex system design problems",
-                type: "practice",
-                estimatedTime: 180,
-                resourceUrl: "/questions/system-design/complex",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        weekNumber: 3,
-        title: "Month 3: Expert Preparation & Mock Interviews",
-        description: "Expert-level preparation and mock interviews",
-        topics: ["All Topics"],
-        totalHours: 12,
-        dailySchedule: [
-          {
-            day: 1,
-            title: "Expert Mock Interviews",
-            description: "Expert-level mock interviews",
-            topics: ["All Topics"],
-            estimatedHours: 3,
-            tasks: [
-              {
-                id: "expert-mock",
-                title: "Expert Mock Interview",
-                description: "Complete expert-level mock interview",
-                type: "practice",
-                estimatedTime: 180,
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    milestones: createMilestones(
+      [
+        {
+          id: "js-advanced-study",
+          title: "Study Advanced JavaScript",
+          description: "Learn advanced JavaScript patterns and concepts",
+          type: "reading",
+          estimatedTime: 90,
+          resourceUrl: "/questions/javascript/advanced-patterns",
+        },
+        {
+          id: "js-advanced-practice",
+          title: "Advanced JavaScript Practice",
+          description: "Practice advanced JavaScript problems",
+          type: "practice",
+          estimatedTime: 90,
+        },
+      ],
+      [
+        {
+          id: "complex-design",
+          title: "Complex System Design",
+          description: "Practice complex system design problems",
+          type: "practice",
+          estimatedTime: 180,
+          resourceUrl: "/questions/system-design/complex",
+        },
+      ],
+      [
+        {
+          id: "expert-mock",
+          title: "Expert Mock Interview",
+          description: "Complete expert-level mock interview",
+          type: "practice",
+          estimatedTime: 180,
+        },
+      ],
+    ),
     prerequisites: [
       "Strong JavaScript foundation",
       "React experience",
@@ -1006,7 +696,7 @@ export const studyPlans: StudyPlan[] = [
       "Lead technical interviews",
       "Ready for principal-level positions",
     ],
-    estimatedTimePerDay: 0.75,
+    estimatedTotalTime: 36,
   },
 ];
 

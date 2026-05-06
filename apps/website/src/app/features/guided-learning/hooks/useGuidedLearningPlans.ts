@@ -3,9 +3,9 @@
 import { useState, useEffect, useMemo } from "react";
 import { LearningPlan } from "../types";
 import {
-  filterDayBasedPlans,
+  sortPlansByDifficulty,
   getQuestionsRange,
-  getDaysRange,
+  getMilestoneRange,
 } from "../utils/plan-helpers";
 
 interface UsePlansResult {
@@ -14,7 +14,7 @@ interface UsePlansResult {
   isLoading: boolean;
   error: string | null;
   questionsRange: string;
-  daysRange: string;
+  milestoneRange: string;
 }
 
 export function useGuidedLearningPlans(): UsePlansResult {
@@ -57,9 +57,9 @@ export function useGuidedLearningPlans(): UsePlansResult {
     loadPlans();
   }, []);
 
-  const plans = useMemo(() => filterDayBasedPlans(allPlans), [allPlans]);
-  const questionsRange = useMemo(() => getQuestionsRange(plans), [plans]);
-  const daysRange = useMemo(() => getDaysRange(plans), [plans]);
+  const plans = useMemo(() => sortPlansByDifficulty(allPlans), [allPlans]);
+  const questionsRange = useMemo(() => getQuestionsRange(plans).label, [plans]);
+  const milestoneRange = useMemo(() => getMilestoneRange(plans), [plans]);
 
-  return { plans, allPlans, isLoading, error, questionsRange, daysRange };
+  return { plans, allPlans, isLoading, error, questionsRange, milestoneRange };
 }

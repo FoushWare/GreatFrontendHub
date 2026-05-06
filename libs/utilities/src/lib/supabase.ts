@@ -277,3 +277,28 @@ export const supabaseClient = {
     return await supabase.from("learning_plans").insert(data).select().single();
   },
 };
+
+/**
+ * Get a Supabase client with service role key (lazy initialization)
+ * This function creates the client only when called, not at module load time
+ * This prevents build-time errors when environment variables are not available
+ */
+export function getSupabaseClient() {
+  const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"];
+  const supabaseServiceRoleKey = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+
+  if (!supabaseUrl || !supabaseServiceRoleKey) {
+    // If not in build phase and missing keys, throw
+    if (process.env["NEXT_PHASE"] !== "phase-production-build") {
+      throw new Error(
+        "Missing required Supabase environment variables: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set",
+      );
+    }
+    // Return dummy client for build phase if needed, or throw
+  }
+
+  return createClient(
+    supabaseUrl || "https://placeholder.supabase.co",
+    supabaseServiceRoleKey || "placeholder",
+  );
+}

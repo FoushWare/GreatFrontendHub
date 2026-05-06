@@ -32,7 +32,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
 
       - name: Install dependencies
@@ -66,13 +66,20 @@ jobs:
             libs/common-ui/src/components/ui/dialog.test.tsx \
             apps/website/src/app/lib/frontend-task-validator.test.ts \
             apps/website/src/app/lib/frontend-task-validator-coverage.test.ts \
+            libs/utilities/src/lib/api/questions-handler.test.ts \
+            libs/utilities/src/lib/api/sanitize-server.test.ts \
+            libs/utilities/src/lib/api/validation.test.ts \
+            libs/utilities/src/lib/api/stats-utils.test.ts \
+            libs/utilities/src/lib/api/__tests__/api-config.test.ts \
+            apps/website/src/app/lib/network/routes/questions/unified/route.test.ts \
+            libs/utilities/src/lib/api/__tests__/stats-utils.test.ts \
             --coverage \
             --coverage.provider=v8 \
             --coverage.reporter=lcov \
             --coverage.reporter=text-summary
           test -f coverage/lcov.info
         env:
-          NODE_OPTIONS: "--max-old-space-size=1536"
+          NODE_OPTIONS: "--max-old-space-size=2048"
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6

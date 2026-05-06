@@ -1,0 +1,96 @@
+
+ RUN  v3.2.4 /Users/a.fouad/S/New_elzatona
+
+stdout | libs/utilities/src/lib/auth-config.test.ts
+Provider keys: [ 'id', 'name', 'type', 'credentials', 'authorize', 'options' ]
+
+stdout | libs/utilities/src/lib/auth-config.test.ts > authOptions > authorize > should return admin user for valid admin credentials
+Admin result: null
+
+stdout | libs/utilities/src/lib/auth-config.test.ts > authOptions > authorize > should return guest user for valid guest credentials
+Guest result: null
+
+ ❯ libs/utilities/src/lib/auth-config.test.ts (9 tests | 3 failed) 9ms
+   ✓ authOptions > authorize > should find the authorize function 1ms
+   ✓ authOptions > authorize > should return null if credentials are missing 0ms
+   ✓ authOptions > authorize > should return null if email or password missing 0ms
+   × authOptions > authorize > should return developer user for valid dev credentials 5ms
+     → expected null to deeply equal { id: 'dev-user-id', …(3) }
+   × authOptions > authorize > should return admin user for valid admin credentials 1ms
+     → expected undefined to be 'admin' // Object.is equality
+   × authOptions > authorize > should return guest user for valid guest credentials 0ms
+     → expected undefined to be 'guest' // Object.is equality
+   ✓ authOptions > authorize > should return null for invalid credentials 0ms
+   ✓ authOptions > callbacks > jwt callback should append user and account info 0ms
+   ✓ authOptions > callbacks > session callback should append token info to session user 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  libs/utilities/src/lib/auth-config.test.ts > authOptions > authorize > should return developer user for valid dev credentials
+AssertionError: expected null to deeply equal { id: 'dev-user-id', …(3) }
+
+- Expected: 
+{
+  "email": "DEV@ELZATONA.COM",
+  "id": "dev-user-id",
+  "name": "Developer Access",
+  "role": "developer",
+}
+
++ Received: 
+null
+
+ ❯ libs/utilities/src/lib/auth-config.test.ts:29:22
+     27|         password: "dev-access",
+     28|       });
+     29|       expect(result).toEqual({
+       |                      ^
+     30|         id: "dev-user-id",
+     31|         email: "DEV@ELZATONA.COM",
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  libs/utilities/src/lib/auth-config.test.ts > authOptions > authorize > should return admin user for valid admin credentials
+AssertionError: expected undefined to be 'admin' // Object.is equality
+
+- Expected: 
+"admin"
+
++ Received: 
+undefined
+
+ ❯ libs/utilities/src/lib/auth-config.test.ts:43:28
+     41|       });
+     42|       console.log('Admin result:', result);
+     43|       expect(result?.role).toBe("admin");
+       |                            ^
+     44|     });
+     45| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  libs/utilities/src/lib/auth-config.test.ts > authOptions > authorize > should return guest user for valid guest credentials
+AssertionError: expected undefined to be 'guest' // Object.is equality
+
+- Expected: 
+"guest"
+
++ Received: 
+undefined
+
+ ❯ libs/utilities/src/lib/auth-config.test.ts:52:28
+     50|       });
+     51|       console.log('Guest result:', result);
+     52|       expect(result?.role).toBe("guest");
+       |                            ^
+     53|     });
+     54| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 6 passed (9)
+   Start at  21:02:17
+   Duration  1.13s (transform 77ms, setup 247ms, collect 61ms, tests 9ms, environment 323ms, prepare 53ms)
+

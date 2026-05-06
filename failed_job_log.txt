@@ -1,0 +1,415 @@
+Deploy Admin	Set up job	﻿2026-04-17T21:49:40.1792838Z Current runner version: '2.333.1'
+Deploy Admin	Set up job	2026-04-17T21:49:40.1814075Z ##[group]Runner Image Provisioner
+Deploy Admin	Set up job	2026-04-17T21:49:40.1814844Z Hosted Compute Agent
+Deploy Admin	Set up job	2026-04-17T21:49:40.1815275Z Version: 20260213.493
+Deploy Admin	Set up job	2026-04-17T21:49:40.1815801Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+Deploy Admin	Set up job	2026-04-17T21:49:40.1816410Z Build Date: 2026-02-13T00:28:41Z
+Deploy Admin	Set up job	2026-04-17T21:49:40.1816947Z Worker ID: {9b823b10-5fdd-4177-ae5b-ee3693d7aefd}
+Deploy Admin	Set up job	2026-04-17T21:49:40.1817501Z Azure Region: westcentralus
+Deploy Admin	Set up job	2026-04-17T21:49:40.1818043Z ##[endgroup]
+Deploy Admin	Set up job	2026-04-17T21:49:40.1819093Z ##[group]Operating System
+Deploy Admin	Set up job	2026-04-17T21:49:40.1819629Z Ubuntu
+Deploy Admin	Set up job	2026-04-17T21:49:40.1820055Z 24.04.4
+Deploy Admin	Set up job	2026-04-17T21:49:40.1820659Z LTS
+Deploy Admin	Set up job	2026-04-17T21:49:40.1821098Z ##[endgroup]
+Deploy Admin	Set up job	2026-04-17T21:49:40.1821550Z ##[group]Runner Image
+Deploy Admin	Set up job	2026-04-17T21:49:40.1822051Z Image: ubuntu-24.04
+Deploy Admin	Set up job	2026-04-17T21:49:40.1822558Z Version: 20260413.86.1
+Deploy Admin	Set up job	2026-04-17T21:49:40.1823421Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260413.86/images/ubuntu/Ubuntu2404-Readme.md
+Deploy Admin	Set up job	2026-04-17T21:49:40.1824759Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260413.86
+Deploy Admin	Set up job	2026-04-17T21:49:40.1825557Z ##[endgroup]
+Deploy Admin	Set up job	2026-04-17T21:49:40.1826476Z ##[group]GITHUB_TOKEN Permissions
+Deploy Admin	Set up job	2026-04-17T21:49:40.1827967Z Contents: read
+Deploy Admin	Set up job	2026-04-17T21:49:40.1828500Z Metadata: read
+Deploy Admin	Set up job	2026-04-17T21:49:40.1828984Z ##[endgroup]
+Deploy Admin	Set up job	2026-04-17T21:49:40.1830946Z Secret source: Actions
+Deploy Admin	Set up job	2026-04-17T21:49:40.1831650Z Prepare workflow directory
+Deploy Admin	Set up job	2026-04-17T21:49:40.2093414Z Prepare all required actions
+Deploy Admin	Set up job	2026-04-17T21:49:40.2125691Z Getting action download info
+Deploy Admin	Set up job	2026-04-17T21:49:40.6277710Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+Deploy Admin	Set up job	2026-04-17T21:49:40.7467332Z Download action repository 'pnpm/action-setup@v4' (SHA:b906affcce14559ad1aafd4ab0e942779e9f58b1)
+Deploy Admin	Set up job	2026-04-17T21:49:41.7547115Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+Deploy Admin	Set up job	2026-04-17T21:49:41.8884348Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+Deploy Admin	Set up job	2026-04-17T21:49:42.2554390Z Complete job name: Deploy Admin
+Deploy Admin	Checkout repository	﻿2026-04-17T21:49:42.3083483Z ##[group]Run actions/checkout@v4
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3083959Z with:
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3084185Z   ref: feat/optimize-ci-and-deploy-sync
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3084470Z   repository: FoushWare/elzatona_web
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3084858Z   token: ***
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3085065Z   ssh-strict: true
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3085277Z   ssh-user: git
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3085495Z   persist-credentials: true
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3085728Z   clean: true
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3085944Z   sparse-checkout-cone-mode: true
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3086198Z   fetch-depth: 1
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3086396Z   fetch-tags: false
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3086597Z   show-progress: true
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3086796Z   lfs: false
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3086977Z   submodules: false
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3087173Z   set-safe-directory: true
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3087641Z ##[endgroup]
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3924143Z Syncing repository: FoushWare/elzatona_web
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3925511Z ##[group]Getting Git version info
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3925984Z Working directory is '/home/runner/work/elzatona_web/elzatona_web'
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.3926774Z [command]/usr/bin/git version
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4488056Z git version 2.53.0
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4506709Z ##[endgroup]
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4518316Z Temporarily overriding HOME='/home/runner/work/_temp/10bbbbd5-1677-4e7b-aec4-c0c87085f301' before making global git config changes
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4519009Z Adding repository directory to the temporary git global config as a safe directory
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4529552Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/elzatona_web/elzatona_web
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4555557Z Deleting the contents of '/home/runner/work/elzatona_web/elzatona_web'
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4558329Z ##[group]Initializing the repository
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4561830Z [command]/usr/bin/git init /home/runner/work/elzatona_web/elzatona_web
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4638784Z hint: Using 'master' as the name for the initial branch. This default branch name
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4639579Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4640447Z hint: to use in all of your new repositories, which will suppress this warning,
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4641018Z hint: call:
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4641312Z hint:
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4641726Z hint: 	git config --global init.defaultBranch <name>
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4642179Z hint:
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4642603Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4643296Z hint: 'development'. The just-created branch can be renamed via this command:
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4643834Z hint:
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4644134Z hint: 	git branch -m <name>
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4644473Z hint:
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4644932Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4645824Z Initialized empty Git repository in /home/runner/work/elzatona_web/elzatona_web/.git/
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4649534Z [command]/usr/bin/git remote add origin https://github.com/FoushWare/elzatona_web
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4674461Z ##[endgroup]
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4675063Z ##[group]Disabling automatic garbage collection
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4677852Z [command]/usr/bin/git config --local gc.auto 0
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4701509Z ##[endgroup]
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4702064Z ##[group]Setting up auth
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4706624Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4729256Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.4978726Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.5002821Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.5182110Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.5205656Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.5393859Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.5419826Z ##[endgroup]
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.5420596Z ##[group]Fetching the repository
+Deploy Admin	Checkout repository	2026-04-17T21:49:42.5427568Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +refs/heads/feat/optimize-ci-and-deploy-sync*:refs/remotes/origin/feat/optimize-ci-and-deploy-sync* +refs/tags/feat/optimize-ci-and-deploy-sync*:refs/tags/feat/optimize-ci-and-deploy-sync*
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3160847Z From https://github.com/FoushWare/elzatona_web
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3161764Z  * [new branch]      feat/optimize-ci-and-deploy-sync -> origin/feat/optimize-ci-and-deploy-sync
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3185167Z ##[endgroup]
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3185960Z ##[group]Determining the checkout info
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3191981Z [command]/usr/bin/git branch --list --remote origin/feat/optimize-ci-and-deploy-sync
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3211755Z   origin/feat/optimize-ci-and-deploy-sync
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3215369Z ##[endgroup]
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3219364Z [command]/usr/bin/git sparse-checkout disable
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3746742Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3769738Z ##[group]Checking out the ref
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.3773705Z [command]/usr/bin/git checkout --progress --force -B feat/optimize-ci-and-deploy-sync refs/remotes/origin/feat/optimize-ci-and-deploy-sync
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.7538516Z Switched to a new branch 'feat/optimize-ci-and-deploy-sync'
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.7539366Z branch 'feat/optimize-ci-and-deploy-sync' set up to track 'origin/feat/optimize-ci-and-deploy-sync'.
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.7562655Z ##[endgroup]
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.7598898Z [command]/usr/bin/git log -1 --format=%H
+Deploy Admin	Checkout repository	2026-04-17T21:49:45.7617639Z ceb93242f18483b5d1227a8efb9f8bd607a42fd4
+Deploy Admin	Install pnpm	﻿2026-04-17T21:49:45.7772976Z ##[group]Run pnpm/action-setup@v4
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.7827870Z with:
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.7828084Z   version: 10.33.0
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.7828261Z   dest: ~/setup-pnpm
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.7828444Z   run_install: null
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.7828626Z   cache: false
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.7828828Z   cache_dependency_path: pnpm-lock.yaml
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.7829089Z   package_json_file: package.json
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.7829316Z   standalone: false
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.7829490Z ##[endgroup]
+Deploy Admin	Install pnpm	2026-04-17T21:49:45.8909521Z ##[group]Running self-installer...
+Deploy Admin	Install pnpm	2026-04-17T21:49:46.4357716Z Progress: resolved 1, reused 0, downloaded 0, added 0
+Deploy Admin	Install pnpm	2026-04-17T21:49:46.4443587Z Packages: +1
+Deploy Admin	Install pnpm	2026-04-17T21:49:46.4444129Z +
+Deploy Admin	Install pnpm	2026-04-17T21:49:46.8629595Z Progress: resolved 1, reused 0, downloaded 1, added 1, done
+Deploy Admin	Install pnpm	2026-04-17T21:49:47.0262160Z 
+Deploy Admin	Install pnpm	2026-04-17T21:49:47.0262649Z dependencies:
+Deploy Admin	Install pnpm	2026-04-17T21:49:47.0262909Z + pnpm 10.33.0
+Deploy Admin	Install pnpm	2026-04-17T21:49:47.0263015Z 
+Deploy Admin	Install pnpm	2026-04-17T21:49:47.0291355Z Done in 1s
+Deploy Admin	Install pnpm	2026-04-17T21:49:47.0438226Z ##[endgroup]
+Deploy Admin	Install pnpm	2026-04-17T21:49:47.0441259Z Installation Completed!
+Deploy Admin	Setup Node.js	﻿2026-04-17T21:49:47.0566648Z ##[group]Run actions/setup-node@v4
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.0566868Z with:
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.0567026Z   node-version: 20
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.0567191Z   cache: pnpm
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.0567341Z   always-auth: false
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.0567515Z   check-latest: false
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.0567783Z   token: ***
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.0567943Z env:
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.0568155Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.0568413Z ##[endgroup]
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.3153221Z Found in cache @ /opt/hostedtoolcache/node/20.20.2/x64
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.3159347Z ##[group]Environment details
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.9824514Z node: v20.20.2
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.9824881Z npm: 10.8.2
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.9825042Z yarn: 1.22.22
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.9825952Z ##[endgroup]
+Deploy Admin	Setup Node.js	2026-04-17T21:49:47.9845294Z [command]/home/runner/setup-pnpm/node_modules/.bin/pnpm store path --silent
+Deploy Admin	Setup Node.js	2026-04-17T21:49:48.2512537Z /home/runner/setup-pnpm/node_modules/.bin/store/v10
+Deploy Admin	Setup Node.js	2026-04-17T21:49:48.4660494Z Cache hit for: node-cache-Linux-x64-pnpm-c1fa4408a2f88a7a3398f75e9407cf077d6dc825f6d3648966b2ca686a6fa52f
+Deploy Admin	Setup Node.js	2026-04-17T21:49:49.6962787Z Received 33554432 of 436469304 (7.7%), 32.0 MBs/sec
+Deploy Admin	Setup Node.js	2026-04-17T21:49:50.7011151Z Received 192937984 of 436469304 (44.2%), 91.9 MBs/sec
+Deploy Admin	Setup Node.js	2026-04-17T21:49:51.6980388Z Received 377487360 of 436469304 (86.5%), 119.9 MBs/sec
+Deploy Admin	Setup Node.js	2026-04-17T21:49:52.3791755Z Received 436469304 of 436469304 (100.0%), 113.0 MBs/sec
+Deploy Admin	Setup Node.js	2026-04-17T21:49:52.3792562Z Cache Size: ~416 MB (436469304 B)
+Deploy Admin	Setup Node.js	2026-04-17T21:49:52.3820597Z [command]/usr/bin/tar -xf /home/runner/work/_temp/4753f2c7-5887-4950-a697-1e1831cb846d/cache.tzst -P -C /home/runner/work/elzatona_web/elzatona_web --use-compress-program unzstd
+Deploy Admin	Setup Node.js	2026-04-17T21:49:57.4183725Z Cache restored successfully
+Deploy Admin	Setup Node.js	2026-04-17T21:49:57.4359607Z Cache restored from key: node-cache-Linux-x64-pnpm-c1fa4408a2f88a7a3398f75e9407cf077d6dc825f6d3648966b2ca686a6fa52f
+Deploy Admin	Enable Corepack	﻿2026-04-17T21:49:57.4576167Z ##[group]Run corepack enable
+Deploy Admin	Enable Corepack	2026-04-17T21:49:57.4576448Z [36;1mcorepack enable[0m
+Deploy Admin	Enable Corepack	2026-04-17T21:49:57.4600917Z shell: /usr/bin/bash -e {0}
+Deploy Admin	Enable Corepack	2026-04-17T21:49:57.4601127Z env:
+Deploy Admin	Enable Corepack	2026-04-17T21:49:57.4601343Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Deploy Admin	Enable Corepack	2026-04-17T21:49:57.4601595Z ##[endgroup]
+Deploy Admin	Install root dependencies	﻿2026-04-17T21:49:57.5569423Z ##[group]Run pnpm install --frozen-lockfile
+Deploy Admin	Install root dependencies	2026-04-17T21:49:57.5569734Z [36;1mpnpm install --frozen-lockfile[0m
+Deploy Admin	Install root dependencies	2026-04-17T21:49:57.5588524Z shell: /usr/bin/bash -e {0}
+Deploy Admin	Install root dependencies	2026-04-17T21:49:57.5588730Z env:
+Deploy Admin	Install root dependencies	2026-04-17T21:49:57.5588938Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Deploy Admin	Install root dependencies	2026-04-17T21:49:57.5589185Z ##[endgroup]
+Deploy Admin	Install root dependencies	2026-04-17T21:49:57.6308583Z ! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-10.33.0.tgz
+Deploy Admin	Install root dependencies	2026-04-17T21:49:58.8950414Z Scope: all 13 workspace projects
+Deploy Admin	Install root dependencies	2026-04-17T21:49:58.9895940Z Lockfile is up to date, resolution step is skipped
+Deploy Admin	Install root dependencies	2026-04-17T21:49:59.1134895Z Progress: resolved 1, reused 0, downloaded 0, added 0
+Deploy Admin	Install root dependencies	2026-04-17T21:49:59.2622246Z Packages: +2431
+Deploy Admin	Install root dependencies	2026-04-17T21:49:59.2622999Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Deploy Admin	Install root dependencies	2026-04-17T21:50:00.1144346Z Progress: resolved 2431, reused 360, downloaded 0, added 0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:01.1149684Z Progress: resolved 2431, reused 1085, downloaded 0, added 0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:02.1151068Z Progress: resolved 2431, reused 2282, downloaded 0, added 0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:03.1154314Z Progress: resolved 2431, reused 2417, downloaded 0, added 81
+Deploy Admin	Install root dependencies	2026-04-17T21:50:04.1165302Z Progress: resolved 2431, reused 2417, downloaded 0, added 103
+Deploy Admin	Install root dependencies	2026-04-17T21:50:05.1171370Z Progress: resolved 2431, reused 2417, downloaded 0, added 378
+Deploy Admin	Install root dependencies	2026-04-17T21:50:06.1167251Z Progress: resolved 2431, reused 2417, downloaded 0, added 677
+Deploy Admin	Install root dependencies	2026-04-17T21:50:07.1166003Z Progress: resolved 2431, reused 2417, downloaded 0, added 903
+Deploy Admin	Install root dependencies	2026-04-17T21:50:08.1171558Z Progress: resolved 2431, reused 2417, downloaded 0, added 1043
+Deploy Admin	Install root dependencies	2026-04-17T21:50:09.1177070Z Progress: resolved 2431, reused 2417, downloaded 0, added 1084
+Deploy Admin	Install root dependencies	2026-04-17T21:50:10.1177952Z Progress: resolved 2431, reused 2417, downloaded 0, added 1202
+Deploy Admin	Install root dependencies	2026-04-17T21:50:11.1183109Z Progress: resolved 2431, reused 2417, downloaded 0, added 1411
+Deploy Admin	Install root dependencies	2026-04-17T21:50:12.1183918Z Progress: resolved 2431, reused 2417, downloaded 0, added 1861
+Deploy Admin	Install root dependencies	2026-04-17T21:50:13.1187277Z Progress: resolved 2431, reused 2417, downloaded 0, added 1939
+Deploy Admin	Install root dependencies	2026-04-17T21:50:14.2940851Z Progress: resolved 2431, reused 2417, downloaded 0, added 1940
+Deploy Admin	Install root dependencies	2026-04-17T21:50:15.2234768Z Progress: resolved 2431, reused 2417, downloaded 0, added 2431, done
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3987436Z 
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3988020Z dependencies:
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3988397Z + @daily-co/daily-js 0.84.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3988764Z + @heroicons/react 2.2.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3989104Z + @monaco-editor/react 4.7.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3989600Z + @radix-ui/react-checkbox 1.3.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3990022Z + @radix-ui/react-collapsible 1.1.12
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3990595Z + @radix-ui/react-dialog 1.1.15
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3990951Z + @radix-ui/react-label 2.1.8
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3991399Z + @radix-ui/react-popover 1.1.15
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3991784Z + @radix-ui/react-progress 1.1.8
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3992167Z + @radix-ui/react-scroll-area 1.2.10
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3992565Z + @radix-ui/react-select 2.2.6
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3992950Z + @radix-ui/react-separator 1.1.8
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3993329Z + @radix-ui/react-slot 1.2.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3993683Z + @radix-ui/react-switch 1.2.6
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3994020Z + @radix-ui/react-tabs 1.1.13
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3994322Z + @reactour/tour 3.8.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3994596Z + @sentry/nextjs 10.46.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3994939Z + @supabase/supabase-js 2.100.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3995311Z + @tanstack/react-query 5.95.2
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3995729Z + @tanstack/react-query-devtools 5.95.2
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3996149Z + @types/bcryptjs 2.4.6
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3996465Z + @types/dompurify 3.2.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3996778Z + @types/jsonwebtoken 9.0.10
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3997176Z + @types/react-syntax-highlighter 15.5.13
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3997576Z + @types/swagger-jsdoc 6.0.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3997952Z + @types/swagger-ui-react 5.18.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3998307Z + @vercel/speed-insights 1.3.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3998614Z + axios 1.15.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3998861Z + bcryptjs 3.0.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3999648Z + cheerio 1.2.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.3999984Z + class-variance-authority 0.7.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4000529Z + cloudinary 2.9.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4000825Z + clsx 2.1.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4001081Z + critters 0.0.23
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4001249Z + date-fns 4.1.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4001424Z + dompurify 3.4.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4001587Z + dotenv 17.3.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4001852Z + firebase 12.11.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4002054Z + html-to-image 1.11.13
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4002524Z + jotai 2.19.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4002741Z + jsonwebtoken 9.0.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4003000Z + lucide-react 0.542.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4003172Z + next 16.2.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4003346Z + next-auth 4.24.13
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4003520Z + node-cron 4.2.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4003697Z + node-fetch 2.7.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4003862Z + nuqs 2.8.9
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4004018Z + react 19.2.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4004290Z + react-day-picker 9.14.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4004578Z + react-dom 19.2.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4004783Z + react-markdown 10.1.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4005019Z + react-resizable-panels 2.1.9
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4005408Z + react-syntax-highlighter 16.1.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4005736Z + shiki 3.23.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4005989Z + sonner 2.0.7
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4006193Z + swagger-jsdoc 6.2.8
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4006386Z + swagger-ui-react 5.32.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4006581Z + tailwind-merge 3.5.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4006776Z + tailwindcss-animate 1.0.7
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4006985Z + validator 13.15.26
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4007152Z + xss 1.0.15
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4007311Z + zod 4.3.6
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4007407Z 
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4007489Z devDependencies:
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4007677Z + @eslint/eslintrc 3.3.5
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4007971Z + @mermaid-js/mermaid-cli 11.12.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4008227Z + @nx/eslint 22.6.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4008397Z + @nx/jest 22.6.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4008564Z + @nx/next 22.6.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4008728Z + @nx/vite 22.6.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4008902Z + @playwright/test 1.58.2
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4009182Z + @swc-node/register 1.11.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4009477Z + @swc/core 1.15.21
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4009753Z + @testing-library/jest-dom 6.9.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4010090Z + @testing-library/react 16.3.2
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4010731Z + @testing-library/user-event 14.6.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4011062Z + @types/jest 30.0.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4011330Z + @types/node 20.19.37
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4011599Z + @types/react 19.2.14
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4011883Z + @types/react-dom 19.2.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4012198Z + @vitest/coverage-v8 3.2.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4012498Z + autoprefixer 10.4.27
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4012803Z + dotenv-cli 11.0.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4013001Z + eslint 9.39.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4013186Z + eslint-config-next 15.5.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4013380Z + glob 11.1.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4013536Z + husky 9.1.7
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4013775Z + jest 30.3.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4014052Z + jest-environment-jsdom 30.3.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4014346Z + js-yaml 3.14.2
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4014559Z + lint-staged 16.4.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4014756Z + minimatch 10.2.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4014917Z + msw 2.12.14
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4015080Z + null-loader 4.0.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4015242Z + nx 22.6.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4015404Z + oe-sonar-mcp 1.0.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4015571Z + prettier 3.8.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4015743Z + puppeteer 23.11.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4015907Z + semver 7.7.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4016083Z + tailwindcss 3.4.19
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4016245Z + ts-jest 29.4.6
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4016406Z + tsx 4.21.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4016602Z + typescript 5.9.3
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4016767Z + vercel 50.44.0
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4016968Z + vite 7.3.2
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4017146Z + vite-tsconfig-paths 6.1.1
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4017352Z + vitest 3.2.4
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4017448Z 
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4380704Z . prepare$ husky
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4799410Z . prepare: Done
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4925212Z ╭ Warning ─────────────────────────────────────────────────────────────────────╮
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4926208Z │                                                                              │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4927435Z │   Ignored build scripts: @firebase/util@1.15.0, @parcel/watcher@2.5.6,       │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4928354Z │   @scarf/scarf@1.4.0, @sentry/cli@2.58.5, @swc/core@1.15.21,                 │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4929220Z │   @tree-sitter-grammars/tree-sitter-yaml@0.7.1, core-js-pure@3.49.0,         │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4930128Z │   esbuild@0.27.0, esbuild@0.27.4, esbuild@0.27.7, less@4.5.1, msw@2.12.14,   │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4931465Z │   nx@22.6.3, protobufjs@7.5.4, puppeteer@23.11.1, sharp@0.34.5,              │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4932338Z │   tree-sitter-json@0.24.8, tree-sitter@0.21.1, tree-sitter@0.22.4,           │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4933186Z │   unrs-resolver@1.11.1.                                                      │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4934052Z │   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4934962Z │   to run scripts.                                                            │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4935501Z │                                                                              │
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.4935982Z ╰──────────────────────────────────────────────────────────────────────────────╯
+Deploy Admin	Install root dependencies	2026-04-17T21:50:16.5128324Z Done in 17.8s using pnpm v10.33.0
+Deploy Admin	Setup Nx and Vercel Caching	﻿2026-04-17T21:50:16.5422878Z ##[group]Run actions/cache@v4
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5423103Z with:
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5423278Z   path: .nx/cache
+Deploy Admin	Setup Nx and Vercel Caching	apps/admin/.next/cache
+Deploy Admin	Setup Nx and Vercel Caching	
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5423605Z   key: Linux-build-cache-ceb93242f18483b5d1227a8efb9f8bd607a42fd4
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5423904Z   restore-keys: Linux-build-cache-
+Deploy Admin	Setup Nx and Vercel Caching	
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5424129Z   enableCrossOsArchive: false
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5424333Z   fail-on-cache-miss: false
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5424521Z   lookup-only: false
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5424691Z   save-always: false
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5424849Z env:
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5425047Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.5425294Z ##[endgroup]
+Deploy Admin	Setup Nx and Vercel Caching	2026-04-17T21:50:16.8307544Z Cache not found for input keys: Linux-build-cache-ceb93242f18483b5d1227a8efb9f8bd607a42fd4, Linux-build-cache-
+Deploy Admin	Validate Vercel token	﻿2026-04-17T21:50:16.8371819Z ##[group]Run if [ -z "***" ]; then
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8372147Z [36;1mif [ -z "***" ]; then[0m
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8372394Z [36;1m  echo "::error::Missing VERCEL_TOKEN secret"[0m
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8372638Z [36;1m  exit 1[0m
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8372803Z [36;1mfi[0m
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8372995Z [36;1mecho "VERCEL_TOKEN is configured"[0m
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8391384Z shell: /usr/bin/bash -e {0}
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8391582Z env:
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8391791Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8392043Z ##[endgroup]
+Deploy Admin	Validate Vercel token	2026-04-17T21:50:16.8429593Z VERCEL_TOKEN is configured
+Deploy Admin	Configure admin Vercel project settings	﻿2026-04-17T21:50:16.8449104Z ##[group]Run curl -fsS -X PATCH \
+Deploy Admin	Configure admin Vercel project settings	2026-04-17T21:50:16.8449352Z [36;1mcurl -fsS -X PATCH \[0m
+Deploy Admin	Configure admin Vercel project settings	2026-04-17T21:50:16.8449788Z [36;1m  -H "Authorization: ***" \[0m
+Deploy Admin	Configure admin Vercel project settings	2026-04-17T21:50:16.8450045Z [36;1m  -H "Content-Type: application/json" \[0m
+Deploy Admin	Configure admin Vercel project settings	2026-04-17T21:50:16.8450619Z [36;1m  -d '{"buildCommand":"pnpm --filter admin build","outputDirectory":"apps/admin/.next"}' \[0m
+Deploy Admin	Configure admin Vercel project settings	2026-04-17T21:50:16.8451100Z [36;1m  "https://api.vercel.com/v9/projects/***"[0m
+Deploy Admin	Configure admin Vercel project settings	2026-04-17T21:50:16.8467187Z shell: /usr/bin/bash -e {0}
+Deploy Admin	Configure admin Vercel project settings	2026-04-17T21:50:16.8467395Z env:
+Deploy Admin	Configure admin Vercel project settings	2026-04-17T21:50:16.8467597Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Deploy Admin	Configure admin Vercel project settings	2026-04-17T21:50:16.8467847Z ##[endgroup]
+Deploy Admin	Validate and build (Local Vercel Build)	﻿2026-04-17T21:50:17.2953978Z ##[group]Run npx vercel pull --yes --environment=production --token=***
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2954473Z [36;1mnpx vercel pull --yes --environment=production --token=***[0m
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2954844Z [36;1mnpx vercel build --prod --token=***[0m
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2973268Z shell: /usr/bin/bash -e {0}
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2973479Z env:
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2973693Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2974007Z   VERCEL_ORG_ID: ***
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2974249Z   VERCEL_PROJECT_ID: ***
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2974447Z   NEXT_PUBLIC_APP_ENV: production
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2974660Z   NEXT_TELEMETRY_DISABLED: 1
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2974958Z   NEXT_PUBLIC_SUPABASE_URL: ***
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2976020Z   NEXT_PUBLIC_SUPABASE_ANON_KEY: ***
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:17.2976253Z ##[endgroup]
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.3366033Z > NOTE: The Vercel CLI now collects telemetry regarding usage of the CLI.
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.3366846Z > This information is used to shape the CLI roadmap and prioritize features.
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.3367614Z > You can learn more, including how to opt-out if you'd not like to participate in this program, by visiting the following URL:
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.3368131Z > https://vercel.com/docs/cli/about-telemetry
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.5262325Z Retrieving project…
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.6645830Z > Downloading `production` Environment Variables for foushwares-projects/elzatona-admin
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.6646486Z Downloading
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.7739457Z Created .vercel/.env.production.local file  [109ms]
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.7739852Z 
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.7740030Z > Downloading project settings
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:18.7744116Z Downloaded project settings to ~/work/elzatona_web/elzatona_web/.vercel/project.json [0ms]
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:19.5798815Z WARNING! Build not running on Vercel. System environment variables will not be available.
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:19.8059668Z Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:19.8843823Z Detected `pnpm-lock.yaml` version 9 generated by pnpm@10.x with package.json#packageManager pnpm@10.33.0
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:19.8876415Z Running "install" command: `npm install`...
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.6678258Z npm error Cannot read properties of null (reading 'package')
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.6679315Z npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-04-17T21_50_19_938Z-debug-0.log
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.6877573Z Error: Command "npm install" exited with 1
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9340059Z ╭──────────────────────────────────────────────────────────────────────────────╮
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9341461Z │                                                                              │
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9342235Z │                     Update available! v50.44.0 ≫ v51.6.1                     │
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9343060Z │   Changelog: https://github.com/vercel/vercel/releases/tag/vercel%4051.6.1   │
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9343973Z │                    Run `pnpm i vercel@latest` to update.                     │
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9344724Z │                                                                              │
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9345480Z │             The latest update may fix any errors that occurred.              │
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9346191Z │                                                                              │
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9346921Z ╰──────────────────────────────────────────────────────────────────────────────╯
+Deploy Admin	Validate and build (Local Vercel Build)	2026-04-17T21:50:28.9570448Z ##[error]Process completed with exit code 1.
+Deploy Admin	Post Install pnpm	﻿2026-04-17T21:50:28.9829362Z Post job cleanup.
+Deploy Admin	Post Install pnpm	2026-04-17T21:50:29.1060031Z Pruning is unnecessary.
+Deploy Admin	Post Checkout repository	﻿2026-04-17T21:50:29.1255154Z Post job cleanup.
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2100861Z [command]/usr/bin/git version
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2129638Z git version 2.53.0
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2169350Z Temporarily overriding HOME='/home/runner/work/_temp/f09a2c0b-7fea-43c6-acc3-2541c6adc2e6' before making global git config changes
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2170822Z Adding repository directory to the temporary git global config as a safe directory
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2174495Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/elzatona_web/elzatona_web
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2367036Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2400726Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2667384Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2690740Z http.https://github.com/.extraheader
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2702196Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.2949472Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.3161130Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Deploy Admin	Post Checkout repository	2026-04-17T21:50:29.3186091Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Deploy Admin	Complete job	﻿2026-04-17T21:50:29.3532055Z Cleaning up orphan processes
+Deploy Admin	Complete job	2026-04-17T21:50:29.3865757Z Terminate orphan process: pid (2261) (node)
+Deploy Admin	Complete job	2026-04-17T21:50:29.3892557Z Terminate orphan process: pid (2324) (node)
+Deploy Admin	Complete job	2026-04-17T21:50:29.3901920Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/cache@v4, actions/checkout@v4, actions/setup-node@v4, pnpm/action-setup@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

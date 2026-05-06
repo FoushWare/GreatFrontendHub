@@ -71,20 +71,6 @@ export interface ParseResult {
 }
 
 export class MarkdownQuestionParser {
-  private static readonly QUESTION_PATTERNS = {
-    // GitHub-style multiple choice with code blocks and options
-    multipleChoice:
-      /^#{1,6}\s*(\d+)\.?\s*(.*?)\n```[\s\S]*?```\n((?:-?\s*[A-Z]:\s*.*\n?)+)/gm,
-    // Simple multiple choice format
-    simpleMultipleChoice: /^(\d+\.?\s*.*?)\n((?:[a-zA-Z]\)\s*.*(?:\n|$))+)/gm,
-    // True/False questions
-    trueFalse:
-      /^#{1,6}\s*(\d+)\.?\s*(.*?)\n```[\s\S]*?```\n-?\s*(True|False)\s*\[(?:correct|x|✓)\]/gm,
-    // Open-ended questions
-    openEnded:
-      /^#{1,6}\s*(\d+)\.?\s*(.*?)\n```[\s\S]*?```\n(?:-?\s*Answer:?\s*(.*))?$/gm,
-  };
-
   private static readonly OPTION_PATTERN =
     /^([a-zA-Z])\)\s*(.*?)(?:\s*\[(?:correct|x|✓)\])?$/gm;
 
@@ -349,8 +335,10 @@ export class MarkdownQuestionParser {
       return "";
     }
 
-    const answerMatch = /Answer:\s*([A-D])/i.exec(line);
-    return answerMatch ? answerMatch[1].toLowerCase() : "";
+    const answerMatch = /Answer:\s*(?<answer>[A-D])/i.exec(line);
+    return answerMatch?.groups?.answer
+      ? answerMatch.groups.answer.toLowerCase()
+      : "";
   }
 
   /**
@@ -363,9 +351,9 @@ export class MarkdownQuestionParser {
     for (let j = startIndex; j < Math.min(startIndex + 10, lines.length); j++) {
       const answerLine = lines[j].trim();
       if (answerLine.includes("Answer:") || answerLine.includes("**Answer:")) {
-        const answerMatch = /Answer:\s*([A-D])/i.exec(answerLine);
-        if (answerMatch) {
-          return answerMatch[1].toLowerCase();
+        const answerMatch = /Answer:\s*(?<answer>[A-D])/i.exec(answerLine);
+        if (answerMatch?.groups?.answer) {
+          return answerMatch.groups.answer.toLowerCase();
         }
       }
     }
@@ -521,8 +509,8 @@ export class MarkdownQuestionParser {
 
     if (githubMatches.length > 0) {
       for (const match of githubMatches) {
-        const id = match[1].toLowerCase();
-        const text = match[2].trim();
+        const id = match[1]?.toLowerCase() || "";
+        const text = (match[2] || "").trim();
         const isCorrect = correctAnswer
           ? id === correctAnswer.toLowerCase()
           : text.includes("[correct]") ||
@@ -540,8 +528,8 @@ export class MarkdownQuestionParser {
     const matches = [...optionsText.matchAll(this.OPTION_PATTERN)];
 
     for (const match of matches) {
-      const id = match[1].toLowerCase();
-      const text = match[2].trim();
+      const id = match[1]?.toLowerCase() || "";
+      const text = (match[2] || "").trim();
       const isCorrect = correctAnswer
         ? id === correctAnswer.toLowerCase()
         : match[0].includes("[correct]") ||

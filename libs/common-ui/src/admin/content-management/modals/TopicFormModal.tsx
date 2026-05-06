@@ -11,11 +11,6 @@ import {
   Button,
   Input,
   Textarea,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
 } from "../../../components/ui";
 import { BookOpen, Search, Plus, Check, ChevronsUpDown } from "lucide-react";
 import {
@@ -93,6 +88,13 @@ export const TopicFormModal: React.FC<TopicFormModalProps> = ({
     });
     onOpenChange(false);
   };
+
+  let submitButtonText = "Create Topic";
+  if (isSubmitting) {
+    submitButtonText = "Saving...";
+  } else if (topic) {
+    submitButtonText = "Save Changes";
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
@@ -181,13 +183,15 @@ export const TopicFormModal: React.FC<TopicFormModalProps> = ({
                         .includes(categorySearch.toLowerCase()),
                     )
                     .map((category) => (
-                      <div
+                      <button
                         key={category.id}
-                        className={`flex items-center justify-between px-2 py-1.5 text-sm rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                        type="button"
+                        className={`flex w-full items-center justify-between px-2 py-1.5 text-sm rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-purple-500 ${
                           categoryId === category.id
                             ? "bg-purple-50 dark:bg-purple-900/20 text-purple-600"
                             : ""
                         }`}
+                        aria-pressed={categoryId === category.id}
                         onClick={() => {
                           setCategoryId(category.id);
                           setIsCategoryPopoverOpen(false);
@@ -199,7 +203,7 @@ export const TopicFormModal: React.FC<TopicFormModalProps> = ({
                         {categoryId === category.id && (
                           <Check className="h-4 w-4" />
                         )}
-                      </div>
+                      </button>
                     ))}
 
                   {categorySearch.trim() &&
@@ -207,8 +211,9 @@ export const TopicFormModal: React.FC<TopicFormModalProps> = ({
                       (c) =>
                         c.name.toLowerCase() === categorySearch.toLowerCase(),
                     ) && (
-                      <div
-                        className="flex items-center px-2 py-2 text-sm text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded cursor-pointer border-t mt-1"
+                      <button
+                        type="button"
+                        className="flex w-full items-center px-2 py-2 text-sm text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded cursor-pointer border-t mt-1 focus:outline-none focus:ring-1 focus:ring-purple-500"
                         onClick={async () => {
                           if (onCreateCategory) {
                             await onCreateCategory(categorySearch.trim());
@@ -222,7 +227,7 @@ export const TopicFormModal: React.FC<TopicFormModalProps> = ({
                       >
                         <Plus className="h-4 w-4 mr-2" />
                         <span>Create "{categorySearch}"</span>
-                      </div>
+                      </button>
                     )}
 
                   {categories.length === 0 && !categorySearch && (
@@ -268,11 +273,7 @@ export const TopicFormModal: React.FC<TopicFormModalProps> = ({
               disabled={isSubmitting}
               className="bg-purple-600 hover:bg-purple-700 text-white"
             >
-              {isSubmitting
-                ? "Saving..."
-                : topic
-                  ? "Save Changes"
-                  : "Create Topic"}
+              {submitButtonText}
             </Button>
           </DialogFooter>
         </form>

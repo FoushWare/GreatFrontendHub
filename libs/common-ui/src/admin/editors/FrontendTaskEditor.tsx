@@ -128,13 +128,10 @@ export default function FrontendTaskEditor({
     handleMouseDown,
     showFileExplorer,
     setShowFileExplorer,
-    consoleOutput,
-    setConsoleOutput,
     showPreview,
     activeTab,
     setActiveTab,
     activeBrowserTab,
-    setActiveBrowserTab,
   } = editorState;
 
   // Simple form handlers
@@ -169,11 +166,6 @@ export default function FrontendTaskEditor({
         mode={mode}
         showFileExplorer={showFileExplorer}
         setShowFileExplorer={setShowFileExplorer}
-        showPreview={showPreview}
-        activeBrowserTab={activeBrowserTab}
-        setActiveBrowserTab={setActiveBrowserTab}
-        consoleOutput={consoleOutput}
-        setConsoleOutput={setConsoleOutput}
       />
     </div>
   );

@@ -46,6 +46,17 @@ export const TopicQuestionsModal: React.FC<TopicQuestionsModalProps> = ({
     ? questions.filter((q) => q.topic_id === topic.id)
     : [];
 
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case "beginner":
+        return "bg-green-50 text-green-700 dark:bg-green-900 dark:text-green-300";
+      case "intermediate":
+        return "bg-yellow-50 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300";
+      default:
+        return "bg-red-50 text-red-700 dark:bg-red-900 dark:text-red-300";
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent
@@ -130,13 +141,7 @@ export const TopicQuestionsModal: React.FC<TopicQuestionsModalProps> = ({
                       <div className="flex items-center space-x-2">
                         <Badge
                           variant="outline"
-                          className={`text-xs ${
-                            question.difficulty === "beginner"
-                              ? "bg-green-50 text-green-700 dark:bg-green-900 dark:text-green-300"
-                              : question.difficulty === "intermediate"
-                                ? "bg-yellow-50 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300"
-                                : "bg-red-50 text-red-700 dark:bg-red-900 dark:text-red-300"
-                          }`}
+                          className={`text-xs ${getDifficultyColor(question.difficulty)}`}
                         >
                           {question.difficulty}
                         </Badge>

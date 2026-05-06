@@ -100,48 +100,38 @@ export class LearningResourcesService {
     let page = 1;
     const perPage = 100;
 
-    while (true) {
-      const url = `${this.API_BASE}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/issues?state=all&per_page=${perPage}&page=${page}`;
-
-      try {
-        const response = await fetch(url, {
-          headers: {
-            Accept: "application/vnd.github.v3+json",
-            // Add GitHub token if available for higher rate limits
-            ...(process.env.NEXT_PUBLIC_GITHUB_TOKEN && {
-              Authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
-            }),
-          },
-        });
-
-        if (!response.ok) {
-          // Don't throw errors, just return empty array to trigger fallback
-          if (response.status === 404) {
-            return [];
-          }
-          if (response.status === 403) {
-            return [];
-          }
-          return [];
-        }
-
-        const resources: LearningResource[] = await response.json();
-
-        if (resources.length === 0) {
-          break; // No more resources
-        }
-
-        allResources.push(...resources);
-        page++;
-
-        // Limit to prevent infinite loops
-        if (page > 10) break;
-      } catch (_error) {
-        return [];
-      }
+    while (page <= 10) {
+      const resources = await this._fetchPage(page, perPage);
+      if (resources.length === 0) break;
+      allResources.push(...resources);
+      page++;
     }
-
     return allResources;
+  }
+
+  /**
+   * Internal helper to fetch a single page of resources.
+   */
+  private static async _fetchPage(
+    page: number,
+    perPage: number,
+  ): Promise<LearningResource[]> {
+    const url = `${this.API_BASE}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/issues?state=all&per_page=${perPage}&page=${page}`;
+    try {
+      const response = await fetch(url, {
+        headers: {
+          Accept: "application/vnd.github.v3+json",
+          ...(process.env.NEXT_PUBLIC_GITHUB_TOKEN && {
+            Authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+          }),
+        },
+      });
+
+      if (!response.ok) return [];
+      return await response.json();
+    } catch {
+      return [];
+    }
   }
 
   /**

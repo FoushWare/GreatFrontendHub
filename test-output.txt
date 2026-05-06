@@ -1,0 +1,135 @@
+npm warn Unknown project config "link-workspace-packages". This will stop working in the next major version of npm.
+npm warn Unknown project config "prefer-workspace-packages". This will stop working in the next major version of npm.
+
+ RUN  v3.2.4 /Users/a.fouad/S/New_elzatona
+
+stderr | apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts > Plans Hierarchy Route > should return 400 if planId is missing
+Error fetching plan hierarchy: TypeError: Cannot read properties of undefined (reading 'from')
+    at Module.GET (/Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.ts:186:8)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at /Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts:59:22
+    at file:///Users/a.fouad/S/New_elzatona/node_modules/.pnpm/@vitest+runner@3.2.4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts > Plans Hierarchy Route > should return 404 if plan cards are missing
+Error fetching plan hierarchy: TypeError: Cannot read properties of undefined (reading 'from')
+    at Module.GET (/Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.ts:186:8)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at /Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts:68:22
+    at file:///Users/a.fouad/S/New_elzatona/node_modules/.pnpm/@vitest+runner@3.2.4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts > Plans Hierarchy Route > should build hierarchy successfully
+Error fetching plan hierarchy: TypeError: Cannot read properties of undefined (reading 'from')
+    at Module.GET (/Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.ts:186:8)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at /Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts:85:22
+    at file:///Users/a.fouad/S/New_elzatona/node_modules/.pnpm/@vitest+runner@3.2.4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts > Plans Hierarchy Route > should fallback to direct categories if card_categories query fails
+Error fetching plan hierarchy: TypeError: Cannot read properties of undefined (reading 'from')
+    at Module.GET (/Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.ts:186:8)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at /Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts:108:22
+    at file:///Users/a.fouad/S/New_elzatona/node_modules/.pnpm/@vitest+runner@3.2.4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts > Plans Hierarchy Route > should return 500 on unexpected exception
+Error fetching plan hierarchy: TypeError: Cannot read properties of undefined (reading 'from')
+    at Module.GET (/Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.ts:186:8)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at /Users/a.fouad/S/New_elzatona/apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts:122:22
+    at file:///Users/a.fouad/S/New_elzatona/node_modules/.pnpm/@vitest+runner@3.2.4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ❯ apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts (5 tests | 4 failed) 11ms
+   × Plans Hierarchy Route > should return 400 if planId is missing 6ms
+     → expected 500 to be 400 // Object.is equality
+   × Plans Hierarchy Route > should return 404 if plan cards are missing 1ms
+     → expected 500 to be 404 // Object.is equality
+   × Plans Hierarchy Route > should build hierarchy successfully 1ms
+     → expected 500 to be 200 // Object.is equality
+   × Plans Hierarchy Route > should fallback to direct categories if card_categories query fails 1ms
+     → expected 500 to be 200 // Object.is equality
+   ✓ Plans Hierarchy Route > should return 500 on unexpected exception 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts > Plans Hierarchy Route > should return 400 if planId is missing
+AssertionError: expected 500 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 500
+
+ ❯ apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts:62:29
+     60|       params: Promise.resolve({ id: "" }),
+     61|     });
+     62|     expect(response.status).toBe(400);
+       |                             ^
+     63|   });
+     64| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts > Plans Hierarchy Route > should return 404 if plan cards are missing
+AssertionError: expected 500 to be 404 // Object.is equality
+
+- Expected
++ Received
+
+- 404
++ 500
+
+ ❯ apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts:71:29
+     69|       params: Promise.resolve({ id: "123" }),
+     70|     });
+     71|     expect(response.status).toBe(404);
+       |                             ^
+     72|   });
+     73| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts > Plans Hierarchy Route > should build hierarchy successfully
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts:90:29
+     88|     const data = await response.json();
+     89| 
+     90|     expect(response.status).toBe(200);
+       |                             ^
+     91|     expect(data.data.length).toBe(1);
+     92|     expect(data.data[0].categories[0].topics[0].questions.length).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts > Plans Hierarchy Route > should fallback to direct categories if card_categories query fails
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ apps/website/src/app/lib/network/routes/plans/[id]/hierarchy/route.test.ts:113:29
+    111|     const data = await response.json();
+    112| 
+    113|     expect(response.status).toBe(200);
+       |                             ^
+    114|     expect(data.data[0].categories[0].name).toBe("Cat 1");
+    115|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 1 passed (5)
+   Start at  02:11:21
+   Duration  936ms (transform 49ms, setup 154ms, collect 55ms, tests 11ms, environment 297ms, prepare 51ms)
+

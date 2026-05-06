@@ -9,133 +9,74 @@ interface GuidedProgress {
   completedTopics: string[];
   completedCategories: string[];
   completedCards: string[];
-  currentPosition: {
-    cardIndex: number;
-    categoryIndex: number;
-    topicIndex: number;
-    questionIndex: number;
-  };
+  currentPosition: any;
   lastUpdated: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    // Get the auth token from cookies or Authorization header
     const cookieStore = await cookies();
-    let token = cookieStore.get("firebase_token")?.value;
-
-    // Try Authorization header if cookie not found
-    if (!token) {
-      const authHeader = request.headers.get("authorization");
-      if (authHeader && authHeader.startsWith("Bearer ")) {
-        token = authHeader.substring(7);
-      }
-    }
-
-    if (!token) {
-      // Security: Removed authentication token logging
-      const _progressData: GuidedProgress = await request.json();
-
-      return NextResponse.json({
-        success: true,
-        message:
-          "Progress would be saved (development mode - not authenticated)",
-        warning: "Using development mode - authentication not fully configured",
-      });
-    }
-
-    // Parse request body first (can only be called once)
+    const token =
+      cookieStore.get("firebase_token")?.value ||
+      request.headers.get("authorization")?.replace("Bearer ", "");
     const progressData: GuidedProgress = await request.json();
 
-    // Verify the token
-    let decodedToken = await verifySupabaseToken(token);
+    if (!token) return _devModeResponse("authentication not fully configured");
 
-    // If Supabase token verification fails, try to get user ID from request body
-    // (for custom auth systems that send userId)
-    if (!decodedToken) {
-      // If request body has userId and the token is from our custom auth system,
-      // we can validate the user exists in the database
-      if (
-        progressData &&
-        typeof progressData === "object" &&
-        "userId" in progressData
-      ) {
-        const userId = (progressData as any).userId as string;
-        // Verify user exists in database
-        const supabase = getSupabaseClient();
-        const { data: user, error: userError } = await supabase
-          .from("users")
-          .select("id, email, role, name")
-          .eq("id", userId)
-          .single();
+    let user = await verifySupabaseToken(token);
+    user ??= await _resolveUserFromData(progressData);
+    if (!user) return _devModeResponse("token invalid");
 
-        if (!userError && user) {
-          // User exists, we can proceed with sync
-          decodedToken = {
-            id: user.id,
-            email: user.email || "",
-            role: user.role || "user",
-            name: user.name,
-          };
-        }
-      }
-
-      if (!decodedToken) {
-        return NextResponse.json({
-          success: false,
-          error: "Invalid authentication token",
-          message: "Progress would be saved (development mode - token invalid)",
-          warning: "Using development mode due to invalid token",
-        });
-      }
-    }
-    console.log(
-      "📄 Syncing guided learning progress for user:",
-      decodedToken.id,
-    );
-
-    // Store progress data in JSONB format
-    const supabase = getSupabaseClient();
-    const { data: _data, error } = await supabase.from("user_progress").upsert(
-      {
-        user_id: decodedToken.id,
-        plan_id: progressData.planId,
-        progress_data: {
-          completedQuestions: progressData.completedQuestions,
-          completedTopics: progressData.completedTopics,
-          completedCategories: progressData.completedCategories,
-          completedCards: progressData.completedCards,
-          currentPosition: progressData.currentPosition,
-        },
-        last_updated: progressData.lastUpdated,
-        updated_at: new Date().toISOString(),
-      },
-      {
-        onConflict: "user_id,plan_id",
-      },
-    );
-
-    if (error) {
-      console.error("❌ Error syncing progress to database:", error);
-      return NextResponse.json(
-        { error: "Failed to sync progress" },
-        { status: 500 },
-      );
-    }
-
-    console.log("✅ Guided learning progress synced successfully");
+    const { error } = await _syncToDatabase(user.id, progressData);
+    if (error) throw error;
 
     return NextResponse.json({
       success: true,
-      message: "Progress synced successfully to database",
+      message: "Progress synced successfully",
     });
   } catch (error) {
-    console.error("❌ Error in sync endpoint:", error);
-
-    return NextResponse.json({
-      success: true,
-      message: "Progress would be saved (development mode - server error)",
-      warning: "Using development mode due to server error",
-    });
+    console.error("❌ Sync error:", error);
+    return _devModeResponse("server error");
   }
+}
+
+async function _resolveUserFromData(data: any) {
+  if (!data?.userId) return null;
+  const { data: user, error } = await getSupabaseClient()
+    .from("users")
+    .select("id, email, role, name")
+    .eq("id", data.userId)
+    .single();
+  return !error && user
+    ? { id: user.id, email: user.email, role: user.role, name: user.name }
+    : null;
+}
+
+async function _syncToDatabase(userId: string, data: GuidedProgress) {
+  return getSupabaseClient()
+    .from("user_progress")
+    .upsert(
+      {
+        user_id: userId,
+        plan_id: data.planId,
+        progress_data: {
+          completedQuestions: data.completedQuestions,
+          completedTopics: data.completedTopics,
+          completedCategories: data.completedCategories,
+          completedCards: data.completedCards,
+          currentPosition: data.currentPosition,
+        },
+        last_updated: data.lastUpdated,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "user_id,plan_id" },
+    );
+}
+
+function _devModeResponse(reason: string) {
+  return NextResponse.json({
+    success: true,
+    message: `Progress would be saved (development mode - ${reason})`,
+    warning: "Using development mode",
+  });
 }

@@ -74,3 +74,44 @@ export const truncateText = (text: string, maxLength: number): string => {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength) + "...";
 };
+
+/**
+ * Normalizes code line breaks to \n
+ */
+export function normalizeCodeLineBreaks(code: string): string {
+  if (!code) return "";
+  return code.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
+}
+
+/**
+ * Strips unsafe control characters from a string
+ */
+export function stripUnsafeControlCharacters(value: string): string {
+  if (!value) return "";
+  let sanitized = "";
+  for (const character of value) {
+    const codePoint = character.codePointAt(0) ?? 0;
+    // Allow standard printable ASCII (32-126) and exclude control characters
+    if (
+      (codePoint >= 32 && codePoint <= 126) ||
+      codePoint === 10 || // \n
+      codePoint === 13 || // \r
+      codePoint === 9 // \t
+    ) {
+      sanitized += character;
+    }
+  }
+  return sanitized;
+}
+
+/**
+ * Gets a descriptive error message from an unknown error
+ */
+export function getErrorMessage(
+  error: unknown,
+  fallbackMessage = "An unknown error occurred",
+): string {
+  if (error instanceof Error) return error.message;
+  if (typeof error === "string") return error;
+  return fallbackMessage;
+}

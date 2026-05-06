@@ -13,28 +13,7 @@ interface FileNode {
   fileType?: string;
 }
 
-// Theme management hook
-export const useThemeManagement = () => {
-  const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const updateTheme = () => {
-      if (theme === "system") {
-        setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
-      } else {
-        setIsDark(theme === "dark");
-      }
-    };
-
-    updateTheme();
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", updateTheme);
-    return () => mediaQuery.removeEventListener("change", updateTheme);
-  }, [theme]);
-
-  return { theme, setTheme, isDark };
-};
+export { useThemeManagement, usePanelLayout } from "./SharedEditorHooks";
 
 // Form data management hook
 export const useFormDataManagement = (task?: ProblemSolvingTask | null) => {
@@ -151,67 +130,5 @@ export const useDynamicFieldsManagement = () => {
     setNewExample,
     newTag,
     setNewTag,
-  };
-};
-
-// Panel layout management hook
-export const usePanelLayout = () => {
-  const [leftPanelWidth, setLeftPanelWidth] = useState(40);
-  const [rightPanelWidth, setRightPanelWidth] = useState(40);
-  const [isResizing, setIsResizing] = useState(false);
-  const [resizeStartX, setResizeStartX] = useState(0);
-  const [resizeStartLeftWidth, setResizeStartLeftWidth] = useState(0);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsResizing(true);
-    setResizeStartX(e.clientX);
-    setResizeStartLeftWidth(leftPanelWidth);
-  };
-
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
-      if (!isResizing) return;
-      const deltaX = e.clientX - resizeStartX;
-      const containerWidth = window.innerWidth;
-      const newLeftWidth =
-        ((resizeStartLeftWidth * containerWidth + deltaX) / containerWidth) *
-        100;
-      const newRightWidth = 100 - newLeftWidth - 20; // 20% for middle panel
-
-      if (newLeftWidth >= 20 && newLeftWidth <= 50) {
-        setLeftPanelWidth(newLeftWidth);
-        setRightPanelWidth(newRightWidth);
-      }
-      return;
-    },
-    [isResizing, resizeStartX, resizeStartLeftWidth],
-  );
-
-  const handleMouseUp = useCallback(() => {
-    setIsResizing(false);
-  }, []);
-
-  useEffect(() => {
-    if (isResizing) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
-      };
-    }
-    return undefined;
-  }, [
-    isResizing,
-    resizeStartX,
-    resizeStartLeftWidth,
-    handleMouseMove,
-    handleMouseUp,
-  ]);
-
-  return {
-    leftPanelWidth,
-    rightPanelWidth,
-    handleMouseDown,
   };
 };

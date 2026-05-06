@@ -58,11 +58,6 @@ export interface ApiConfig {
 
 /**
  * Get centralized API configuration based on current environment
- *
- * This is the ONLY place you need to import for environment-specific config.
- * All APIs should use this function.
- *
- * @returns Complete API configuration for current environment
  */
 export function getApiConfig(): ApiConfig {
   const env = getEnvironment();
@@ -70,84 +65,13 @@ export function getApiConfig(): ApiConfig {
   const isProd = isProductionEnvironment();
   const isDev = isDevelopmentEnvironment();
 
-  // CRITICAL: For test environment, ensure we're using test project
-  // If APP_ENV=test but we're seeing production URL, log a warning
-  if (isTest) {
-    const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"] || "";
-    const _isTestProject =
-      supabaseUrl.includes("kiycimlsatwfqxtfprlr") ||
-      supabaseUrl.includes("slfyltsmcivmqfloxpmq") ||
-      supabaseUrl.includes("vopfdukvdhnmzzjkxpnj");
-    const isProdProject = supabaseUrl.includes("hpnewqkvpnthpohvxcmq");
+  _validateTestEnvironment(isTest);
 
-    if (isProdProject) {
-      console.error(
-        "[API Config] ⚠️  WARNING: APP_ENV=test but using PRODUCTION project!",
-      );
-      console.error(
-        "[API Config] Expected: kiycimlsatwfqxtfprlr (zatona-web-testing)",
-      );
-      console.error("[API Config] Actual:", supabaseUrl);
-      console.error(
-        "[API Config] Please restart the dev server after updating .env.test.local",
-      );
-    }
-  }
-
-  // Get Supabase configuration from environment
   const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"] || "";
-  const supabaseAnonKey = process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"] || "";
-  const supabaseServiceRoleKey = process.env["SUPABASE_SERVICE_ROLE_KEY"] || "";
-
-  // Extract project reference from URL
   const projectRef =
     /https?:\/\/([^.]+)\.supabase\.co/.exec(supabaseUrl)?.[1] || "unknown";
 
-  // Get admin credentials
-  // Test/Development: Use ADMIN_EMAIL (or fallback to INITIAL_ADMIN_EMAIL)
-  // Production: Use INITIAL_ADMIN_EMAIL
-  const adminEmail =
-    isTest || isDev
-      ? process.env["ADMIN_EMAIL"] || process.env["INITIAL_ADMIN_EMAIL"] || ""
-      : process.env["INITIAL_ADMIN_EMAIL"] || "";
-
-  const adminPassword =
-    isTest || isDev
-      ? process.env["ADMIN_PASSWORD"] ||
-        process.env["INITIAL_ADMIN_PASSWORD"] ||
-        ""
-      : process.env["INITIAL_ADMIN_PASSWORD"] || "";
-
-  // Environment-specific headers
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-    "X-Environment": env,
-    "X-Project-Ref": projectRef,
-  };
-
-  // Add additional headers based on environment
-  if (isTest) {
-    headers["X-Test-Mode"] = "true";
-  }
-  if (isDev) {
-    headers["X-Dev-Mode"] = "true";
-  }
-
-  // Feature flags
-  const enableDebugLogging = !isProd; // Enable for test and development
-  const enableTestData = isTest || isDev; // Development can use test data
-  const enableCaching = isProd; // Only cache in production
-
-  // API configuration
-  const apiBaseUrl =
-    process.env["NEXT_PUBLIC_API_URL"] ||
-    (globalThis.window === undefined
-      ? "http://localhost:3000"
-      : globalThis.window.location.origin);
-
-  // Timeouts and retries (more lenient in test and development)
-  const requestTimeout = isTest || isDev ? 30000 : 10000; // 30s for test/dev, 10s for prod
-  const maxRetries = isTest || isDev ? 3 : 2;
+  const { adminEmail, adminPassword } = _getAdminCredentials(isTest, isDev);
 
   return {
     environment: env,
@@ -155,18 +79,67 @@ export function getApiConfig(): ApiConfig {
     isProduction: isProd,
     isDevelopment: isDev,
     supabaseUrl,
-    supabaseAnonKey,
-    supabaseServiceRoleKey,
-    headers,
+    supabaseAnonKey: process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"] || "",
+    supabaseServiceRoleKey: process.env["SUPABASE_SERVICE_ROLE_KEY"] || "",
+    headers: _getEnvironmentHeaders(env, projectRef, isTest, isDev),
     adminEmail,
     adminPassword,
-    enableDebugLogging,
-    enableTestData,
-    enableCaching,
-    apiBaseUrl,
-    requestTimeout,
-    maxRetries,
+    enableDebugLogging: !isProd,
+    enableTestData: isTest || isDev,
+    enableCaching: isProd,
+    apiBaseUrl: _getApiBaseUrl(),
+    requestTimeout: isTest || isDev ? 30000 : 10000,
+    maxRetries: isTest || isDev ? 3 : 2,
   };
+}
+
+function _validateTestEnvironment(isTest: boolean): void {
+  if (!isTest) return;
+  const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"] || "";
+  if (supabaseUrl.includes("hpnewqkvpnthpohvxcmq")) {
+    console.error(
+      "[API Config] ⚠️  WARNING: APP_ENV=test but using PRODUCTION project!",
+    );
+    console.error("[API Config] Actual:", supabaseUrl);
+  }
+}
+
+function _getAdminCredentials(isTest: boolean, isDev: boolean) {
+  const useTestCreds = isTest || isDev;
+  return {
+    adminEmail: useTestCreds
+      ? process.env["ADMIN_EMAIL"] || process.env["INITIAL_ADMIN_EMAIL"] || ""
+      : process.env["INITIAL_ADMIN_EMAIL"] || "",
+    adminPassword: useTestCreds
+      ? process.env["ADMIN_PASSWORD"] ||
+        process.env["INITIAL_ADMIN_PASSWORD"] ||
+        ""
+      : process.env["INITIAL_ADMIN_PASSWORD"] || "",
+  };
+}
+
+function _getEnvironmentHeaders(
+  env: string,
+  projectRef: string,
+  isTest: boolean,
+  isDev: boolean,
+) {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    "X-Environment": env,
+    "X-Project-Ref": projectRef,
+  };
+  if (isTest) headers["X-Test-Mode"] = "true";
+  if (isDev) headers["X-Dev-Mode"] = "true";
+  return headers;
+}
+
+function _getApiBaseUrl(): string {
+  if (process.env["NEXT_PUBLIC_API_URL"])
+    return process.env["NEXT_PUBLIC_API_URL"];
+  return globalThis.window === undefined
+    ? "http://localhost:3000"
+    : globalThis.window.location.origin;
 }
 
 /**

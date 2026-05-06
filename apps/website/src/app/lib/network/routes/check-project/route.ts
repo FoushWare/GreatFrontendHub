@@ -1,178 +1,127 @@
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import { getSupabaseConfig, getApiConfig } from "../../../api-config";
+import { getSupabaseConfig } from "../../../api-config";
 import { getEnvironment } from "../../../environment";
 
-// Admin config - using environment variables directly
 const adminConfig = {
   get jwtSecret() {
     return process.env.JWT_SECRET || "default-secret";
   },
 };
 
-/**
- * API endpoint to check which Supabase project is currently being used
- * Useful for debugging environment configuration
- *
- * SECURITY: This endpoint requires admin authentication
- */
 export async function GET(request: NextRequest) {
   try {
-    // Verify admin authentication
-    const authHeader = request.headers.get("authorization");
-    const token = authHeader?.replace("Bearer ", "");
-
-    if (!token) {
+    const auth = _verifyAdminAuth(request);
+    if (!auth.success)
       return NextResponse.json(
-        {
-          success: false,
-          error: "Unauthorized: Admin token required",
-        },
+        { success: false, error: auth.error },
         { status: 401 },
       );
-    }
 
-    // Verify JWT token
-    try {
-      const jwtSecret = adminConfig.jwtSecret;
-      const decoded = jwt.verify(token, jwtSecret) as {
-        adminId?: string;
-        id?: string;
-        email?: string;
-        role?: string;
-      };
-
-      // Verify it's an admin token (should have adminId or id and email)
-      if (!decoded.adminId && !decoded.id) {
-        return NextResponse.json(
-          {
-            success: false,
-            error: "Unauthorized: Invalid admin token",
-          },
-          { status: 401 },
-        );
-      }
-
-      // Log admin access for security auditing
-      console.log(
-        `[Check Project API] Admin access: ${decoded.email || decoded.adminId || "unknown"}`,
-      );
-    } catch (_error) {
-      // Security: Removed detailed error logging to prevent information disclosure
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Unauthorized: Invalid or expired token",
-        },
-        { status: 401 },
-      );
-    }
-
-    // Proceed with project check (admin is authenticated)
     const config = getSupabaseConfig();
-    const _apiConfig = getApiConfig();
     const env = getEnvironment();
 
-    // Extract project reference from URL
     const urlProjectRef = config.url.match(
       /https?:\/\/([^.]+)\.supabase\.co/,
     )?.[1];
+    const { ref: keyProjectRef, role: keyRole } = _decodeServiceKey(
+      config.serviceRoleKey,
+    );
 
-    // Decode service role key to get project reference
-    let keyProjectRef = null;
-    let keyRole = null;
-    if (config.serviceRoleKey) {
-      try {
-        const jwtParts = config.serviceRoleKey.split(".");
-        if (jwtParts.length === 3) {
-          const payload = JSON.parse(
-            Buffer.from(jwtParts[1], "base64").toString(),
-          );
-          keyProjectRef = payload.ref;
-          keyRole = payload.role;
-        }
-      } catch (_error) {
-        // Invalid JWT
-      }
-    }
-
-    // Project mappings
-    const projects: Record<string, { name: string; type: string }> = {
-      kiycimlsatwfqxtfprlr: {
-        name: "zatona-web-testing",
-        type: "TEST",
-      },
-      hpnewqkvpnthpohvxcmq: {
-        name: "zatona-web",
-        type: "PRODUCTION",
-      },
-      slfyltsmcivmqfloxpmq: {
-        name: "zatona-web-testing (old)",
-        type: "TEST (OLD)",
-      },
-      vopfdukvdhnmzzjkxpnj: {
-        name: "zatona-web-testing (old)",
-        type: "TEST (OLD)",
-      },
-    };
-
-    const urlProject = projects[urlProjectRef || ""] || {
-      name: "unknown",
-      type: "UNKNOWN",
-    };
-    const keyProject = projects[keyProjectRef || ""] || {
-      name: "unknown",
-      type: "UNKNOWN",
-    };
-
-    const isMatch = urlProjectRef === keyProjectRef;
-    const isTestProject = urlProjectRef === "kiycimlsatwfqxtfprlr";
-    const isProductionProject = urlProjectRef === "hpnewqkvpnthpohvxcmq";
+    const projectData = _getProjectStatus(urlProjectRef, keyProjectRef);
 
     return NextResponse.json({
       success: true,
       environment: {
         detected: env,
         appEnv: process.env.APP_ENV,
-        nextPublicAppEnv: process.env.NEXT_PUBLIC_APP_ENV,
         nodeEnv: process.env.NODE_ENV,
       },
       supabase: {
         url: config.url,
         urlProjectRef: urlProjectRef || "not found",
-        urlProjectName: urlProject.name,
-        urlProjectType: urlProject.type,
+        ...projectData.supabase,
         keyProjectRef: keyProjectRef || "not found",
-        keyProjectName: keyProject.name,
-        keyProjectType: keyProject.type,
         keyRole: keyRole || "unknown",
-        match: isMatch,
+        match: projectData.isMatch,
       },
-      status: {
-        isTestProject,
-        isProductionProject,
-        isCorrectlyConfigured:
-          isMatch && (isTestProject || isProductionProject),
-        warning: !isMatch
-          ? "URL and Service Role Key point to different projects!"
-          : null,
-      },
-      message:
-        isMatch && isTestProject
-          ? "✅ Using zatona-web-testing (TEST) project correctly"
-          : isMatch && isProductionProject
-            ? "⚠️ Using zatona-web (PRODUCTION) project"
-            : !isMatch
-              ? "❌ Configuration mismatch detected"
-              : "⚠️ Unknown project configuration",
+      status: projectData.status,
+      message: projectData.message,
     });
   } catch (error) {
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: error instanceof Error ? error.message : "Internal error",
       },
       { status: 500 },
     );
   }
+}
+
+function _verifyAdminAuth(request: NextRequest): {
+  success: boolean;
+  error?: string;
+} {
+  const token = request.headers.get("authorization")?.replace("Bearer ", "");
+  if (!token)
+    return { success: false, error: "Unauthorized: Admin token required" };
+  try {
+    const decoded = jwt.verify(token, adminConfig.jwtSecret) as any;
+    if (!decoded.adminId && !decoded.id)
+      return { success: false, error: "Unauthorized: Invalid admin token" };
+    return { success: true };
+  } catch {
+    return { success: false, error: "Unauthorized: Invalid or expired token" };
+  }
+}
+
+function _decodeServiceKey(key?: string): { ref?: string; role?: string } {
+  if (!key) return {};
+  try {
+    const parts = key.split(".");
+    if (parts.length !== 3) return {};
+    const payload = JSON.parse(Buffer.from(parts[1], "base64").toString());
+    return { ref: payload.ref, role: payload.role };
+  } catch {
+    return {};
+  }
+}
+
+function _getProjectStatus(urlRef?: string, keyRef?: string) {
+  const projects: any = {
+    kiycimlsatwfqxtfprlr: { name: "zatona-web-testing", type: "TEST" },
+    hpnewqkvpnthpohvxcmq: { name: "zatona-web", type: "PRODUCTION" },
+  };
+  const urlP = projects[urlRef || ""] || { name: "unknown", type: "UNKNOWN" };
+  const keyP = projects[keyRef || ""] || { name: "unknown", type: "UNKNOWN" };
+  const isMatch = urlRef === keyRef;
+  const isTest = urlRef === "kiycimlsatwfqxtfprlr";
+  const isProd = urlRef === "hpnewqkvpnthpohvxcmq";
+
+  return {
+    isMatch,
+    supabase: {
+      urlProjectName: urlP.name,
+      urlProjectType: urlP.type,
+      keyProjectName: keyP.name,
+      keyProjectType: keyP.type,
+    },
+    status: {
+      isTestProject: isTest,
+      isProductionProject: isProd,
+      isCorrectlyConfigured: isMatch && (isTest || isProd),
+    },
+    message: _getProjectMessage(isMatch, isTest, isProd),
+  };
+}
+
+function _getProjectMessage(
+  isMatch: boolean,
+  isTest: boolean,
+  isProd: boolean,
+): string {
+  if (isMatch && isTest) return "✅ Using TEST project correctly";
+  if (isMatch && isProd) return "⚠️ Using PRODUCTION project";
+  return "❌ Configuration mismatch";
 }

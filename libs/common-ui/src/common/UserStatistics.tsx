@@ -29,8 +29,8 @@ export const UserStatistics: React.FC = () => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
       {/* Active Learners */}
-      <div className="text-center group">
-        <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+      <div className="text-center group/stat">
+        <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover/stat:scale-110 transition-transform duration-300">
           <Users className="w-8 h-8 text-white" />
         </div>
         <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -42,8 +42,8 @@ export const UserStatistics: React.FC = () => {
       </div>
 
       {/* Success Rate */}
-      <div className="text-center group">
-        <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+      <div className="text-center group/stat">
+        <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover/stat:scale-110 transition-transform duration-300">
           <TrendingUp className="w-8 h-8 text-white" />
         </div>
         <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -55,8 +55,8 @@ export const UserStatistics: React.FC = () => {
       </div>
 
       {/* Total Questions */}
-      <div className="text-center group">
-        <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+      <div className="text-center group/stat">
+        <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover/stat:scale-110 transition-transform duration-300">
           <Award className="w-8 h-8 text-white" />
         </div>
         <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -68,8 +68,8 @@ export const UserStatistics: React.FC = () => {
       </div>
 
       {/* Average Time */}
-      <div className="text-center group">
-        <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+      <div className="text-center group/stat">
+        <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover/stat:scale-110 transition-transform duration-300">
           <Clock className="w-8 h-8 text-white" />
         </div>
         <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">

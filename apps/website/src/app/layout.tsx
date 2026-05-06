@@ -81,7 +81,9 @@ export default function RootLayout({
                             <NavigationProvider>
                               <ErrorBoundary>
                                 <ConditionalNavbar />
-                                {children}
+                                <main className="pt-20 min-h-screen">
+                                  {children}
+                                </main>
                                 <SpeedInsights />
                               </ErrorBoundary>
                             </NavigationProvider>

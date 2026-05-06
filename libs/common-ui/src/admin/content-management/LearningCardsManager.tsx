@@ -118,7 +118,7 @@ const TopicNode: React.FC<{
       id={`topic-${topic.id}`}
       className="border-l-2 border-gray-100 pl-4 py-2"
     >
-      <div className="flex items-center justify-between gap-4 rounded p-2 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
+      <div className="flex items-center justify-between gap-4 rounded p-2 transition-all duration-200 hover:bg-gray-50/80 dark:hover:bg-gray-800/80 group">
         {/* Left section: expandable content with description */}
         <button
           type="button"
@@ -255,7 +255,7 @@ const CategoryNode: React.FC<{
     >
       <button
         type="button"
-        className="flex items-center justify-between gap-4 py-2 px-2 rounded transition-colors w-full hover:bg-gray-50 dark:hover:bg-gray-800"
+        className="flex items-center justify-between gap-4 py-2 px-2 rounded transition-all duration-200 w-full hover:bg-gray-50/80 dark:hover:bg-gray-800/80 group"
         onClick={() => toggleCategory(category.id)}
       >
         {/* Left section: description and metadata */}
@@ -369,7 +369,7 @@ export const LearningCardsManager: React.FC<LearningCardsManagerProps> = ({
         className="border-l-4"
         style={{ borderLeftColor: card.color }}
       >
-        <CardHeader className="pb-3 border-b-0 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+        <CardHeader className="pb-3 border-b-0 hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-all duration-200 group">
           <div className="flex items-start justify-between gap-4">
             <button
               type="button"

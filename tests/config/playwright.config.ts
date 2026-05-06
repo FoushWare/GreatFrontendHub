@@ -1,4 +1,13 @@
 import { defineConfig, devices } from "@playwright/test";
+import path from "path";
+import dotenv from "dotenv";
+
+/**
+ * Read environment variables from file.
+ * https://github.com/motdotla/dotenv
+ */
+dotenv.config({ path: path.resolve(__dirname, "../../.env.test.local") });
+dotenv.config();
 
 // Playwright configuration for website and admin E2E tests
 export default defineConfig({

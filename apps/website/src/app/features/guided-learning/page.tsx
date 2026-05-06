@@ -27,12 +27,12 @@ export default function GuidedLearningPage() {
     isLoading: plansLoading,
     error,
     questionsRange,
-    daysRange,
+    milestoneRange,
   } = useGuidedLearningPlans();
   const {
     currentPlan,
-    dailyGoals,
-    currentDay,
+    milestones,
+    currentMilestoneId,
     resumePlan,
     resetPlan,
     selectPlan,
@@ -60,7 +60,10 @@ export default function GuidedLearningPage() {
   if (authLoading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <div
+          data-testid="loading-spinner"
+          className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"
+        ></div>
       </div>
     );
   }
@@ -71,7 +74,7 @@ export default function GuidedLearningPage() {
         {/* Header with stats */}
         <GuidedLearningHeader
           questionsRange={questionsRange}
-          daysRange={daysRange}
+          milestoneRange={milestoneRange}
         />
 
         {/* Sign-in CTA for non-authenticated users */}
@@ -81,8 +84,8 @@ export default function GuidedLearningPage() {
         {isAuthenticated && currentPlan && (
           <ActivePlanView
             plan={currentPlan}
-            dailyGoals={dailyGoals}
-            currentDay={currentDay}
+            milestones={milestones}
+            currentMilestoneId={currentMilestoneId}
             onResume={resumePlan}
             onReset={resetPlan}
           />

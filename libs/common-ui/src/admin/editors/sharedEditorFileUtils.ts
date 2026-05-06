@@ -71,22 +71,17 @@ export const updateFileInTree = (
   });
 };
 
+const FILE_ICON_MAP: Record<string, string> = {
+  tsx: "blue",
+  jsx: "blue",
+  css: "purple",
+  html: "orange",
+  js: "yellow",
+  json: "green",
+};
+
 export const getFileIcon = (fileType: string) => {
-  switch (fileType) {
-    case "tsx":
-    case "jsx":
-      return "blue";
-    case "css":
-      return "purple";
-    case "html":
-      return "orange";
-    case "js":
-      return "yellow";
-    case "json":
-      return "green";
-    default:
-      return "gray";
-  }
+  return FILE_ICON_MAP[fileType] || "gray";
 };
 
 export const getFileById = (openFiles: any[], fileId: string) => {
@@ -113,22 +108,17 @@ export const setCurrentFileContent = (
   );
 };
 
+const LANGUAGE_MAP: Record<string, string> = {
+  tsx: "typescript",
+  jsx: "typescript",
+  css: "css",
+  html: "html",
+  js: "javascript",
+  json: "json",
+};
+
 export const getLanguageForType = (fileType: string) => {
-  switch (fileType) {
-    case "tsx":
-    case "jsx":
-      return "typescript";
-    case "css":
-      return "css";
-    case "html":
-      return "html";
-    case "js":
-      return "javascript";
-    case "json":
-      return "json";
-    default:
-      return "plaintext";
-  }
+  return LANGUAGE_MAP[fileType] || "plaintext";
 };
 
 export const copyToClipboard = async (content: string): Promise<void> => {

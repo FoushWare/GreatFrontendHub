@@ -11,10 +11,7 @@ import type {
   AdminUnifiedQuestion,
   Topic as AdminTopic,
 } from "@elzatona/types";
-import {
-  useLearningCardRepository,
-  usePlanRepository,
-} from "@elzatona/database/client";
+import { useLearningCardRepository } from "@elzatona/database/client";
 import { supabase } from "@elzatona/utilities";
 import type { Topic as DatabaseTopic } from "@elzatona/database";
 
@@ -52,23 +49,6 @@ type DatabasePlanRecord = {
   status?: string | null;
   created_at?: string | null;
   updated_at?: string | null;
-  createdAt?: string | Date | null;
-  updatedAt?: string | Date | null;
-};
-
-type DatabaseLearningCardRecord = {
-  id: string;
-  title: string;
-  description?: string | null;
-  content?: string | null;
-  color?: string | null;
-  icon?: string | null;
-  order_index?: number | null;
-  order?: number | null;
-  is_active?: boolean | null;
-  isPublished?: boolean | null;
-  created_at?: string | Date | null;
-  updated_at?: string | Date | null;
   createdAt?: string | Date | null;
   updatedAt?: string | Date | null;
 };
@@ -352,7 +332,7 @@ function buildTopicCategoryLookup(
   return lookup;
 }
 
-function transformQuestion(q: any): AdminUnifiedQuestion {
+function transformQuestion(q: Record<string, unknown>): AdminUnifiedQuestion {
   const category_id =
     q.category_id ?? q.categoryId ?? getPrimaryNestedId(q.categories) ?? "";
   const topic_id =
@@ -371,8 +351,7 @@ function transformQuestion(q: any): AdminUnifiedQuestion {
     isActive: q.isActive ?? q.is_active ?? true,
     createdAt: q.createdAt ?? q.created_at ?? "",
     updatedAt: q.updatedAt ?? q.updated_at ?? "",
-    // Ensure nested objects are handled if needed
-  };
+  } as AdminUnifiedQuestion;
 }
 
 export const contentManagementMappingTestUtils = {
@@ -675,22 +654,6 @@ function normalizePlanStatus(
   return fallback;
 }
 
-function normalizeLearningCard(
-  card: DatabaseLearningCardRecord,
-): AdminLearningCard {
-  return {
-    id: card.id,
-    title: card.title,
-    description: card.description ?? card.content ?? "",
-    color: card.color ?? "#3B82F6",
-    icon: card.icon ?? "BookOpen",
-    order_index: card.order_index ?? card.order ?? 0,
-    is_active: card.is_active ?? card.isPublished ?? true,
-    created_at: toIsoDate(card.created_at ?? card.createdAt),
-    updated_at: toIsoDate(card.updated_at ?? card.updatedAt),
-  };
-}
-
 function getErrorMessage(error: unknown, fallbackMessage: string): string {
   return error instanceof Error ? error.message : fallbackMessage;
 }
@@ -798,7 +761,6 @@ async function loadLearningPlans(): Promise<LoadResult<LearningPlan>> {
 export function useContentManagement() {
   // Inject repositories
   const cardRepository = useLearningCardRepository();
-  const planRepository = usePlanRepository();
 
   // Transform database Topic to admin Topic
   const transformTopicToAdmin = (
@@ -960,10 +922,12 @@ export function useContentManagement() {
         topicsResult.error,
       ].filter((message): message is string => Boolean(message));
 
-      const normalizedCards = cardsResult.data;
+      const normalizedCards = cardsResult.data || [];
       const { cards: canonicalCards, idsByKey } =
         buildCanonicalCards(normalizedCards);
-      const normalizedQuestions = questionsResult.data.map(transformQuestion);
+      const normalizedQuestions = (questionsResult.data || []).map((q) =>
+        transformQuestion(q as unknown as Record<string, unknown>),
+      );
       const categoryCardLookup = buildCategoryCardLookup(normalizedQuestions);
       const topicCategoryLookup = buildTopicCategoryLookup(normalizedQuestions);
 
@@ -1016,7 +980,7 @@ export function useContentManagement() {
     } finally {
       setLoading(false);
     }
-  }, [cardRepository, planRepository]);
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -1153,14 +1117,26 @@ export function useContentManagement() {
     setExpandedCards(newExpandedCards);
     setExpandedCategories(newExpandedCategories);
     setExpandedTopics(newExpandedTopics);
-  }, [debouncedSearchTerm, topics, categories, questions]);
+  }, [
+    debouncedSearchTerm,
+    topics,
+    categories,
+    questions,
+    expandedCards,
+    expandedCategories,
+    expandedTopics,
+  ]);
 
   // Toggles
   const toggleCard = useCallback(
     (id: string) =>
       setExpandedCards((prev) => {
         const next = new Set(prev);
-        next.has(id) ? next.delete(id) : next.add(id);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
         return next;
       }),
     [],
@@ -1170,7 +1146,11 @@ export function useContentManagement() {
     (id: string) =>
       setExpandedCategories((prev) => {
         const next = new Set(prev);
-        next.has(id) ? next.delete(id) : next.add(id);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
         return next;
       }),
     [],
@@ -1180,7 +1160,11 @@ export function useContentManagement() {
     (id: string) =>
       setExpandedTopics((prev) => {
         const next = new Set(prev);
-        next.has(id) ? next.delete(id) : next.add(id);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
         return next;
       }),
     [],
@@ -1190,7 +1174,11 @@ export function useContentManagement() {
     (id: string) =>
       setExpandedPlans((prev) => {
         const next = new Set(prev);
-        next.has(id) ? next.delete(id) : next.add(id);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
         return next;
       }),
     [],
@@ -1200,7 +1188,11 @@ export function useContentManagement() {
     (id: string) =>
       setExpandedPlanCards((prev) => {
         const next = new Set(prev);
-        next.has(id) ? next.delete(id) : next.add(id);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
         return next;
       }),
     [],
@@ -1210,7 +1202,11 @@ export function useContentManagement() {
     (id: string) =>
       setExpandedPlanCategories((prev) => {
         const next = new Set(prev);
-        next.has(id) ? next.delete(id) : next.add(id);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
         return next;
       }),
     [],
@@ -1220,7 +1216,11 @@ export function useContentManagement() {
     (id: string) =>
       setExpandedPlanTopics((prev) => {
         const next = new Set(prev);
-        next.has(id) ? next.delete(id) : next.add(id);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
         return next;
       }),
     [],
@@ -1262,7 +1262,11 @@ export function useContentManagement() {
   const toggleQuestionSelection = useCallback((id: string) => {
     setSelectedQuestions((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
       return next;
     });
   }, []);
@@ -1392,7 +1396,7 @@ export function useContentManagement() {
         );
       }
     },
-    [planRepository],
+    [],
   );
 
   const openDeleteCardModal = useCallback((card: AdminLearningCard) => {
@@ -1429,7 +1433,11 @@ export function useContentManagement() {
       try {
         // ARCHITECTURAL: Fetch current plan cards using planRepository.getPlanCards(selectedPlanId) and available cards
         // Requires implementing new repository methods for plan-card relationships
-        const current: any = [];
+        const current: {
+          card_id: string;
+          order_index: number;
+          is_active: boolean;
+        }[] = [];
         setPlanCards(current || []);
         setAvailableCards(cards);
       } catch (err) {
@@ -1541,7 +1549,7 @@ export function useContentManagement() {
         toast.error(err instanceof Error ? err.message : "Failed to add card");
       }
     },
-    [selectedPlanForCards, planCards, planRepository],
+    [selectedPlanForCards, planCards],
   );
 
   const removeCardFromPlan = useCallback(
@@ -1563,7 +1571,7 @@ export function useContentManagement() {
         );
       }
     },
-    [selectedPlanForCards, planRepository],
+    [selectedPlanForCards],
   );
 
   const toggleCardActiveStatus = useCallback(
@@ -1589,7 +1597,7 @@ export function useContentManagement() {
         );
       }
     },
-    [selectedPlanForCards, planRepository],
+    [selectedPlanForCards],
   );
 
   const createSpacedRepetitionPlans = useCallback(async () => {
@@ -1827,7 +1835,7 @@ export function useContentManagement() {
           ...cleanData
         } = data;
 
-        const payload: any = {
+        const payload: Record<string, unknown> = {
           ...cleanData,
           topic_id: selectedTopicIdForNewQuestion,
         };
@@ -1880,7 +1888,7 @@ export function useContentManagement() {
   }, []);
 
   const submitCard = useCallback(
-    async (data: any) => {
+    async (data: Record<string, any>) => {
       setIsSubmittingCard(true);
       try {
         const payload = {
@@ -1902,7 +1910,7 @@ export function useContentManagement() {
           toast.success("Card updated");
         } else {
           // Create
-          (payload as any).is_active = true;
+          (payload as Record<string, any>).is_active = true;
           const { error: createError } = await supabase
             .from("learning_cards")
             .insert(payload);

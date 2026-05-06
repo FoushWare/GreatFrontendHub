@@ -130,7 +130,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
 
       - name: Install root dependencies
@@ -168,13 +168,14 @@ jobs:
 
       - name: Deploy website
         run: |
-          set -euo pipefail
+          set +e
+          set -uo pipefail
           timeout 8m npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           for attempt in 1 2 3 4 5 6; do
             echo "Deploy website attempt ${attempt}/6"
             deploy_log="$(mktemp)"
             timeout 20m npx vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | tee "$deploy_log" || true
-            if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1' "$deploy_log"; then
+            if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1|Error: The request timed out' "$deploy_log"; then
               echo "Deploy output indicates explicit build failure; failing deployment step."
               exit 1
             fi
@@ -189,7 +190,7 @@ jobs:
               fi
               cat "$inspect_log"
 
-              if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1' "$inspect_log"; then
+              if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1|Error: The request timed out' "$inspect_log"; then
                 echo "Inspect indicates an explicit build failure; failing deployment step."
                 exit 1
               fi
@@ -237,7 +238,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
 
       - name: Install root dependencies
@@ -275,13 +276,14 @@ jobs:
 
       - name: Deploy admin
         run: |
-          set -euo pipefail
+          set +e
+          set -uo pipefail
           timeout 8m npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           for attempt in 1 2 3 4 5 6; do
             echo "Deploy admin attempt ${attempt}/6"
             deploy_log="$(mktemp)"
             timeout 20m npx vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | tee "$deploy_log" || true
-            if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1' "$deploy_log"; then
+            if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1|Error: The request timed out' "$deploy_log"; then
               echo "Deploy output indicates explicit build failure; failing deployment step."
               exit 1
             fi
@@ -296,7 +298,7 @@ jobs:
               fi
               cat "$inspect_log"
 
-              if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1' "$inspect_log"; then
+              if grep -Eq 'Failed to process project graph|Could not find ".modules.yaml"|ENOENT: no such file or directory|Error: Command "npx nx build|Error: Command "npm run build" exited with 1|Error: Command "npm install" exited with 1|Error: The request timed out' "$inspect_log"; then
                 echo "Inspect indicates an explicit build failure; failing deployment step."
                 exit 1
               fi

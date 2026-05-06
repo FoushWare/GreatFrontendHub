@@ -1,17 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-import { getSupabaseConfig } from "../../../../../api-config";
-
-// Helper function to create Supabase client using centralized config
-function getSupabaseClient() {
-  const config = getSupabaseConfig();
-  return createClient(config.url, config.serviceRoleKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  });
-}
+import { getSupabaseClient } from "../../../../../get-supabase-client";
 
 // POST /api/plans/[id]/cards - Add a card to a plan
 export async function POST(

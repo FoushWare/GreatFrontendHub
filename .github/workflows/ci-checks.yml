@@ -30,7 +30,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
 
       - name: Install dependencies
@@ -53,14 +53,14 @@ jobs:
           echo "🧪 Running unit tests for admin login components..."
           # Run Vitest tests for common-ui library (AdminLogin components)
           echo "📦 Testing AdminLoginFormMolecule in common-ui..."
-          NODE_OPTIONS=--max-old-space-size=768 npx vitest run libs/common-ui/src/components/molecules/AdminLoginFormMolecule.test.tsx
+          NODE_OPTIONS=--max-old-space-size=2048 npx vitest run libs/common-ui/src/components/molecules/AdminLoginFormMolecule.test.tsx
 
           # Run Vitest tests for admin app (AdminLoginPage)
           echo "📦 Testing AdminLoginPage in apps/admin..."
-          NODE_OPTIONS=--max-old-space-size=768 npx vitest run apps/admin/src/app/admin/login/page.test.tsx
+          NODE_OPTIONS=--max-old-space-size=2048 npx vitest run apps/admin/src/app/admin/login/page.test.tsx
         continue-on-error: false
         env:
-          NODE_OPTIONS: "--max-old-space-size=768"
+          NODE_OPTIONS: "--max-old-space-size=2048"
           CI: "true"
           # Provide minimal env vars for tests
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.TEST_SUPABASE_URL || 'https://placeholder.supabase.co' }}

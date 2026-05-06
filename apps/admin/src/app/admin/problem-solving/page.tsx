@@ -144,10 +144,10 @@ export default function ProblemSolvingPage() {
       {/* Task Grid */}
       {isLoading ? (
         <div className="flex justify-center py-12">
-          <div
-            role="status"
+          <output
             className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"
-          ></div>
+            aria-label="Loading"
+          ></output>
         </div>
       ) : filteredTasks.length === 0 ? (
         <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-lg border border-dashed border-gray-300 dark:border-gray-700">

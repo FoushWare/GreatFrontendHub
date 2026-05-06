@@ -13,30 +13,11 @@ interface FileNode {
   isEntryPoint?: boolean;
 }
 
-// Hook for theme management
-export const useThemeManagement = () => {
-  const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = globalThis.window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    );
-    const updateTheme = () => {
-      if (theme === "system") {
-        setIsDark(mediaQuery.matches);
-      } else {
-        setIsDark(theme === "dark");
-      }
-    };
-
-    updateTheme();
-    mediaQuery.addEventListener("change", updateTheme);
-    return () => mediaQuery.removeEventListener("change", updateTheme);
-  }, [theme]);
-
-  return { theme, setTheme, isDark };
-};
+export {
+  useThemeManagement,
+  usePanelLayout,
+  useConsoleManagement,
+} from "./SharedEditorHooks";
 
 // Hook for form data management
 export const useFormDataManagement = (task?: AdminFrontendTask | null) => {
@@ -77,74 +58,6 @@ export const useFormDataManagement = (task?: AdminFrontendTask | null) => {
   }, [task]);
 
   return { formData, setFormData };
-};
-
-// Hook for panel layout management
-export const usePanelLayout = () => {
-  const [leftPanelWidth, setLeftPanelWidth] = useState(25);
-  const [rightPanelWidth, setRightPanelWidth] = useState(25);
-  const [isResizing, setIsResizing] = useState(false);
-  const [resizeStartX, setResizeStartX] = useState(0);
-
-  const handleMouseDown = (e: React.MouseEvent, _panel: "left" | "right") => {
-    e.preventDefault();
-    setIsResizing(true);
-    setResizeStartX(e.clientX);
-  };
-
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
-      if (!isResizing) return;
-
-      const deltaX = e.clientX - resizeStartX;
-      const containerWidth = window.innerWidth;
-      const deltaPercent = (deltaX / containerWidth) * 100;
-
-      if (deltaPercent !== 0) {
-        setLeftPanelWidth((prev) =>
-          Math.max(20, Math.min(60, prev + deltaPercent)),
-        );
-        setRightPanelWidth((prev) =>
-          Math.max(20, Math.min(60, prev - deltaPercent)),
-        );
-        setResizeStartX(e.clientX);
-      }
-    },
-    [isResizing, resizeStartX],
-  );
-
-  const handleMouseUp = useCallback(() => {
-    setIsResizing(false);
-  }, []);
-
-  useEffect(() => {
-    if (isResizing) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      document.body.style.cursor = "col-resize";
-      document.body.style.userSelect = "none";
-    } else {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-      document.body.style.cursor = "";
-      document.body.style.userSelect = "";
-    }
-
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-      document.body.style.cursor = "";
-      document.body.style.userSelect = "";
-    };
-  }, [isResizing, resizeStartX, handleMouseMove, handleMouseUp]);
-
-  return {
-    leftPanelWidth,
-    rightPanelWidth,
-    setLeftPanelWidth,
-    setRightPanelWidth,
-    handleMouseDown,
-  };
 };
 
 // Helper function to create file tree structure
@@ -311,28 +224,4 @@ export const useFileManagement = (task?: AdminFrontendTask | null) => {
     setOpenFiles,
     setShowFileExplorer,
   };
-};
-
-// Hook for console management
-export const useConsoleManagement = () => {
-  const [consoleOutput, setConsoleOutput] = useState<string[]>([]);
-  const [showConsole] = useState(true);
-
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      // SECURITY: Verify message origin to prevent XSS
-      if (event.origin !== globalThis.window.location.origin) {
-        console.warn("Received message from untrusted origin:", event.origin);
-        return;
-      }
-      if (event.data.type === "console") {
-        setConsoleOutput((prev) => [...prev.slice(-19), event.data.message]);
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
-
-  return { consoleOutput, setConsoleOutput, showConsole };
 };

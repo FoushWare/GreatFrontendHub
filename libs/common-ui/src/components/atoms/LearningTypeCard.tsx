@@ -25,7 +25,8 @@ const colorVariants = {
     iconBg: "bg-indigo-600",
     ring: "ring-indigo-400",
     text: "text-indigo-600 dark:text-indigo-400",
-    hoverText: "group-hover:text-indigo-600 dark:group-hover:text-indigo-400",
+    hoverText:
+      "group-hover/card:text-indigo-600 dark:group-hover/card:text-indigo-400",
   },
   green: {
     gradient:
@@ -33,7 +34,8 @@ const colorVariants = {
     iconBg: "bg-green-600",
     ring: "ring-green-400",
     text: "text-green-600 dark:text-green-400",
-    hoverText: "group-hover:text-green-600 dark:group-hover:text-green-400",
+    hoverText:
+      "group-hover/card:text-green-600 dark:group-hover/card:text-green-400",
   },
 };
 
@@ -58,7 +60,7 @@ export function LearningTypeCard({
     <div
       onClick={onClick}
       className={cn(
-        "group bg-gradient-to-br rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 cursor-pointer",
+        "group/card bg-gradient-to-br rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 cursor-pointer",
         colors.gradient,
         showAnimation
           ? "opacity-100 translate-y-0"
@@ -71,7 +73,7 @@ export function LearningTypeCard({
       <div className="text-center">
         <div
           className={cn(
-            "w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300",
+            "w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover/card:scale-110 transition-transform duration-300",
             colors.iconBg,
           )}
         >
@@ -85,7 +87,7 @@ export function LearningTypeCard({
         >
           {title}
         </h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-6 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors">
+        <p className="text-gray-600 dark:text-gray-300 mb-6 group-hover/card:text-gray-700 dark:group-hover/card:text-gray-200 transition-colors">
           {description}
         </p>
         <div
@@ -95,7 +97,7 @@ export function LearningTypeCard({
           )}
         >
           <span>Start {title}</span>
-          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+          <ArrowRight className="w-5 h-5 group-hover/card:translate-x-1 transition-transform duration-300" />
         </div>
       </div>
     </div>

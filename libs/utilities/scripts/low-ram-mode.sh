@@ -13,7 +13,7 @@ case "$MODE" in
     ;;
   admin)
     echo "Starting admin in low-RAM mode..."
-    export NODE_OPTIONS="--max-old-space-size=1536"
+    export NODE_OPTIONS="--max-old-space-size=2048"
     exec npm run dev:admin:standard
     ;;
   check)

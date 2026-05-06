@@ -36,8 +36,10 @@ export const QuestionFormModal: React.FC<QuestionFormModalProps> = ({
   readOnly = false,
   isLoading = false,
 }) => {
-  const initialData =
-    question || (topicId ? ({ topic_id: topicId } as any) : undefined);
+  let initialData = question || undefined;
+  if (!initialData && topicId) {
+    initialData = { topic_id: topicId } as any;
+  }
   let modalTitle = "Create New Question";
   if (readOnly) {
     modalTitle = "View Question";

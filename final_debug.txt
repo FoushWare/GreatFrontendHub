@@ -1,0 +1,61 @@
+
+ RUN  v3.2.4 /Users/a.fouad/S/New_elzatona
+
+ ❯ libs/utilities/src/lib/auth-config.test.ts (9 tests | 3 failed) 5ms
+   ✓ authOptions > authorize > should find the authorize function 1ms
+   ✓ authOptions > authorize > should return null if credentials are missing 0ms
+   ✓ authOptions > authorize > should return null if email or password missing 0ms
+   × authOptions > authorize > should return developer user for valid dev credentials 1ms
+     → expected null not to be null
+   × authOptions > authorize > should return admin user for valid admin credentials 0ms
+     → expected null not to be null
+   × authOptions > authorize > should return guest user for valid guest credentials 0ms
+     → expected null not to be null
+   ✓ authOptions > authorize > should return null for invalid credentials 0ms
+   ✓ authOptions > callbacks > jwt callback should append user and account info 0ms
+   ✓ authOptions > callbacks > session callback should append token info to session user 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  libs/utilities/src/lib/auth-config.test.ts > authOptions > authorize > should return developer user for valid dev credentials
+AssertionError: expected null not to be null
+ ❯ libs/utilities/src/lib/auth-config.test.ts:31:26
+     29|         password: "dev-access",
+     30|       });
+     31|       expect(result).not.toBeNull();
+       |                          ^
+     32|       expect(result.id).toBe("dev-user-id");
+     33|       expect(result.role).toBe("developer");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  libs/utilities/src/lib/auth-config.test.ts > authOptions > authorize > should return admin user for valid admin credentials
+AssertionError: expected null not to be null
+ ❯ libs/utilities/src/lib/auth-config.test.ts:41:26
+     39|         password: "admin-pass",
+     40|       });
+     41|       expect(result).not.toBeNull();
+       |                          ^
+     42|       expect(result.role).toBe("admin");
+     43|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  libs/utilities/src/lib/auth-config.test.ts > authOptions > authorize > should return guest user for valid guest credentials
+AssertionError: expected null not to be null
+ ❯ libs/utilities/src/lib/auth-config.test.ts:50:26
+     48|         password: "guest-pass",
+     49|       });
+     50|       expect(result).not.toBeNull();
+       |                          ^
+     51|       expect(result.role).toBe("guest");
+     52|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 6 passed (9)
+   Start at  21:04:44
+   Duration  975ms (transform 44ms, setup 171ms, collect 19ms, tests 5ms, environment 315ms, prepare 50ms)
+

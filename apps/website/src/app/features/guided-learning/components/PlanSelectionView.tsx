@@ -87,10 +87,11 @@ export function PlanSelectionView({
               <span className="text-2xl">🎯</span>
             </div>
             <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-              Daily Goals
+              Objective-Driven Stages
             </h4>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Manageable daily targets keep you motivated and on track
+              Complete modular milestones at your own pace without rigid
+              deadlines
             </p>
           </div>
           <div>

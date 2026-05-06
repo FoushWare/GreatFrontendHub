@@ -21,4 +21,15 @@ export default defineConfig({
       external: ["react", "react-dom"],
     },
   },
+  test: {
+    globals: true,
+    environment: "node",
+    include: ["src/**/*.test.ts", "src/**/*.spec.ts"],
+    reporters: ["default", "json"],
+    outputFile: "../../coverage/libs/utilities/report.json",
+    coverage: {
+      reportsDirectory: "../../coverage/libs/utilities",
+      provider: "v8",
+    },
+  },
 });

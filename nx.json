@@ -84,5 +84,6 @@
     }
   },
   "defaultProject": "website",
-  "analytics": false
+  "analytics": false,
+  "nxCloudId": "69e2afb60680f8c80c42021a"
 }

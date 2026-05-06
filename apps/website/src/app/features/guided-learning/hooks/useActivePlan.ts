@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { LearningPlan, DailyGoal } from "../types";
-import { generateDailyGoals } from "../utils/daily-goals";
+import { LearningPlan } from "../types";
+import { StudyMilestone } from "@elzatona/types";
 
 interface UseActivePlanResult {
   currentPlan: LearningPlan | null;
-  dailyGoals: DailyGoal[];
-  currentDay: number;
+  milestones: StudyMilestone[];
+  currentMilestoneId: string | null;
   resumePlan: () => void;
   resetPlan: () => void;
   selectPlan: (plan: LearningPlan) => void;
@@ -17,8 +17,10 @@ interface UseActivePlanResult {
 export function useActivePlan(isAuthenticated: boolean): UseActivePlanResult {
   const router = useRouter();
   const [currentPlan, setCurrentPlan] = useState<LearningPlan | null>(null);
-  const [dailyGoals, setDailyGoals] = useState<DailyGoal[]>([]);
-  const [currentDay, setCurrentDay] = useState(1);
+  const [milestones, setMilestones] = useState<StudyMilestone[]>([]);
+  const [currentMilestoneId, setCurrentMilestoneId] = useState<string | null>(
+    null,
+  );
 
   useEffect(() => {
     if (!isAuthenticated || globalThis.window === undefined) return;
@@ -28,16 +30,16 @@ export function useActivePlan(isAuthenticated: boolean): UseActivePlanResult {
       try {
         const plan = JSON.parse(stored) as LearningPlan;
         setCurrentPlan(plan);
-        setDailyGoals(generateDailyGoals(plan));
+        setMilestones(plan.milestones || []);
 
-        // Calculate current day based on start date
-        const startDateStr = localStorage.getItem("plan-start-date");
-        if (startDateStr) {
-          const startDate = new Date(startDateStr);
-          const today = new Date();
-          const diffTime = Math.abs(today.getTime() - startDate.getTime());
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-          setCurrentDay(Math.min(diffDays, plan.duration));
+        // Track current milestone from storage or default to first
+        const storedMilestone = localStorage.getItem(
+          `plan-progress-${plan.id}`,
+        );
+        if (storedMilestone) {
+          setCurrentMilestoneId(storedMilestone);
+        } else if (plan.milestones && plan.milestones.length > 0) {
+          setCurrentMilestoneId(plan.milestones[0].id);
         }
       } catch {
         console.warn("Failed to parse active guided plan from localStorage");
@@ -53,20 +55,33 @@ export function useActivePlan(isAuthenticated: boolean): UseActivePlanResult {
   }, [currentPlan, router]);
 
   const resetPlan = useCallback(() => {
+    if (currentPlan) {
+      localStorage.removeItem(`plan-progress-${currentPlan.id}`);
+    }
     localStorage.removeItem("active-guided-plan");
     localStorage.removeItem("plan-start-date");
     setCurrentPlan(null);
-    setDailyGoals([]);
-    setCurrentDay(1);
-  }, []);
+    setMilestones([]);
+    setCurrentMilestoneId(null);
+  }, [currentPlan]);
 
   const selectPlan = useCallback(
     (plan: LearningPlan) => {
       localStorage.setItem("active-guided-plan", JSON.stringify(plan));
       localStorage.setItem("plan-start-date", new Date().toISOString());
+
+      const firstMilestoneId =
+        plan.milestones && plan.milestones.length > 0
+          ? plan.milestones[0].id
+          : null;
+
+      if (firstMilestoneId) {
+        localStorage.setItem(`plan-progress-${plan.id}`, firstMilestoneId);
+      }
+
       setCurrentPlan(plan);
-      setDailyGoals(generateDailyGoals(plan));
-      setCurrentDay(1);
+      setMilestones(plan.milestones || []);
+      setCurrentMilestoneId(firstMilestoneId);
       router.push(`/guided-practice?plan=${plan.id}`);
     },
     [router],
@@ -74,8 +89,8 @@ export function useActivePlan(isAuthenticated: boolean): UseActivePlanResult {
 
   return {
     currentPlan,
-    dailyGoals,
-    currentDay,
+    milestones,
+    currentMilestoneId,
     resumePlan,
     resetPlan,
     selectPlan,

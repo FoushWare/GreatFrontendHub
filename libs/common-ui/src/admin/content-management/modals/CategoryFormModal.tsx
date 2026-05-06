@@ -65,6 +65,13 @@ export const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
     onOpenChange(false);
   };
 
+  let submitButtonText = "Create Category";
+  if (isSubmitting) {
+    submitButtonText = "Saving...";
+  } else if (category) {
+    submitButtonText = "Save Changes";
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="w-full max-w-2xl" onOpenChange={onOpenChange}>
@@ -133,11 +140,7 @@ export const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
               disabled={isSubmitting}
               className="bg-green-600 hover:bg-green-700 text-white"
             >
-              {isSubmitting
-                ? "Saving..."
-                : category
-                  ? "Save Changes"
-                  : "Create Category"}
+              {submitButtonText}
             </Button>
           </DialogFooter>
         </form>

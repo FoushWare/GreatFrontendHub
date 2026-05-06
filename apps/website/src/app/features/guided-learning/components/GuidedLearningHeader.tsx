@@ -4,12 +4,12 @@ import { BookOpen, Calendar, Target, HelpCircle } from "lucide-react";
 
 interface GuidedLearningHeaderProps {
   readonly questionsRange: string;
-  readonly daysRange: string;
+  readonly milestoneRange: string;
 }
 
 export function GuidedLearningHeader({
   questionsRange,
-  daysRange,
+  milestoneRange,
 }: Readonly<GuidedLearningHeaderProps>) {
   return (
     <div className="mb-8">
@@ -31,7 +31,8 @@ export function GuidedLearningHeader({
           Guided Learning
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Choose a structured learning plan that fits your schedule and goals
+          Choose a structured learning plan that fits your goals and mastery
+          level
         </p>
       </div>
 
@@ -40,7 +41,7 @@ export function GuidedLearningHeader({
         <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800">
           <Calendar className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
-            {daysRange} Days
+            {milestoneRange} Milestones
           </span>
         </div>
         <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 dark:bg-purple-900/20 rounded-xl border border-purple-100 dark:border-purple-800">

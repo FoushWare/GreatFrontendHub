@@ -30,45 +30,59 @@ vi.mock("@elzatona/contexts", () => ({
 
 // Mock common-ui components to avoid complex rendering
 vi.mock("@elzatona/common-ui", () => ({
-  Button: ({ children, onClick, ...props }: any) => (
-    <button onClick={onClick} {...props}>
-      {children}
+  Button: ({ children, onClick, ...props }: Record<string, unknown>) => (
+    <button onClick={onClick as any} {...(props as any)}>
+      {children as any}
     </button>
   ),
-  Dialog: ({ children }: any) => <div data-testid="dialog">{children}</div>,
-  DialogContent: ({ children }: any) => (
+  Dialog: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="dialog">{children}</div>
+  ),
+  DialogContent: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="dialog-content">{children}</div>
   ),
-  DialogHeader: ({ children }: any) => (
+  DialogHeader: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="dialog-header">{children}</div>
   ),
-  DialogTitle: ({ children }: any) => (
+  DialogTitle: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="dialog-title">{children}</div>
   ),
-  DialogDescription: ({ children }: any) => (
+  DialogDescription: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="dialog-description">{children}</div>
   ),
-  Input: ({ ...props }: any) => <input {...props} />,
-  Label: ({ children, ...props }: any) => <label {...props}>{children}</label>,
-  Textarea: ({ children, ...props }: any) => (
-    <textarea {...props}>{children}</textarea>
+  Input: ({ ...props }: Record<string, unknown>) => (
+    <input {...(props as any)} />
   ),
-  Select: ({ children, value, onValueChange }: any) => (
+  Label: ({ children, ...props }: Record<string, unknown>) => (
+    <label {...(props as any)}>{children as any}</label>
+  ),
+  Textarea: ({ children, ...props }: Record<string, unknown>) => (
+    <textarea {...(props as any)}>{children as any}</textarea>
+  ),
+  Select: ({ children, value, onValueChange }: Record<string, unknown>) => (
     <select
-      value={value}
-      onChange={(e) => onValueChange?.(e.target.value)}
+      value={value as any}
+      onChange={(e) => (onValueChange as any)?.(e.target.value)}
       data-testid="select"
     >
-      {children}
+      {children as any}
     </select>
   ),
-  SelectTrigger: ({ children }: any) => <>{children}</>,
-  SelectValue: ({ children }: any) => <>{children}</>,
-  SelectContent: ({ children }: any) => <>{children}</>,
-  SelectItem: ({ children, value }: any) => (
-    <option value={value}>{children}</option>
+  SelectTrigger: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
   ),
-  StatsSection: ({ stats }: any) => (
+  SelectValue: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  SelectContent: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  SelectItem: ({
+    children,
+    value,
+  }: {
+    children: React.ReactNode;
+    value: string;
+  }) => <option value={value}>{children}</option>,
+  StatsSection: ({ stats }: { stats: Record<string, number> }) => (
     <div data-testid="stats-section">
       {stats &&
         Object.entries(stats).map(([key, value]) => (
@@ -81,18 +95,18 @@ vi.mock("@elzatona/common-ui", () => ({
     onSearchChange,
     filterCardType,
     onFilterChange,
-  }: any) => (
+  }: Record<string, unknown>) => (
     <div data-testid="search-filters">
       <input
         data-testid="search-input"
-        value={searchTerm}
-        onChange={(e) => onSearchChange(e.target.value)}
+        value={searchTerm as any}
+        onChange={(e) => (onSearchChange as any)(e.target.value)}
         placeholder="Search..."
       />
       <select
         data-testid="filter-select"
-        value={filterCardType}
-        onChange={(e) => onFilterChange(e.target.value)}
+        value={filterCardType as any}
+        onChange={(e) => (onFilterChange as any)(e.target.value)}
       >
         <option value="all">All</option>
         <option value="flashcard">Flashcard</option>
@@ -110,12 +124,16 @@ vi.mock("@elzatona/common-ui", () => ({
     <div data-testid="delete-confirmation-modal" />
   ),
   CardManagementModal: () => <div data-testid="card-management-modal" />,
-  QuestionFormModal: ({ isOpen, readOnly, question }: any) =>
+  QuestionFormModal: ({
+    isOpen,
+    readOnly,
+    question,
+  }: Record<string, unknown>) =>
     isOpen ? (
       <div
         data-testid="question-form-modal"
         data-read-only={readOnly ? "true" : "false"}
-        data-question-id={question?.id ?? ""}
+        data-question-id={(question as any)?.id ?? ""}
       />
     ) : null,
   CardFormModal: () => <div data-testid="card-form-modal" />,

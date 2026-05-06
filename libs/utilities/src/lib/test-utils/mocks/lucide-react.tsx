@@ -20,6 +20,7 @@ export const Target = () => <span data-testid="target-icon">🎯</span>;
 export const CheckCircle = () => <span data-testid="check-icon">✓</span>;
 export const Users = () => <span data-testid="users-icon">👥</span>;
 export const Award = () => <span data-testid="award-icon">🏆</span>;
+export const Trophy = () => <span data-testid="trophy-icon">🏆</span>;
 export const ExternalLink = () => <span data-testid="external-icon">🔗</span>;
 export const Filter = () => <span data-testid="filter-icon">🔽</span>;
 export const X = () => <span data-testid="x-icon">✕</span>;
