@@ -121,37 +121,51 @@ function aggregateProgress(attempts: any[], progressEntries: any[]) {
   const uniqueQuestionIds = new Set<string>();
   let totalPoints = 0;
 
-  // Question attempts aggregation
-  attempts.forEach((a) => {
-    if (a.question_id) uniqueQuestionIds.add(a.question_id);
-    totalPoints += a.points_earned || 0;
-  });
+  // Process attempts
+  const attemptStats = _processAttempts(attempts);
+  attemptStats.ids.forEach((id) => uniqueQuestionIds.add(id));
+  totalPoints += attemptStats.points;
 
-  // User progress aggregation (JSON parsing handle)
-  progressEntries.forEach((entry) => {
-    const progressData =
+  // Process progress entries
+  const progressStats = _processProgressEntries(progressEntries);
+  progressStats.ids.forEach((id) => uniqueQuestionIds.add(id));
+  totalPoints += progressStats.points;
+
+  return { uniqueQuestionIds, totalPoints };
+}
+
+function _processAttempts(attempts: any[]) {
+  const ids = new Set<string>();
+  let points = 0;
+  attempts.forEach((a) => {
+    if (a.question_id) ids.add(a.question_id);
+    points += a.points_earned || 0;
+  });
+  return { ids, points };
+}
+
+function _processProgressEntries(entries: any[]) {
+  const ids = new Set<string>();
+  let points = 0;
+  entries.forEach((entry) => {
+    const data =
       typeof entry.progress_data === "string"
         ? safeJsonParse(entry.progress_data)
         : entry.progress_data;
 
-    if (!progressData) return;
+    if (!data) return;
 
-    if (Array.isArray(progressData.completedQuestions)) {
-      progressData.completedQuestions.forEach((id: string) =>
-        uniqueQuestionIds.add(id),
-      );
+    if (Array.isArray(data.completedQuestions)) {
+      data.completedQuestions.forEach((id: string) => ids.add(id));
     }
-    if (Array.isArray(progressData.answeredQuestions)) {
-      progressData.answeredQuestions.forEach((id: string) =>
-        uniqueQuestionIds.add(id),
-      );
+    if (Array.isArray(data.answeredQuestions)) {
+      data.answeredQuestions.forEach((id: string) => ids.add(id));
     }
-    if (Array.isArray(progressData.correctAnswers)) {
-      totalPoints += progressData.correctAnswers.length * 10;
+    if (Array.isArray(data.correctAnswers)) {
+      points += data.correctAnswers.length * 10;
     }
   });
-
-  return { uniqueQuestionIds, totalPoints };
+  return { ids, points };
 }
 
 function safeJsonParse(data: string) {

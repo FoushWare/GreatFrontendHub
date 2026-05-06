@@ -2,7 +2,6 @@
 
 import React, { useCallback } from "react";
 import { createClient } from "@supabase/supabase-js";
-import DOMPurify from "dompurify";
 
 const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"]!;
 const supabaseServiceRoleKey = process.env["SUPABASE_SERVICE_ROLE_KEY"]!;
@@ -10,20 +9,7 @@ const _supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
 import { TourProvider, useTour } from "@reactour/tour";
 
-// Security wrapper for CSS content
-const sanitizeCSS = (css: string): string => {
-  if (typeof window === "undefined") {
-    return css; // Server-side: return as-is
-  }
-
-  return DOMPurify.sanitize(css, {
-    ALLOWED_TAGS: ["style"],
-    ALLOWED_ATTR: [],
-    ALLOW_DATA_ATTR: false,
-  });
-};
-
-// Pre-defined tour styles to avoid parsing issues
+// Guided tour styles are defined statically below
 const tourStyles = `
   :root {
     --tour-bg: #ffffff;
@@ -206,7 +192,7 @@ export const GuidedTour: React.FC<GuidedTourProps> = (props) => {
     <>
       <style
         dangerouslySetInnerHTML={{
-          __html: sanitizeCSS(tourStyles),
+          __html: tourStyles,
         }}
       />
       <TourProvider

@@ -24,6 +24,18 @@ let _questionsCache: any = null;
 // -----------------------------------------------------------------------------
 
 /**
+ * Normalizes a string for fuzzy slug matching.
+ */
+function normalizeForMatch(str: string): string {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/s$/, "") // Remove trailing 's' for plural matching
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+}
+
+/**
  * Checks if a string is a valid UUID.
  */
 function isUuid(str: string): boolean {
@@ -66,8 +78,44 @@ async function _fallbackIdLookup(supabase: any, table: string, id: string) {
     .eq("id", id)
     .maybeSingle();
 
-  if (!data) console.error(`${table} lookup failed for: ${id}`);
   return data?.id || null;
+}
+
+/**
+ * Robust slug-based lookup for topics and other entities.
+ */
+async function _lookupEntityBySlug(
+  supabase: any,
+  table: string,
+  slug: string,
+  filterField?: string,
+  filterValue?: any,
+) {
+  const normalized = normalizeForMatch(slug);
+  let query = supabase.from(table).select("*");
+  if (filterField && filterValue) query = query.eq(filterField, filterValue);
+
+  const { data: entities } = await query;
+  if (!entities) return null;
+
+  // Try multiple matching strategies
+  const match = (entities as any[]).find((e) => {
+    const eSlug = e.slug?.toLowerCase() || "";
+    const eName = e.name?.toLowerCase() || "";
+    const eNameSlug = eName.replace(/\s+/g, "-");
+    const eSlugNorm = normalizeForMatch(eSlug);
+    const eNameNorm = normalizeForMatch(eName);
+
+    return (
+      eSlug === slug.toLowerCase() ||
+      eNameSlug === slug.toLowerCase() ||
+      eSlugNorm.includes(normalized) ||
+      normalized.includes(eSlugNorm) ||
+      eNameNorm.includes(normalized)
+    );
+  });
+
+  return match?.id || null;
 }
 
 /**
@@ -85,11 +133,22 @@ async function lookupTopic(
   topicValue: any,
   categoryId?: string | null,
 ) {
-  return _lookupEntityId(
+  const id = await _lookupEntityId(
     supabase,
     "topics",
     topicValue,
     ["name"],
+    categoryId ? "category_id" : undefined,
+    categoryId,
+  );
+
+  if (id) return id;
+
+  // Try robust slug matching if basic lookup fails
+  return _lookupEntityBySlug(
+    supabase,
+    "topics",
+    String(topicValue),
     categoryId ? "category_id" : undefined,
     categoryId,
   );
@@ -224,7 +283,17 @@ function _prepareFinalDbObject(
     category_id: lookups.categoryId || null,
     topic_id: lookups.topicId || null,
     learning_card_id: lookups.learningCardId || null,
-    content: dbQuestion["content"] || dbQuestion["title"],
+    question_text:
+      dbQuestion["question_text"] ||
+      dbQuestion["question"] ||
+      dbQuestion["title"] ||
+      "",
+    correct_answer:
+      dbQuestion["correct_answer"] ||
+      dbQuestion["answer"] ||
+      dbQuestion["correctAnswer"] ||
+      "",
+    content: dbQuestion["content"] || dbQuestion["title"] || "",
     type:
       dbQuestion["type"] === "multiple-select"
         ? "multiple-choice"
@@ -241,21 +310,49 @@ function _prepareFinalDbObject(
  * Transforms a raw database question for frontend consumption.
  */
 function transformQuestionForFrontend(question: Record<string, any>) {
-  const transformed = { ...question };
-  if (question["categories"]) {
-    transformed["category_id"] = question["categories"]["id"];
-    transformed["category"] = question["categories"]["name"];
-  }
-  if (question["topics"]) {
-    transformed["topic_id"] = question["topics"]["id"];
-    transformed["topic"] = question["topics"]["name"];
-  }
-  if (question["learning_cards"]) {
-    transformed["learning_card_id"] = question["learning_cards"]["id"];
-    transformed["learningCardId"] = question["learning_cards"]["id"];
-    transformed["learning_card"] = question["learning_cards"];
-  }
-  return transformed;
+  const questionText =
+    question.question_text ||
+    question.question ||
+    question.title ||
+    question.content ||
+    question.text ||
+    "";
+
+  return {
+    id: question.id,
+    question: questionText,
+    question_text: questionText, // Also include raw field for backward compatibility
+    content: question.content || "",
+    answer: question.correct_answer,
+    explanation: question.explanation || "",
+    topicId: question.topic_id,
+    categoryId: question.category_id,
+    difficulty: question.difficulty,
+    type: question.question_type || question.type,
+    questionType: question.question_type || question.type,
+    options: question.options
+      ? typeof question.options === "string"
+        ? JSON.parse(question.options)
+        : question.options
+      : null,
+    correctAnswer: question.correct_answer,
+    tags: question.tags
+      ? typeof question.tags === "string"
+        ? JSON.parse(question.tags)
+        : question.tags
+      : [],
+    is_active: question.is_active,
+    created_at: question.created_at
+      ? new Date(question.created_at)
+      : new Date(),
+    updated_at: question.updated_at
+      ? new Date(question.updated_at)
+      : new Date(),
+    // Include joined data if available
+    category: question.categories,
+    topic: question.topics,
+    learningCard: question.learning_cards,
+  };
 }
 
 /**
@@ -358,11 +455,24 @@ export async function questionsGetHandler(request: NextRequest) {
 
     const page = Number.parseInt(searchParams.get("page") || "1", 10);
     const pageSize = Number.parseInt(searchParams.get("pageSize") || "10", 10);
-    const categoryId = searchParams.get("categoryId");
-    const topicId = searchParams.get("topicId");
+    const categoryParam =
+      searchParams.get("categoryId") || searchParams.get("category");
+    const topicParam =
+      searchParams.get("topicId") ||
+      searchParams.get("topic") ||
+      searchParams.get("subtopic");
     const search = searchParams.get("search");
-    const type = searchParams.get("type");
+    const type = searchParams.get("type") || searchParams.get("questionType");
+    const difficulty = searchParams.get("difficulty");
     const offset = (page - 1) * pageSize;
+
+    // Resolve IDs if names are provided
+    const categoryId = categoryParam
+      ? await lookupCategory(supabase, categoryParam)
+      : null;
+    const topicId = topicParam
+      ? await lookupTopic(supabase, topicParam, categoryId)
+      : null;
 
     let query = supabase
       .from("questions")
@@ -373,6 +483,7 @@ export async function questionsGetHandler(request: NextRequest) {
     if (categoryId) query = query.eq("category_id", categoryId);
     if (topicId) query = query.eq("topic_id", topicId);
     if (type) query = query.eq("type", type);
+    if (difficulty) query = query.eq("difficulty", difficulty);
     if (search) query = query.ilike("title", `%${search}%`);
 
     const { count, data, error } = await query
