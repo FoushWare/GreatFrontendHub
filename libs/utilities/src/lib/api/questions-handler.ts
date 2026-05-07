@@ -309,7 +309,7 @@ function _prepareFinalDbObject(
 /**
  * Transforms a raw database question for frontend consumption.
  */
-function transformQuestionForFrontend(question: Record<string, any>) {
+function transformQuestionForFrontend(question: any) {
   const questionText =
     question.question_text ||
     question.question ||
