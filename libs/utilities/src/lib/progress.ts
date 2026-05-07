@@ -449,7 +449,7 @@ export const getLearningRecommendations = (
   const incompleteItems = items.filter((item) => !item.isCompleted);
 
   // Sort by priority and difficulty (high priority + beginner first)
-  const sortedItems = incompleteItems.sort((a, b) => {
+  const sortedItems = [...incompleteItems].sort((a, b) => {
     const priorityOrder: Record<"high" | "medium" | "low", number> = {
       high: 3,
       medium: 2,

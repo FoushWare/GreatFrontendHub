@@ -11,25 +11,13 @@ import {
   useThemeManagement,
   useFormDataManagement,
   useCodeEditorManagement,
-  useFileExplorerManagement,
-  useDynamicFieldsManagement,
   usePanelLayout,
 } from "./ProblemSolvingEditorHooks";
 import {
   ProblemSolvingEditorHeader,
   ProblemSolvingEditorMainContent,
 } from "./ProblemSolvingEditorComponents";
-import {
-  createTestCase,
-  validateFormData,
-  copyToClipboard,
-  addConstraint,
-  removeConstraint,
-  addExample,
-  removeExample,
-  addTag,
-  removeTag,
-} from "./ProblemSolvingEditorUtils";
+import { validateFormData } from "./ProblemSolvingEditorUtils";
 
 interface ProblemSolvingEditorProps {
   task?: ProblemSolvingTask | null;

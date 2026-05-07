@@ -1,0 +1,957 @@
+Build Admin App	UNKNOWN STEP	﻿2026-05-07T07:41:38.4353824Z Current runner version: '2.334.0'
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4390889Z ##[group]Runner Image Provisioner
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4392339Z Hosted Compute Agent
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4393413Z Version: 20260213.493
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4394485Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4395877Z Build Date: 2026-02-13T00:28:41Z
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4397346Z Worker ID: {af958258-9e40-4bfd-9cbd-f3cd5415a420}
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4398499Z Azure Region: eastus
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4399566Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4401833Z ##[group]Operating System
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4402919Z Ubuntu
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4403798Z 24.04.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4404542Z LTS
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4405512Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4406384Z ##[group]Runner Image
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4407627Z Image: ubuntu-24.04
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4408649Z Version: 20260413.86.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4410937Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260413.86/images/ubuntu/Ubuntu2404-Readme.md
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4413604Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260413.86
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4415062Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4417342Z ##[group]GITHUB_TOKEN Permissions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4420171Z Contents: read
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4421149Z Metadata: read
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4422117Z Packages: read
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4423056Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4426153Z Secret source: Actions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4427588Z Prepare workflow directory
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4912014Z Prepare all required actions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.4968418Z Getting action download info
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:38.9631571Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:39.2320201Z Download action repository 'pnpm/action-setup@v4' (SHA:b906affcce14559ad1aafd4ab0e942779e9f58b1)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:39.4658417Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:39.6588848Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:39.9631074Z Complete job name: Build Admin App
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0556361Z ##[group]Run actions/checkout@v4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0558190Z with:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0559061Z   repository: FoushWare/elzatona_web
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0560487Z   token: ***
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0561382Z   ssh-strict: true
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0562231Z   ssh-user: git
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0563161Z   persist-credentials: true
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0564229Z   clean: true
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0565116Z   sparse-checkout-cone-mode: true
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0566110Z   fetch-depth: 1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0567262Z   fetch-tags: false
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0568139Z   show-progress: true
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0569073Z   lfs: false
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0569935Z   submodules: false
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0570818Z   set-safe-directory: true
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.0572149Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.1739723Z Syncing repository: FoushWare/elzatona_web
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.1743163Z ##[group]Getting Git version info
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.1744905Z Working directory is '/home/runner/work/elzatona_web/elzatona_web'
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.1747671Z [command]/usr/bin/git version
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.2732968Z git version 2.53.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.2763089Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.2778526Z Temporarily overriding HOME='/home/runner/work/_temp/6fe9ec9f-4595-4ef2-898d-f69cbf46963c' before making global git config changes
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.2781757Z Adding repository directory to the temporary git global config as a safe directory
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.2785121Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/elzatona_web/elzatona_web
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.2818824Z Deleting the contents of '/home/runner/work/elzatona_web/elzatona_web'
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.2822887Z ##[group]Initializing the repository
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.2827071Z [command]/usr/bin/git init /home/runner/work/elzatona_web/elzatona_web
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3099514Z hint: Using 'master' as the name for the initial branch. This default branch name
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3102783Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3105059Z hint: to use in all of your new repositories, which will suppress this warning,
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3107644Z hint: call:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3108542Z hint:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3109737Z hint: 	git config --global init.defaultBranch <name>
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3111069Z hint:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3112321Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3114946Z hint: 'development'. The just-created branch can be renamed via this command:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3116561Z hint:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3117804Z hint: 	git branch -m <name>
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3119059Z hint:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3120547Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3122809Z Initialized empty Git repository in /home/runner/work/elzatona_web/elzatona_web/.git/
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3127234Z [command]/usr/bin/git remote add origin https://github.com/FoushWare/elzatona_web
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3150572Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3152550Z ##[group]Disabling automatic garbage collection
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3154557Z [command]/usr/bin/git config --local gc.auto 0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3185537Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3187617Z ##[group]Setting up auth
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3192793Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.3224626Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.5272200Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.5307415Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.5557964Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.5591983Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.5828260Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.5865583Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.5867911Z ##[group]Fetching the repository
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:40.5878204Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +7cf02b8a08e23f70008582f50acde8c83ca65ad6:refs/remotes/pull/12104/merge
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.3802713Z From https://github.com/FoushWare/elzatona_web
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.3805087Z  * [new ref]         7cf02b8a08e23f70008582f50acde8c83ca65ad6 -> pull/12104/merge
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.3832564Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.3833271Z ##[group]Determining the checkout info
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.3834813Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.3840243Z [command]/usr/bin/git sparse-checkout disable
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.3876565Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.3901188Z ##[group]Checking out the ref
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.3904938Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/12104/merge
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7249379Z Note: switching to 'refs/remotes/pull/12104/merge'.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7250131Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7250709Z You are in 'detached HEAD' state. You can look around, make experimental
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7333853Z changes and commit them, and you can discard any commits you make in this
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7334888Z state without impacting any branches by switching back to a branch.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7335562Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7336011Z If you want to create a new branch to retain commits you create, you may
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7337767Z do so (now or later) by using -c with the switch command. Example:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7338250Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7338489Z   git switch -c <new-branch-name>
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7338837Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7339039Z Or undo this operation with:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7339378Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7339546Z   git switch -
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7339809Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7340189Z Turn off this advice by setting config variable advice.detachedHead to false
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7340917Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7341559Z HEAD is now at 7cf02b8 Merge 798ff9bcfd83e38132861412489c4ea75953bcef into f668f27096c7ed1ce24a18e7a99f2f12c7037556
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7344916Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7345870Z [command]/usr/bin/git log -1 --format=%H
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7355220Z 7cf02b8a08e23f70008582f50acde8c83ca65ad6
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7583120Z ##[group]Run pnpm/action-setup@v4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7583474Z with:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7583700Z   version: 10.33.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7583942Z   dest: ~/setup-pnpm
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7584202Z   run_install: null
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7584437Z   cache: false
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7584693Z   cache_dependency_path: pnpm-lock.yaml
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7585048Z   package_json_file: package.json
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7585339Z   standalone: false
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.7585575Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:42.9048665Z ##[group]Running self-installer...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:43.6519940Z Progress: resolved 1, reused 0, downloaded 0, added 0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:43.6612688Z Packages: +1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:43.6613074Z +
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1013592Z Progress: resolved 1, reused 0, downloaded 1, added 1, done
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1323620Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1324281Z dependencies:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1357490Z + pnpm 10.33.0 (10.33.4 is available)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1357868Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1358109Z Done in 1s
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1515095Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1519290Z Installation Completed!
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1678315Z ##[group]Run actions/setup-node@v4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1678622Z with:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1678814Z   node-version: 24
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1679013Z   cache: pnpm
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1679209Z   always-auth: false
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1679424Z   check-latest: false
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1679780Z   token: ***
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1679969Z env:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1680221Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.1680520Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.3715404Z Found in cache @ /opt/hostedtoolcache/node/24.14.1/x64
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:44.3723537Z ##[group]Environment details
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:47.7483375Z node: v24.14.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:47.7483803Z npm: 11.11.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:47.7484144Z yarn: 1.22.22
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:47.7485615Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:47.7510614Z [command]/home/runner/setup-pnpm/node_modules/.bin/pnpm store path --silent
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:48.1886152Z /home/runner/setup-pnpm/node_modules/.bin/store/v10
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:48.4342337Z Cache hit for: node-cache-Linux-x64-pnpm-c1fa4408a2f88a7a3398f75e9407cf077d6dc825f6d3648966b2ca686a6fa52f
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:49.4689377Z Received 167772160 of 436469304 (38.4%), 160.0 MBs/sec
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:50.4736065Z Received 369098752 of 436469304 (84.6%), 175.6 MBs/sec
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:50.8972250Z Received 436469304 of 436469304 (100.0%), 171.4 MBs/sec
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:50.8973687Z Cache Size: ~416 MB (436469304 B)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:50.9015129Z [command]/usr/bin/tar -xf /home/runner/work/_temp/408d1aa0-57b0-4d4e-9927-5c9dae1bf966/cache.tzst -P -C /home/runner/work/elzatona_web/elzatona_web --use-compress-program unzstd
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.1999653Z Cache restored successfully
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.2349817Z Cache restored from key: node-cache-Linux-x64-pnpm-c1fa4408a2f88a7a3398f75e9407cf077d6dc825f6d3648966b2ca686a6fa52f
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.2553123Z ##[group]Run pnpm install --no-frozen-lockfile
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.2553806Z [36;1mpnpm install --no-frozen-lockfile[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.2594902Z shell: /usr/bin/bash -e {0}
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.2595327Z env:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.2595755Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.2596551Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.5964193Z Scope: all 13 workspace projects
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.7017377Z Lockfile is up to date, resolution step is skipped
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:57.8349440Z Progress: resolved 1, reused 0, downloaded 0, added 0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:58.0715615Z Packages: +2431
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:58.0716496Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:58.8369603Z Progress: resolved 2431, reused 1082, downloaded 0, added 0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:41:59.8370407Z Progress: resolved 2431, reused 2417, downloaded 0, added 111
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:00.8374146Z Progress: resolved 2431, reused 2417, downloaded 0, added 784
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:01.8376873Z Progress: resolved 2431, reused 2417, downloaded 0, added 1163
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:02.8381879Z Progress: resolved 2431, reused 2417, downloaded 0, added 1638
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:03.8383303Z Progress: resolved 2431, reused 2417, downloaded 0, added 2287
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:04.0083466Z Progress: resolved 2431, reused 2417, downloaded 0, added 2431, done
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4333584Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4334382Z dependencies:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4335155Z + @daily-co/daily-js 0.84.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4336088Z + @heroicons/react 2.2.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4337138Z + @monaco-editor/react 4.7.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4337932Z + @radix-ui/react-checkbox 1.3.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4338688Z + @radix-ui/react-collapsible 1.1.12
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4339493Z + @radix-ui/react-dialog 1.1.15
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4340269Z + @radix-ui/react-label 2.1.8
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4341123Z + @radix-ui/react-popover 1.1.15
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4341904Z + @radix-ui/react-progress 1.1.8
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4342684Z + @radix-ui/react-scroll-area 1.2.10
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4343449Z + @radix-ui/react-select 2.2.6
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4344175Z + @radix-ui/react-separator 1.1.8
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4345008Z + @radix-ui/react-slot 1.2.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4345774Z + @radix-ui/react-switch 1.2.6
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4346997Z + @radix-ui/react-tabs 1.1.13
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4347496Z + @reactour/tour 3.8.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4347905Z + @sentry/nextjs 10.46.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4348397Z + @supabase/supabase-js 2.100.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4348982Z + @tanstack/react-query 5.95.2
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4349872Z + @tanstack/react-query-devtools 5.95.2
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4350449Z + @types/bcryptjs 2.4.6
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4350918Z + @types/dompurify 3.2.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4351395Z + @types/jsonwebtoken 9.0.10
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4351913Z + @types/react-syntax-highlighter 15.5.13
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4352488Z + @types/swagger-jsdoc 6.0.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4353063Z + @types/swagger-ui-react 5.18.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4353629Z + @vercel/speed-insights 1.3.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4354165Z + axios 1.15.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4354537Z + bcryptjs 3.0.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4354902Z + cheerio 1.2.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4355391Z + class-variance-authority 0.7.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4355893Z + cloudinary 2.9.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4356321Z + clsx 2.1.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4356967Z + critters 0.0.23
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4357378Z + date-fns 4.1.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4357802Z + dompurify 3.4.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4358188Z + dotenv 17.3.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4358589Z + firebase 12.11.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4359023Z + html-to-image 1.11.13
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4359449Z + jotai 2.19.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4359858Z + jsonwebtoken 9.0.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4360301Z + lucide-react 0.542.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4360722Z + next 16.2.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4361127Z + next-auth 4.24.13
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4361548Z + node-cron 4.2.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4361957Z + node-fetch 2.7.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4362352Z + nuqs 2.8.9
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4362730Z + react 19.2.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4363735Z + react-day-picker 9.14.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4364300Z + react-dom 19.2.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4364803Z + react-markdown 10.1.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4365331Z + react-resizable-panels 2.1.9
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4365906Z + react-syntax-highlighter 16.1.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4366923Z + shiki 3.23.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4367311Z + sonner 2.0.7
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4367710Z + swagger-jsdoc 6.2.8
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4368160Z + swagger-ui-react 5.32.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4368587Z + tailwind-merge 3.5.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4369033Z + tailwindcss-animate 1.0.7
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4369509Z + validator 13.15.26
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4369902Z + xss 1.0.15
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4370240Z + zod 4.3.6
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4370438Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4370600Z devDependencies:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4371013Z + @eslint/eslintrc 3.3.5
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4371651Z + @mermaid-js/mermaid-cli 11.12.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4372168Z + @nx/eslint 22.6.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4372550Z + @nx/jest 22.6.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4372920Z + @nx/next 22.6.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4373276Z + @nx/vite 22.6.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4373663Z + @playwright/test 1.58.2
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4374098Z + @swc-node/register 1.11.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4374516Z + @swc/core 1.15.21
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4374957Z + @testing-library/jest-dom 6.9.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4375484Z + @testing-library/react 16.3.2
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4376012Z + @testing-library/user-event 14.6.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4376529Z + @types/jest 30.0.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4377244Z + @types/node 20.19.37
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4377684Z + @types/react 19.2.14
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4378116Z + @types/react-dom 19.2.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4378601Z + @vitest/coverage-v8 3.2.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4379053Z + autoprefixer 10.4.27
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4379495Z + dotenv-cli 11.0.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4379866Z + eslint 9.39.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4380280Z + eslint-config-next 15.5.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4380699Z + glob 11.1.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4381047Z + husky 9.1.7
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4381395Z + jest 30.3.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4381845Z + jest-environment-jsdom 30.3.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4382289Z + js-yaml 3.14.2
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4382688Z + lint-staged 16.4.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4383095Z + minimatch 10.2.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4383464Z + msw 2.12.14
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4383839Z + null-loader 4.0.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4384210Z + nx 22.6.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4384588Z + oe-sonar-mcp 1.0.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4384985Z + prettier 3.8.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4385383Z + puppeteer 23.11.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4385756Z + semver 7.7.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4386141Z + tailwindcss 3.4.19
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4386534Z + ts-jest 29.4.6
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4387100Z + tsx 4.21.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4387484Z + typescript 5.9.3
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4387823Z + vercel 50.44.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4388179Z + vite 7.3.2
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4388555Z + vite-tsconfig-paths 6.1.1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4388996Z + vitest 3.2.4
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4389201Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.4809960Z . prepare$ husky
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5406167Z . prepare: Done
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5570335Z ╭ Warning ─────────────────────────────────────────────────────────────────────╮
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5571345Z │                                                                              │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5572706Z │   Ignored build scripts: @firebase/util@1.15.0, @parcel/watcher@2.5.6,       │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5574759Z │   @scarf/scarf@1.4.0, @sentry/cli@2.58.5, @swc/core@1.15.21,                 │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5575923Z │   @tree-sitter-grammars/tree-sitter-yaml@0.7.1, core-js-pure@3.49.0,         │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5577327Z │   esbuild@0.27.0, esbuild@0.27.4, esbuild@0.27.7, less@4.5.1, msw@2.12.14,   │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5578408Z │   nx@22.6.3, protobufjs@7.5.4, puppeteer@23.11.1, sharp@0.34.5,              │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5579506Z │   tree-sitter-json@0.24.8, tree-sitter@0.21.1, tree-sitter@0.22.4,           │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5580545Z │   unrs-resolver@1.11.1.                                                      │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5581924Z │   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5583004Z │   to run scripts.                                                            │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5583892Z │                                                                              │
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5585073Z ╰──────────────────────────────────────────────────────────────────────────────╯
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.5705933Z Done in 8.2s using pnpm v10.33.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6364758Z ##[group]Run echo "🧹 Checking for existing build artifacts..."
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6365542Z [36;1mecho "🧹 Checking for existing build artifacts..."[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6366296Z [36;1mls -d apps/admin/.next || echo "✅ No pre-existing apps/admin/.next found"[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6396420Z shell: /usr/bin/bash -e {0}
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6397108Z env:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6397511Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6398021Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6453836Z 🧹 Checking for existing build artifacts...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6465317Z ls: cannot access 'apps/admin/.next': No such file or directory
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6467694Z ✅ No pre-existing apps/admin/.next found
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6525297Z ##[group]Run echo "🏗️ Building admin app for E2E tests..."
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6525789Z [36;1mecho "🏗️ Building admin app for E2E tests..."[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6526181Z [36;1mpnpm exec nx build admin --skip-nx-cache[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6548183Z shell: /usr/bin/bash -e {0}
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6548445Z env:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6548722Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6549098Z   NODE_OPTIONS: --max-old-space-size=2048
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6549392Z   NEXT_TELEMETRY_DISABLED: 1
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6549634Z   APP_ENV: test
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6549847Z   NEXT_PUBLIC_APP_ENV: test
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6550086Z   NODE_ENV: production
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6551025Z   NEXT_PUBLIC_SUPABASE_URL: ***
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6552411Z   NEXT_PUBLIC_SUPABASE_ANON_KEY: ***
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6553848Z   SUPABASE_SERVICE_ROLE_KEY: ***
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6554202Z   JWT_SECRET: ***
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6554414Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:05.6599861Z 🏗️ Building admin app for E2E tests...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:07.4204986Z [@sentry/nextjs] DEPRECATION WARNING: disableLogger is deprecated and will be removed in a future version. Use webpack.treeshake.removeDebugLogging instead.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:07.4207847Z [@sentry/nextjs] DEPRECATION WARNING: automaticVercelMonitors is deprecated and will be removed in a future version. Use webpack.automaticVercelMonitors instead.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:08.6750162Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:08.6751970Z [7m[1m[33m NX [39m[22m[27m  [33m--skip-nx-cache disables the connection to Nx Cloud for the current run.[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:08.6752783Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:08.6753275Z The remote cache will not be read from or written to during this run.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:08.6753738Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:08.6758293Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:08.6759633Z [7m[1m[36m NX [39m[22m[27m  [36mRunning target [1mbuild[22m for project admin and [1m4[22m tasks it depends on:[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:08.6760436Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:08.6760714Z [2m[36m[39m[22m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0248009Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0274270Z ##[group]✅ [2m> [22m[2mnx run[22m database:build
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0287794Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0298167Z [36mvite v7.3.2 [32mbuilding client environment for production...[36m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0327459Z transforming...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0366162Z [32m✓[39m 75 modules transformed.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0367505Z [33m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0369175Z [1m(!)[22m outDir [37m[2m/home/runner/work/elzatona_web/elzatona_web/dist/libs/database[22m[33m is not inside project root and will not be emptied.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0370561Z Use --emptyOutDir to override.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0371186Z [39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0371719Z [33m[plugin vite:reporter] 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0374871Z (!) /home/runner/work/elzatona_web/elzatona_web/libs/database/src/lib/SupabaseDatabaseService.ts is dynamically imported by /home/runner/work/elzatona_web/elzatona_web/libs/database/src/lib/appConfig.ts but also statically imported by /home/runner/work/elzatona_web/elzatona_web/libs/database/src/index.ts, dynamic import will not move module into another chunk.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0378085Z [39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0378465Z rendering chunks...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0378900Z computing gzip size...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0380103Z [2m../../dist/libs/database/[22m[36mindex.mjs  [39m[1m[33m653.37 kB[39m[22m[2m │ gzip: 128.28 kB[22m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0381106Z [33m[plugin vite:reporter] 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0384281Z (!) /home/runner/work/elzatona_web/elzatona_web/libs/database/src/lib/SupabaseDatabaseService.ts is dynamically imported by /home/runner/work/elzatona_web/elzatona_web/libs/database/src/lib/appConfig.ts but also statically imported by /home/runner/work/elzatona_web/elzatona_web/libs/database/src/index.ts, dynamic import will not move module into another chunk.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0387117Z [39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:17.0388192Z [2m../../dist/libs/database/[22m[36mindex.js  [39m[1m[2m241.40 kB[22m[1m[22m[2m │ gzip: 58.96 kB[22m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2057699Z [32m✓ built in 2.80s[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2058674Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2067524Z ##[group]❌ [2m> [22m[2mnx run[22m common-ui:build
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2069730Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2071702Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:314:14[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'question_text' comes from an index signature, so it must be accessed with ['question_text'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2073009Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2074383Z [0m [90m 312 | [39m[36mfunction[39m transformQuestionForFrontend(question[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m any[33m>[39m) {
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2075860Z  [90m 313 | [39m  [36mconst[39m questionText [33m=[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2109567Z [31m[1m>[22m[39m[90m 314 | [39m    question[33m.[39mquestion_text [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2110405Z  [90m     | [39m             [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2111026Z  [90m 315 | [39m    question[33m.[39mquestion [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2111637Z  [90m 316 | [39m    question[33m.[39mtitle [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2112282Z  [90m 317 | [39m    question[33m.[39mcontent [33m||[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2112606Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2113959Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:315:14[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'question' comes from an index signature, so it must be accessed with ['question'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2114903Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2115271Z [0m [90m 313 | [39m  [36mconst[39m questionText [33m=[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2115924Z  [90m 314 | [39m    question[33m.[39mquestion_text [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2117032Z [31m[1m>[22m[39m[90m 315 | [39m    question[33m.[39mquestion [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2117832Z  [90m     | [39m             [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2118404Z  [90m 316 | [39m    question[33m.[39mtitle [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2119011Z  [90m 317 | [39m    question[33m.[39mcontent [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2119627Z  [90m 318 | [39m    question[33m.[39mtext [33m||[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2119959Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2121617Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:316:14[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'title' comes from an index signature, so it must be accessed with ['title'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2122812Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2123386Z [0m [90m 314 | [39m    question[33m.[39mquestion_text [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2124238Z  [90m 315 | [39m    question[33m.[39mquestion [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2125164Z [31m[1m>[22m[39m[90m 316 | [39m    question[33m.[39mtitle [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2125939Z  [90m     | [39m             [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2127124Z  [90m 317 | [39m    question[33m.[39mcontent [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2127950Z  [90m 318 | [39m    question[33m.[39mtext [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2128662Z  [90m 319 | [39m    [32m""[39m[33m;[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2129015Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2130688Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:317:14[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'content' comes from an index signature, so it must be accessed with ['content'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2132258Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2132795Z [0m [90m 315 | [39m    question[33m.[39mquestion [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2133598Z  [90m 316 | [39m    question[33m.[39mtitle [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2134536Z [31m[1m>[22m[39m[90m 317 | [39m    question[33m.[39mcontent [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2135329Z  [90m     | [39m             [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2136041Z  [90m 318 | [39m    question[33m.[39mtext [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2136984Z  [90m 319 | [39m    [32m""[39m[33m;[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2137509Z  [90m 320 | [39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2137735Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2139673Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:318:14[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'text' comes from an index signature, so it must be accessed with ['text'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2140874Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2141364Z [0m [90m 316 | [39m    question[33m.[39mtitle [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2142197Z  [90m 317 | [39m    question[33m.[39mcontent [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2143171Z [31m[1m>[22m[39m[90m 318 | [39m    question[33m.[39mtext [33m||[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2143956Z  [90m     | [39m             [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2144615Z  [90m 319 | [39m    [32m""[39m[33m;[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2145159Z  [90m 320 | [39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2145647Z  [90m 321 | [39m  [36mreturn[39m {[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2145972Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2148039Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:322:18[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'id' comes from an index signature, so it must be accessed with ['id'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2149177Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2149479Z [0m [90m 320 | [39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2150000Z  [90m 321 | [39m  [36mreturn[39m {
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2150897Z [31m[1m>[22m[39m[90m 322 | [39m    id[33m:[39m question[33m.[39mid[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2151748Z  [90m     | [39m                 [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2152544Z  [90m 323 | [39m    question[33m:[39m questionText[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2153901Z  [90m 324 | [39m    question_text[33m:[39m questionText[33m,[39m [90m// Also include raw field for backward compatibility[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2155402Z  [90m 325 | [39m    content[33m:[39m question[33m.[39mcontent [33m||[39m [32m""[39m[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2156029Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2158064Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:325:23[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'content' comes from an index signature, so it must be accessed with ['content'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2159310Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2159887Z [0m [90m 323 | [39m    question[33m:[39m questionText[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2161212Z  [90m 324 | [39m    question_text[33m:[39m questionText[33m,[39m [90m// Also include raw field for backward compatibility[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2162897Z [31m[1m>[22m[39m[90m 325 | [39m    content[33m:[39m question[33m.[39mcontent [33m||[39m [32m""[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2163908Z  [90m     | [39m                      [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2164779Z  [90m 326 | [39m    answer[33m:[39m question[33m.[39mcorrect_answer[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2166025Z  [90m 327 | [39m    explanation[33m:[39m question[33m.[39mexplanation [33m||[39m [32m""[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2167483Z  [90m 328 | [39m    topicId[33m:[39m question[33m.[39mtopic_id[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2167969Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2169776Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:326:22[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'correct_answer' comes from an index signature, so it must be accessed with ['correct_answer'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2171364Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2172483Z [0m [90m 324 | [39m    question_text[33m:[39m questionText[33m,[39m [90m// Also include raw field for backward compatibility[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2173891Z  [90m 325 | [39m    content[33m:[39m question[33m.[39mcontent [33m||[39m [32m""[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2175255Z [31m[1m>[22m[39m[90m 326 | [39m    answer[33m:[39m question[33m.[39mcorrect_answer[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2176248Z  [90m     | [39m                     [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2177772Z  [90m 327 | [39m    explanation[33m:[39m question[33m.[39mexplanation [33m||[39m [32m""[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2178957Z  [90m 328 | [39m    topicId[33m:[39m question[33m.[39mtopic_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2180290Z  [90m 329 | [39m    categoryId[33m:[39m question[33m.[39mcategory_id[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2180886Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2182715Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:327:27[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'explanation' comes from an index signature, so it must be accessed with ['explanation'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2184006Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2184846Z [0m [90m 325 | [39m    content[33m:[39m question[33m.[39mcontent [33m||[39m [32m""[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2186030Z  [90m 326 | [39m    answer[33m:[39m question[33m.[39mcorrect_answer[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2187811Z [31m[1m>[22m[39m[90m 327 | [39m    explanation[33m:[39m question[33m.[39mexplanation [33m||[39m [32m""[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2188937Z  [90m     | [39m                          [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2189799Z  [90m 328 | [39m    topicId[33m:[39m question[33m.[39mtopic_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2190832Z  [90m 329 | [39m    categoryId[33m:[39m question[33m.[39mcategory_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2191917Z  [90m 330 | [39m    difficulty[33m:[39m question[33m.[39mdifficulty[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2192484Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2194272Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:328:23[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'topic_id' comes from an index signature, so it must be accessed with ['topic_id'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2195511Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2196186Z [0m [90m 326 | [39m    answer[33m:[39m question[33m.[39mcorrect_answer[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2199127Z  [90m 327 | [39m    explanation[33m:[39m question[33m.[39mexplanation [33m||[39m [32m""[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2200541Z [31m[1m>[22m[39m[90m 328 | [39m    topicId[33m:[39m question[33m.[39mtopic_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2201501Z  [90m     | [39m                      [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2202418Z  [90m 329 | [39m    categoryId[33m:[39m question[33m.[39mcategory_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2203506Z  [90m 330 | [39m    difficulty[33m:[39m question[33m.[39mdifficulty[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2204894Z  [90m 331 | [39m    type[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2205607Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2207678Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:329:26[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'category_id' comes from an index signature, so it must be accessed with ['category_id'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2208952Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2209879Z [0m [90m 327 | [39m    explanation[33m:[39m question[33m.[39mexplanation [33m||[39m [32m""[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2211108Z  [90m 328 | [39m    topicId[33m:[39m question[33m.[39mtopic_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2212377Z [31m[1m>[22m[39m[90m 329 | [39m    categoryId[33m:[39m question[33m.[39mcategory_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2213362Z  [90m     | [39m                         [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2214548Z  [90m 330 | [39m    difficulty[33m:[39m question[33m.[39mdifficulty[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2215841Z  [90m 331 | [39m    type[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2217721Z  [90m 332 | [39m    questionType[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2218483Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2220251Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:330:26[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'difficulty' comes from an index signature, so it must be accessed with ['difficulty'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2221543Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2222186Z [0m [90m 328 | [39m    topicId[33m:[39m question[33m.[39mtopic_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2223509Z  [90m 329 | [39m    categoryId[33m:[39m question[33m.[39mcategory_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2224840Z [31m[1m>[22m[39m[90m 330 | [39m    difficulty[33m:[39m question[33m.[39mdifficulty[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2225803Z  [90m     | [39m                         [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2230487Z  [90m 331 | [39m    type[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2232119Z  [90m 332 | [39m    questionType[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2233346Z  [90m 333 | [39m    options[33m:[39m question[33m.[39moptions[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2233776Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2235566Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:331:20[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'question_type' comes from an index signature, so it must be accessed with ['question_type'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2237156Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2237880Z [0m [90m 329 | [39m    categoryId[33m:[39m question[33m.[39mcategory_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2239007Z  [90m 330 | [39m    difficulty[33m:[39m question[33m.[39mdifficulty[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2240545Z [31m[1m>[22m[39m[90m 331 | [39m    type[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2241700Z  [90m     | [39m                   [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2242883Z  [90m 332 | [39m    questionType[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2244057Z  [90m 333 | [39m    options[33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2245247Z  [90m 334 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39moptions [33m===[39m [32m"string"[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2245861Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2247793Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:331:46[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'type' comes from an index signature, so it must be accessed with ['type'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2249025Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2249731Z [0m [90m 329 | [39m    categoryId[33m:[39m question[33m.[39mcategory_id[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2250790Z  [90m 330 | [39m    difficulty[33m:[39m question[33m.[39mdifficulty[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2252327Z [31m[1m>[22m[39m[90m 331 | [39m    type[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2253535Z  [90m     | [39m                                             [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2254797Z  [90m 332 | [39m    questionType[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2255929Z  [90m 333 | [39m    options[33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2257417Z  [90m 334 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39moptions [33m===[39m [32m"string"[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2258048Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2259847Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:332:28[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'question_type' comes from an index signature, so it must be accessed with ['question_type'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2261460Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2262145Z [0m [90m 330 | [39m    difficulty[33m:[39m question[33m.[39mdifficulty[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2263437Z  [90m 331 | [39m    type[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2265229Z [31m[1m>[22m[39m[90m 332 | [39m    questionType[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2266412Z  [90m     | [39m                           [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2267595Z  [90m 333 | [39m    options[33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2271592Z  [90m 334 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39moptions [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2272977Z  [90m 335 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39moptions)[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2273538Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2275129Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:332:54[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'type' comes from an index signature, so it must be accessed with ['type'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2276305Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2277274Z [0m [90m 330 | [39m    difficulty[33m:[39m question[33m.[39mdifficulty[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2278612Z  [90m 331 | [39m    type[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2280123Z [31m[1m>[22m[39m[90m 332 | [39m    questionType[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2281331Z  [90m     | [39m                                                     [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2282232Z  [90m 333 | [39m    options[33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2283440Z  [90m 334 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39moptions [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2284657Z  [90m 335 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39moptions)[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2285214Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2287208Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:333:23[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'options' comes from an index signature, so it must be accessed with ['options'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2288449Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2289414Z [0m [90m 331 | [39m    type[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2290941Z  [90m 332 | [39m    questionType[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2292331Z [31m[1m>[22m[39m[90m 333 | [39m    options[33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2293307Z  [90m     | [39m                      [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2294390Z  [90m 334 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39moptions [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2295611Z  [90m 335 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39moptions)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2296610Z  [90m 336 | [39m        [33m:[39m question[33m.[39moptions[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2297294Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2299058Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:334:25[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'options' comes from an index signature, so it must be accessed with ['options'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2300295Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2301339Z [0m [90m 332 | [39m    questionType[33m:[39m question[33m.[39mquestion_type [33m||[39m question[33m.[39mtype[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2302501Z  [90m 333 | [39m    options[33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2303856Z [31m[1m>[22m[39m[90m 334 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39moptions [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2305482Z  [90m     | [39m                        [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2306403Z  [90m 335 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39moptions)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2307812Z  [90m 336 | [39m        [33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2308633Z  [90m 337 | [39m      [33m:[39m [36mnull[39m[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2309017Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2310758Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:335:31[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'options' comes from an index signature, so it must be accessed with ['options'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2311980Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2312555Z [0m [90m 333 | [39m    options[33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2313877Z  [90m 334 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39moptions [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2315302Z [31m[1m>[22m[39m[90m 335 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39moptions)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2316309Z  [90m     | [39m                              [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2317366Z  [90m 336 | [39m        [33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2318114Z  [90m 337 | [39m      [33m:[39m [36mnull[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2319089Z  [90m 338 | [39m    correctAnswer[33m:[39m question[33m.[39mcorrect_answer[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2319642Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2321320Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:336:20[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'options' comes from an index signature, so it must be accessed with ['options'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2322496Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2323314Z [0m [90m 334 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39moptions [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2324435Z  [90m 335 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39moptions)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2325571Z [31m[1m>[22m[39m[90m 336 | [39m        [33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2326408Z  [90m     | [39m                   [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2327409Z  [90m 337 | [39m      [33m:[39m [36mnull[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2328351Z  [90m 338 | [39m    correctAnswer[33m:[39m question[33m.[39mcorrect_answer[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2329344Z  [90m 339 | [39m    tags[33m:[39m question[33m.[39mtags[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2329755Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2331604Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:338:29[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'correct_answer' comes from an index signature, so it must be accessed with ['correct_answer'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2332930Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2333444Z [0m [90m 336 | [39m        [33m:[39m question[33m.[39moptions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2334217Z  [90m 337 | [39m      [33m:[39m [36mnull[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2335444Z [31m[1m>[22m[39m[90m 338 | [39m    correctAnswer[33m:[39m question[33m.[39mcorrect_answer[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2336465Z  [90m     | [39m                            [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2337460Z  [90m 339 | [39m    tags[33m:[39m question[33m.[39mtags
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2338439Z  [90m 340 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39mtags [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2339591Z  [90m 341 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39mtags)[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2340114Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2341682Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:339:20[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'tags' comes from an index signature, so it must be accessed with ['tags'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2342820Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2343585Z [0m [90m 337 | [39m      [33m:[39m [36mnull[39m[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2344568Z  [90m 338 | [39m    correctAnswer[33m:[39m question[33m.[39mcorrect_answer[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2345639Z [31m[1m>[22m[39m[90m 339 | [39m    tags[33m:[39m question[33m.[39mtags
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2346408Z  [90m     | [39m                   [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2347707Z  [90m 340 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39mtags [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2348820Z  [90m 341 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39mtags)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2349726Z  [90m 342 | [39m        [33m:[39m question[33m.[39mtags[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2350124Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2351921Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:340:25[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'tags' comes from an index signature, so it must be accessed with ['tags'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2353145Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2353889Z [0m [90m 338 | [39m    correctAnswer[33m:[39m question[33m.[39mcorrect_answer[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2354836Z  [90m 339 | [39m    tags[33m:[39m question[33m.[39mtags
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2356100Z [31m[1m>[22m[39m[90m 340 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39mtags [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2357483Z  [90m     | [39m                        [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2358457Z  [90m 341 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39mtags)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2359382Z  [90m 342 | [39m        [33m:[39m question[33m.[39mtags
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2360052Z  [90m 343 | [39m      [33m:[39m [][33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2360394Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2362033Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:341:31[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'tags' comes from an index signature, so it must be accessed with ['tags'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2363223Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2363742Z [0m [90m 339 | [39m    tags[33m:[39m question[33m.[39mtags
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2364815Z  [90m 340 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39mtags [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2366229Z [31m[1m>[22m[39m[90m 341 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39mtags)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2367471Z  [90m     | [39m                              [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2368216Z  [90m 342 | [39m        [33m:[39m question[33m.[39mtags
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2368909Z  [90m 343 | [39m      [33m:[39m [][33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2369727Z  [90m 344 | [39m    is_active[33m:[39m question[33m.[39mis_active[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2370245Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2371897Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:342:20[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'tags' comes from an index signature, so it must be accessed with ['tags'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2373025Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2373918Z [0m [90m 340 | [39m      [33m?[39m [36mtypeof[39m question[33m.[39mtags [33m===[39m [32m"string"[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2375080Z  [90m 341 | [39m        [33m?[39m [33mJSON[39m[33m.[39mparse(question[33m.[39mtags)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2376118Z [31m[1m>[22m[39m[90m 342 | [39m        [33m:[39m question[33m.[39mtags
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2377282Z  [90m     | [39m                   [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2377978Z  [90m 343 | [39m      [33m:[39m [][33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2378841Z  [90m 344 | [39m    is_active[33m:[39m question[33m.[39mis_active[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2379837Z  [90m 345 | [39m    created_at[33m:[39m question[33m.[39mcreated_at[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2380319Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2382092Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:344:25[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'is_active' comes from an index signature, so it must be accessed with ['is_active'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2383614Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2384154Z [0m [90m 342 | [39m        [33m:[39m question[33m.[39mtags
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2384921Z  [90m 343 | [39m      [33m:[39m [][33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2385994Z [31m[1m>[22m[39m[90m 344 | [39m    is_active[33m:[39m question[33m.[39mis_active[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2387243Z  [90m     | [39m                        [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2388124Z  [90m 345 | [39m    created_at[33m:[39m question[33m.[39mcreated_at
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2389156Z  [90m 346 | [39m      [33m?[39m [36mnew[39m [33mDate[39m(question[33m.[39mcreated_at)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2390146Z  [90m 347 | [39m      [33m:[39m [36mnew[39m [33mDate[39m()[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2390586Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2392545Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:345:26[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'created_at' comes from an index signature, so it must be accessed with ['created_at'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2393952Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2394450Z [0m [90m 343 | [39m      [33m:[39m [][33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2395341Z  [90m 344 | [39m    is_active[33m:[39m question[33m.[39mis_active[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2396418Z [31m[1m>[22m[39m[90m 345 | [39m    created_at[33m:[39m question[33m.[39mcreated_at
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2397570Z  [90m     | [39m                         [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2398520Z  [90m 346 | [39m      [33m?[39m [36mnew[39m [33mDate[39m(question[33m.[39mcreated_at)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2399452Z  [90m 347 | [39m      [33m:[39m [36mnew[39m [33mDate[39m()[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2400343Z  [90m 348 | [39m    updated_at[33m:[39m question[33m.[39mupdated_at[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2400811Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2402528Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:346:27[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'created_at' comes from an index signature, so it must be accessed with ['created_at'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2403766Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2404362Z [0m [90m 344 | [39m    is_active[33m:[39m question[33m.[39mis_active[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2405324Z  [90m 345 | [39m    created_at[33m:[39m question[33m.[39mcreated_at
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2406572Z [31m[1m>[22m[39m[90m 346 | [39m      [33m?[39m [36mnew[39m [33mDate[39m(question[33m.[39mcreated_at)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2407908Z  [90m     | [39m                          [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2408752Z  [90m 347 | [39m      [33m:[39m [36mnew[39m [33mDate[39m()[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2409707Z  [90m 348 | [39m    updated_at[33m:[39m question[33m.[39mupdated_at
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2410894Z  [90m 349 | [39m      [33m?[39m [36mnew[39m [33mDate[39m(question[33m.[39mupdated_at)[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2411443Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2413046Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:348:26[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'updated_at' comes from an index signature, so it must be accessed with ['updated_at'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2414269Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2414948Z [0m [90m 346 | [39m      [33m?[39m [36mnew[39m [33mDate[39m(question[33m.[39mcreated_at)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2415910Z  [90m 347 | [39m      [33m:[39m [36mnew[39m [33mDate[39m()[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2417292Z [31m[1m>[22m[39m[90m 348 | [39m    updated_at[33m:[39m question[33m.[39mupdated_at
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2418217Z  [90m     | [39m                         [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2419162Z  [90m 349 | [39m      [33m?[39m [36mnew[39m [33mDate[39m(question[33m.[39mupdated_at)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2420130Z  [90m 350 | [39m      [33m:[39m [36mnew[39m [33mDate[39m()[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2421006Z  [90m 351 | [39m    [90m// Include joined data if available[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2421788Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2423547Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:349:27[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'updated_at' comes from an index signature, so it must be accessed with ['updated_at'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2424798Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2425363Z [0m [90m 347 | [39m      [33m:[39m [36mnew[39m [33mDate[39m()[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2426213Z  [90m 348 | [39m    updated_at[33m:[39m question[33m.[39mupdated_at
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2427682Z [31m[1m>[22m[39m[90m 349 | [39m      [33m?[39m [36mnew[39m [33mDate[39m(question[33m.[39mupdated_at)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2428667Z  [90m     | [39m                          [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2429477Z  [90m 350 | [39m      [33m:[39m [36mnew[39m [33mDate[39m()[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2430472Z  [90m 351 | [39m    [90m// Include joined data if available[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2431404Z  [90m 352 | [39m    category[33m:[39m question[33m.[39mcategories[33m,[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2431927Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2433734Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:352:24[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'categories' comes from an index signature, so it must be accessed with ['categories'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2435012Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2435559Z [0m [90m 350 | [39m      [33m:[39m [36mnew[39m [33mDate[39m()[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2436421Z  [90m 351 | [39m    [90m// Include joined data if available[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2437854Z [31m[1m>[22m[39m[90m 352 | [39m    category[33m:[39m question[33m.[39mcategories[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2438793Z  [90m     | [39m                       [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2439604Z  [90m 353 | [39m    topic[33m:[39m question[33m.[39mtopics[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2440606Z  [90m 354 | [39m    learningCard[33m:[39m question[33m.[39mlearning_cards[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2441445Z  [90m 355 | [39m  }[33m;[39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2441739Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2443432Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:353:21[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'topics' comes from an index signature, so it must be accessed with ['topics'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2444673Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2445244Z [0m [90m 351 | [39m    [90m// Include joined data if available[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2446155Z  [90m 352 | [39m    category[33m:[39m question[33m.[39mcategories[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2447581Z [31m[1m>[22m[39m[90m 353 | [39m    topic[33m:[39m question[33m.[39mtopics[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2448502Z  [90m     | [39m                    [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2449478Z  [90m 354 | [39m    learningCard[33m:[39m question[33m.[39mlearning_cards[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2450312Z  [90m 355 | [39m  }[33m;[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2450791Z  [90m 356 | [39m}[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2451038Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2452920Z [4m[34mlibs/utilities/src/lib/api/questions-handler.ts:354:28[39m[24m - [31m[1merror[22m[39m [90mTS4111[39m: Property 'learning_cards' comes from an index signature, so it must be accessed with ['learning_cards'].
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2454228Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2454847Z [0m [90m 352 | [39m    category[33m:[39m question[33m.[39mcategories[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2455769Z  [90m 353 | [39m    topic[33m:[39m question[33m.[39mtopics[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2457258Z [31m[1m>[22m[39m[90m 354 | [39m    learningCard[33m:[39m question[33m.[39mlearning_cards[33m,[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2458229Z  [90m     | [39m                           [31m[1m^[22m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2458846Z  [90m 355 | [39m  }[33m;[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2459293Z  [90m 356 | [39m}
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2459677Z  [90m 357 | [39m[0m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2459895Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2460038Z Found 33 errors.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2460500Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2461026Z [7m[1m[31m NX [39m[22m[27m  [31mFound type errors. See above.[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2461478Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2461735Z Pass --verbose to see the stacktrace.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:26.2462052Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1322635Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1327673Z ##[group]✅ [2m> [22m[2mnx run[22m website:build:production
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1328226Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1329720Z [@sentry/nextjs] DEPRECATION WARNING: disableLogger is deprecated and will be removed in a future version. Use webpack.treeshake.removeDebugLogging instead. (Not supported with Turbopack.)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1332106Z [@sentry/nextjs] DEPRECATION WARNING: automaticVercelMonitors is deprecated and will be removed in a future version. Use webpack.automaticVercelMonitors instead. (Not supported with Turbopack.)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1333886Z [33m[1m⚠[22m[39m No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1334758Z [1m[38;2;173;127;168m▲ Next.js 16.2.3[39m[22m (Turbopack)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1335152Z - Experiments (use with caution):
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1335480Z   · clientTraceMetadata
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1335803Z   [1m✓[22m optimizeCss
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1336091Z   · optimizePackageImports
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1336254Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1336534Z [37m[1m [22m[39m Creating an optimized production build ...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1338455Z [@sentry/nextjs] DEPRECATION WARNING: disableLogger is deprecated and will be removed in a future version. Use webpack.treeshake.removeDebugLogging instead. (Not supported with Turbopack.)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1339995Z [@sentry/nextjs] DEPRECATION WARNING: automaticVercelMonitors is deprecated and will be removed in a future version. Use webpack.automaticVercelMonitors instead. (Not supported with Turbopack.)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1341010Z [32m[1m✓[22m[39m Compiled successfully in 22.5s
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1341594Z [37m[1m [22m[39m Running next.config.js provided runAfterProductionCompile ...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1342203Z [32m[1m✓[22m[39m Completed runAfterProductionCompile in 260ms
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1342655Z [37m[1m [22m[39m Running TypeScript ...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1343065Z [37m[1m [22m[39m Finished TypeScript in 8.6s ...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1343523Z [37m[1m [22m[39m Collecting page data using 3 workers ...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1344044Z ✅ Supabase server initialized successfully with service role key!
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1344593Z ✅ Supabase server initialized successfully with service role key!
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1345126Z ✅ Supabase server initialized successfully with service role key!
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1345662Z ✅ Supabase server initialized successfully with service role key!
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1346217Z [37m[1m [22m[39m Generating static pages using 3 workers (0/75) ...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1349044Z [37m[1m [22m[39m Generating static pages using 3 workers (18/75) 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1349690Z [37m[1m [22m[39m Generating static pages using 3 workers (37/75) 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1351336Z ✅ Supabase server initialized successfully with service role key!
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1353003Z ✅ Supabase server initialized successfully with service role key!
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1354551Z [37m[1m [22m[39m Generating static pages using 3 workers (56/75) 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1355568Z [32m[1m✓[22m[39m Generating static pages using 3 workers (75/75) in 162ms
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1356247Z [37m[1m [22m[39m Finalizing page optimization ...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1356477Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1356873Z [4mRoute (app)[24m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1357156Z ┌ ƒ /
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1357370Z ├ ƒ /_not-found
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1357624Z ├ ƒ /admin/[[...path]]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1357864Z ├ ƒ /api-docs
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1358073Z ├ ƒ /api/auth
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1358315Z ├ ƒ /api/auth/[...nextauth]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1358628Z ├ ƒ /api/auth/clear-cookie
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1358901Z ├ ƒ /api/auth/session
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1359157Z ├ ƒ /api/auth/set-cookie
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1359681Z ├ ƒ /api/cards
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1359917Z ├ ƒ /api/cards/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1360198Z ├ ƒ /api/cards/[id]/categories
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1360474Z ├ ƒ /api/categories
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1360722Z ├ ƒ /api/categories/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1361021Z ├ ƒ /api/categories/[id]/topics
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1361363Z ├ ƒ /api/categories/question-counts
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1361666Z ├ ƒ /api/check-project
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1361924Z ├ ƒ /api/code/execute
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1362179Z ├ ƒ /api/dashboard/stats
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1362434Z ├ ƒ /api/flashcards
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1362685Z ├ ƒ /api/flashcards/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1362946Z ├ ƒ /api/flashcards/add
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1363223Z ├ ƒ /api/frontend-tasks/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1363589Z ├ ƒ /api/guided-learning/plan-details/[planId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1363964Z ├ ƒ /api/guided-learning/plans
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1364447Z ├ ƒ /api/guided-learning/plans/[planId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1364860Z ├ ƒ /api/guided-learning/plans/[planId]/sections
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1365342Z ├ ƒ /api/guided-learning/plans/[planId]/sections/[sectionId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1365730Z ├ ƒ /api/learning-paths
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1366012Z ├ ƒ /api/learning-paths/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1366347Z ├ ƒ /api/learning-paths/[id]/resources
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1366865Z ├ ƒ /api/plans
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1367128Z ├ ƒ /api/plans/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1367394Z ├ ƒ /api/plans/[id]/cards
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1367705Z ├ ƒ /api/plans/[id]/categories
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1367999Z ├ ƒ /api/plans/[id]/hierarchy
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1368291Z ├ ƒ /api/plans/[id]/questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1368576Z ├ ƒ /api/plans/[id]/topics
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1368891Z ├ ƒ /api/progress/free-style/sync
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1369182Z ├ ƒ /api/progress/get
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1369493Z ├ ƒ /api/progress/guided-learning/load
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1369865Z ├ ƒ /api/progress/guided-learning/sync
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1370169Z ├ ƒ /api/progress/save
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1370415Z ├ ƒ /api/questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1370671Z ├ ƒ /api/questions/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1370927Z ├ ƒ /api/questions/add
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1371212Z ├ ƒ /api/questions/bulk-topics
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1371592Z ├ ƒ /api/questions/by-learning-path/[learningPath]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1371984Z ├ ƒ /api/questions/by-topic/[topicId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1372295Z ├ ƒ /api/questions/count
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1372596Z ├ ƒ /api/questions/learning-paths
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1372972Z ├ ƒ /api/questions/question-topics/[questionId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1373303Z ├ ƒ /api/questions/stats
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1373572Z ├ ƒ /api/questions/unified
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1373876Z ├ ƒ /api/questions/unified/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1374201Z ├ ƒ /api/questions/update-counts
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1374529Z ├ ƒ /api/questions/validate-answer
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1374815Z ├ ƒ /api/sections
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1375073Z ├ ƒ /api/sections/auto-assign
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1375379Z ├ ƒ /api/seed-plan-questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1375637Z ├ ƒ /api/swagger
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1375865Z ├ ƒ /api/topics
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1376100Z ├ ƒ /api/topics/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1376382Z ├ ƒ /api/topics/[id]/questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1376894Z ├ ƒ /api/user/learning-plans
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1377326Z ├ ƒ /api/user/preferences
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1377583Z ├ ƒ /api/users
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1377796Z ├ ƒ /auth
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1378020Z ├ ƒ /auth/callback
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1378306Z ├ ƒ /browse-practice-questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1378610Z ├ ƒ /categories-topics
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1378892Z ├ ƒ /custom-practice/[planId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1379172Z ├ ƒ /custom-roadmap
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1379405Z ├ ƒ /dashboard
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1379659Z ├ ƒ /features/guided-learning
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1379996Z ├ ƒ /features/guided-learning/[planId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1380286Z ├ ƒ /flashcards
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1380506Z ├ ƒ /free-style
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1380766Z ├ ƒ /free-style-practice
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1381032Z ├ ƒ /free-style/cart
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1381296Z ├ ƒ /free-style/path/[pathId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1381742Z ├ ƒ /frontend-tasks
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1381993Z ├ ƒ /frontend-tasks/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1382237Z ├ ƒ /get-started
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1382472Z ├ ƒ /guided-practice
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1382738Z ├ ƒ /guided-practice-minimal
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1383032Z ├ ƒ /guided-practice-simple
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1383305Z ├ ƒ /learning-mode
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1383544Z ├ ƒ /learning-paths
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1383794Z ├ ƒ /learning-paths/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1384137Z ├ ƒ /learning-paths/[id]/sections/[sectionId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1384479Z ├ ƒ /lib/network/routes/auth
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1384813Z ├ ƒ /lib/network/routes/auth/[...nextauth]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1385179Z ├ ƒ /lib/network/routes/auth/clear-cookie
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1385530Z ├ ƒ /lib/network/routes/auth/session
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1385877Z ├ ƒ /lib/network/routes/auth/set-cookie
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1386314Z ├ ƒ /lib/network/routes/cards
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1386950Z ├ ƒ /lib/network/routes/cards/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1387380Z ├ ƒ /lib/network/routes/cards/[id]/categories
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1387741Z ├ ƒ /lib/network/routes/categories
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1388084Z ├ ƒ /lib/network/routes/categories/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1388464Z ├ ƒ /lib/network/routes/categories/[id]/topics
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1388877Z ├ ƒ /lib/network/routes/categories/question-counts
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1389269Z ├ ƒ /lib/network/routes/check-project
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1389613Z ├ ƒ /lib/network/routes/code/execute
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1389953Z ├ ƒ /lib/network/routes/dashboard/stats
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1390288Z ├ ƒ /lib/network/routes/flashcards
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1390623Z ├ ƒ /lib/network/routes/flashcards/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1390969Z ├ ƒ /lib/network/routes/flashcards/add
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1391409Z ├ ƒ /lib/network/routes/guided-learning/plan-details/[planId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1391855Z ├ ƒ /lib/network/routes/guided-learning/plans
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1392292Z ├ ƒ /lib/network/routes/guided-learning/plans/[planId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1392797Z ├ ƒ /lib/network/routes/guided-learning/plans/[planId]/sections
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1393384Z ├ ƒ /lib/network/routes/guided-learning/plans/[planId]/sections/[sectionId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1393855Z ├ ƒ /lib/network/routes/learning-paths
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1394228Z ├ ƒ /lib/network/routes/learning-paths/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1394649Z ├ ƒ /lib/network/routes/learning-paths/[id]/resources
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1395008Z ├ ƒ /lib/network/routes/plans
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1395327Z ├ ƒ /lib/network/routes/plans/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1395673Z ├ ƒ /lib/network/routes/plans/[id]/cards
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1396049Z ├ ƒ /lib/network/routes/plans/[id]/categories
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1396432Z ├ ƒ /lib/network/routes/plans/[id]/hierarchy
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1397072Z ├ ƒ /lib/network/routes/plans/[id]/questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1397458Z ├ ƒ /lib/network/routes/plans/[id]/topics
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1397871Z ├ ƒ /lib/network/routes/progress/free-style/sync
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1398246Z ├ ƒ /lib/network/routes/progress/get
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1398670Z ├ ƒ /lib/network/routes/progress/guided-learning/load
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1399111Z ├ ƒ /lib/network/routes/progress/guided-learning/sync
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1399490Z ├ ƒ /lib/network/routes/progress/save
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1399827Z ├ ƒ /lib/network/routes/questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1400163Z ├ ƒ /lib/network/routes/questions/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1400503Z ├ ƒ /lib/network/routes/questions/add
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1400871Z ├ ƒ /lib/network/routes/questions/bulk-topics
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1401354Z ├ ƒ /lib/network/routes/questions/by-learning-path/[learningPath]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1401843Z ├ ƒ /lib/network/routes/questions/by-topic/[topicId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1402232Z ├ ƒ /lib/network/routes/questions/count
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1402623Z ├ ƒ /lib/network/routes/questions/learning-paths
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1403114Z ├ ƒ /lib/network/routes/questions/question-topics/[questionId]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1403538Z ├ ƒ /lib/network/routes/questions/stats
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1404095Z ├ ƒ /lib/network/routes/questions/unified
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1404482Z ├ ƒ /lib/network/routes/questions/unified/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1404879Z ├ ƒ /lib/network/routes/questions/update-counts
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1405290Z ├ ƒ /lib/network/routes/questions/validate-answer
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1405660Z ├ ƒ /lib/network/routes/sections
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1406011Z ├ ƒ /lib/network/routes/sections/auto-assign
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1406391Z ├ ƒ /lib/network/routes/seed-plan-questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1407059Z ├ ƒ /lib/network/routes/topics
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1407424Z ├ ƒ /lib/network/routes/topics/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1407801Z ├ ƒ /lib/network/routes/topics/[id]/questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1408201Z ├ ƒ /lib/network/routes/user/learning-plans
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1408577Z ├ ƒ /lib/network/routes/user/preferences
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1408903Z ├ ƒ /lib/network/routes/users
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1409358Z ├ ƒ /my-plans
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1409611Z ├ ƒ /problem-solving
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1409879Z ├ ƒ /problem-solving/[id]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1410142Z ├ ƒ /questions
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1410356Z ├ ƒ /settings
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1410592Z ├ ƒ /test-notifications
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1410848Z └ ƒ /test-supabase
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1410974Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1410981Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1411115Z ƒ Proxy (Middleware)
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1411246Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1411434Z ƒ  (Dynamic)  server-rendered on demand
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:44.1411628Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0840954Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0842645Z ##[group]✅ [2m> [22m[2mnx run[22m utilities:build
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0843454Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0844604Z [36mvite v7.3.2 [32mbuilding client environment for production...[36m[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0845703Z transforming...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0846524Z [32m✓[39m 243 modules transformed.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0847749Z [33m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0849262Z [1m(!)[22m outDir [37m[2m/home/runner/work/elzatona_web/elzatona_web/dist/libs/utilities[22m[33m is not inside project root and will not be emptied.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0850453Z Use --emptyOutDir to override.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0850906Z [39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0851249Z rendering chunks...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0851663Z computing gzip size...
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0852803Z [2m../../dist/libs/utilities/[22m[36mindex.js  [39m[1m[33m886.28 kB[39m[22m[2m │ gzip: 188.98 kB[22m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0854358Z [2m../../dist/libs/utilities/[22m[36mindex.cjs  [39m[1m[2m413.12 kB[22m[1m[22m[2m │ gzip: 113.46 kB[22m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0855316Z [32m✓ built in 1.80s[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0863863Z ##[endgroup]
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0864368Z [2m[31m[39m[22m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0864707Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0866069Z [7m[1m[31m NX [39m[22m[27m  [31mRunning target [1mbuild[22m for project admin and [1m4[22m tasks it depends on failed[39m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0867167Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0867487Z [2mFailed tasks:[22m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0867782Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0868044Z [2m-[22m common-ui:build
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0868339Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0868978Z [2mHint: run the command with[22m --verbose [2mfor more details.[22m
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.0869512Z 
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.1324060Z ##[error]Process completed with exit code 130.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.1413137Z Post job cleanup.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.2863454Z Pruning is unnecessary.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.3004239Z Post job cleanup.
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4069927Z [command]/usr/bin/git version
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4120159Z git version 2.53.0
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4167082Z Temporarily overriding HOME='/home/runner/work/_temp/f14f2dee-4e8f-40c8-8d09-114c525df003' before making global git config changes
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4168687Z Adding repository directory to the temporary git global config as a safe directory
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4173537Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/elzatona_web/elzatona_web
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4212859Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4247880Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4497336Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4517803Z http.https://github.com/.extraheader
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4530575Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4560695Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4780654Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.4811586Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.5151143Z Cleaning up orphan processes
+Build Admin App	UNKNOWN STEP	2026-05-07T07:42:50.5495128Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/setup-node@v4, pnpm/action-setup@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

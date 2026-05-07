@@ -31,8 +31,8 @@ function normalizeForMatch(str: string): string {
     .toLowerCase()
     .trim()
     .replace(/s$/, "") // Remove trailing 's' for plural matching
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "");
+    .replaceAll(/\s+/g, "-")
+    .replaceAll(/[^a-z0-9-]/g, "");
 }
 
 /**
@@ -102,7 +102,7 @@ async function _lookupEntityBySlug(
   const match = (entities as any[]).find((e) => {
     const eSlug = e.slug?.toLowerCase() || "";
     const eName = e.name?.toLowerCase() || "";
-    const eNameSlug = eName.replace(/\s+/g, "-");
+    const eNameSlug = eName.replaceAll(/\s+/g, "-");
     const eSlugNorm = normalizeForMatch(eSlug);
     const eNameNorm = normalizeForMatch(eName);
 
@@ -318,6 +318,22 @@ function transformQuestionForFrontend(question: Record<string, any>) {
     question.text ||
     "";
 
+  let parsedOptions = null;
+  if (question.options) {
+    parsedOptions =
+      typeof question.options === "string"
+        ? JSON.parse(question.options)
+        : question.options;
+  }
+
+  let parsedTags = [];
+  if (question.tags) {
+    parsedTags =
+      typeof question.tags === "string"
+        ? JSON.parse(question.tags)
+        : question.tags;
+  }
+
   return {
     id: question.id,
     question: questionText,
@@ -330,17 +346,9 @@ function transformQuestionForFrontend(question: Record<string, any>) {
     difficulty: question.difficulty,
     type: question.question_type || question.type,
     questionType: question.question_type || question.type,
-    options: question.options
-      ? typeof question.options === "string"
-        ? JSON.parse(question.options)
-        : question.options
-      : null,
+    options: parsedOptions,
     correctAnswer: question.correct_answer,
-    tags: question.tags
-      ? typeof question.tags === "string"
-        ? JSON.parse(question.tags)
-        : question.tags
-      : [],
+    tags: parsedTags,
     is_active: question.is_active,
     created_at: question.created_at
       ? new Date(question.created_at)

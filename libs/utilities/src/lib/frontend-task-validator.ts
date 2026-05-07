@@ -161,8 +161,9 @@ class ReactValidator extends BaseValidator {
     const { input } = testCase;
     if (input === "initial") return root.textContent?.includes("0") ? "0" : "";
 
-    const btnLabel =
-      input === "increment" ? "+" : input === "decrement" ? "-" : input;
+    let btnLabel = input;
+    if (input === "increment") btnLabel = "+";
+    else if (input === "decrement") btnLabel = "-";
     const btn = Array.from(root.querySelectorAll("button")).find((b) =>
       b.textContent?.toLowerCase().includes(btnLabel.toLowerCase()),
     );
@@ -180,7 +181,7 @@ class ReactValidator extends BaseValidator {
  * Main validator facade
  */
 export class FrontendTaskValidator {
-  private reactValidator = new ReactValidator();
+  private readonly reactValidator = new ReactValidator();
 
   async validateReactComponent(
     userCode: string,

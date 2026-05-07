@@ -11,7 +11,6 @@ interface HeaderProps {
   handleSave: () => void;
   onCancel: () => void;
 }
-
 export const FrontendTaskEditorHeader: React.FC<HeaderProps> = ({
   isDark,
   theme,
@@ -20,64 +19,71 @@ export const FrontendTaskEditorHeader: React.FC<HeaderProps> = ({
   formData,
   handleSave,
   onCancel,
-}) => (
-  <div
-    className={`border-b px-6 py-4 transition-colors duration-300 ${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"}`}
-  >
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-4">
-        <button
-          onClick={onCancel}
-          className={`p-2 transition-colors ${isDark ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"}`}
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </button>
-        <div className="flex items-center gap-3">
-          <div
-            className={`w-8 h-8 rounded-lg flex items-center justify-center ${isDark ? "bg-gradient-to-r from-purple-500 to-indigo-500" : "bg-gradient-to-r from-blue-500 to-purple-500"}`}
+}) => {
+  const getHeaderTitle = () => {
+    const titles: Record<string, string> = {
+      create: "Create Task",
+      edit: "Edit Task",
+      view: "View Task",
+    };
+    return titles[mode] || "Task Editor";
+  };
+
+  return (
+    <div
+      className={`border-b px-6 py-4 transition-colors duration-300 ${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"}`}
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={onCancel}
+            className={`p-2 transition-colors ${isDark ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"}`}
           >
-            <Code className="w-4 h-4" />
-          </div>
-          <div>
-            <h1
-              className={`text-xl font-bold ${isDark ? "text-white" : "text-gray-900"}`}
-            >
-              {mode === "create"
-                ? "Create Task"
-                : mode === "edit"
-                  ? "Edit Task"
-                  : "View Task"}
-            </h1>
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div className="flex items-center gap-3">
             <div
-              className={`flex items-center gap-2 text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}
+              className={`w-8 h-8 rounded-lg flex items-center justify-center ${isDark ? "bg-gradient-to-r from-purple-500 to-indigo-500" : "bg-gradient-to-r from-blue-500 to-purple-500"}`}
             >
-              <span>React</span>
-              <span>•</span>
-              <span>{formData.difficulty}</span>
+              <Code className="w-4 h-4" />
+            </div>
+            <div>
+              <h1
+                className={`text-xl font-bold ${isDark ? "text-white" : "text-gray-900"}`}
+              >
+                {getHeaderTitle()}
+              </h1>
+              <div
+                className={`flex items-center gap-2 text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}
+              >
+                <span>React</span>
+                <span>•</span>
+                <span>{formData.difficulty}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex items-center gap-3">
-        <ThemeToggle theme={theme} setTheme={setTheme} isDark={isDark} />
-        {mode !== "view" && (
+        <div className="flex items-center gap-3">
+          <ThemeToggle theme={theme} setTheme={setTheme} isDark={isDark} />
+          {mode !== "view" && (
+            <button
+              onClick={handleSave}
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center gap-2"
+            >
+              <Save className="w-4 h-4" /> Save
+            </button>
+          )}
           <button
-            onClick={handleSave}
-            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center gap-2"
+            onClick={onCancel}
+            className={`px-4 py-2 rounded-lg ${isDark ? "bg-gray-700 text-white" : "bg-gray-200 text-gray-900"}`}
           >
-            <Save className="w-4 h-4" /> Save
+            Cancel
           </button>
-        )}
-        <button
-          onClick={onCancel}
-          className={`px-4 py-2 rounded-lg ${isDark ? "bg-gray-700 text-white" : "bg-gray-200 text-gray-900"}`}
-        >
-          Cancel
-        </button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 interface MainContentProps {
   isDark: boolean;
