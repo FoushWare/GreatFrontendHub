@@ -36,7 +36,7 @@ jobs:
       - name: Run Admin unit tests
         run: npx vitest run apps/admin/src --reporter=verbose
         env:
-          NODE_OPTIONS: "--max-old-space-size=2048"
+          NODE_OPTIONS: "--max-old-space-size=4096"
 
   build-admin:
     name: Build Admin App
@@ -70,7 +70,7 @@ jobs:
           echo "🏗️ Building admin app for E2E tests..."
           pnpm exec nx build admin --skip-nx-cache
         env:
-          NODE_OPTIONS: "--max-old-space-size=2048"
+          NODE_OPTIONS: "--max-old-space-size=4096"
           NEXT_TELEMETRY_DISABLED: "1"
           APP_ENV: "test"
           NEXT_PUBLIC_APP_ENV: "test"
@@ -170,7 +170,7 @@ jobs:
             sleep 1
           done
         env:
-          NODE_OPTIONS: "--max-old-space-size=2048"
+          NODE_OPTIONS: "--max-old-space-size=4096"
           APP_ENV: "test"
           NEXT_PUBLIC_APP_ENV: "test"
           NODE_ENV: "production"
@@ -185,7 +185,7 @@ jobs:
           # Sharding parallelizes tests across multiple runners
           npx playwright test --config=apps/admin/tests/config/playwright.config.ts --project=chromium --shard=${{ matrix.shard }}/${{ strategy.job-total }}
         env:
-          NODE_OPTIONS: "--max-old-space-size=2048"
+          NODE_OPTIONS: "--max-old-space-size=4096"
           PLAYWRIGHT_WORKERS: "2"
           CI: "true"
           APP_ENV: "test"

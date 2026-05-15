@@ -44,7 +44,7 @@ export function getPreferredImageFormat(): string {
   // Check browser support for WebP
   if (typeof window !== "undefined") {
     const canvas = document.createElement("canvas");
-    return canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0
+    return canvas.toDataURL("image/webp").startsWith("data:image/webp")
       ? "webp"
       : "jpeg";
   }

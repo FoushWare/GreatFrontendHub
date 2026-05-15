@@ -7,14 +7,16 @@ import {
   SelectGroup,
 } from "./SharedEditorComponents";
 
+import { ProblemSolvingTaskFormData } from "@elzatona/types";
+
 interface HeaderProps {
-  isDark: boolean;
-  theme: "light" | "dark" | "system";
-  setTheme: (theme: "light" | "dark" | "system") => void;
-  isEditing: boolean;
-  formData: any;
-  handleSave: () => void;
-  onCancel: () => void;
+  readonly isDark: boolean;
+  readonly theme: "light" | "dark" | "system";
+  readonly setTheme: (theme: "light" | "dark" | "system") => void;
+  readonly isEditing: boolean;
+  readonly formData: ProblemSolvingTaskFormData;
+  readonly handleSave: () => void;
+  readonly onCancel: () => void;
 }
 
 export const ProblemSolvingEditorHeader: React.FC<HeaderProps> = ({
@@ -73,15 +75,15 @@ export const ProblemSolvingEditorHeader: React.FC<HeaderProps> = ({
 );
 
 interface MainContentProps {
-  isDark: boolean;
-  leftPanelWidth: number;
-  rightPanelWidth: number;
-  handleMouseDown: (e: React.MouseEvent) => void;
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-  formData: any;
-  setFormData: (data: any) => void;
-  children?: React.ReactNode;
+  readonly isDark: boolean;
+  readonly leftPanelWidth: number;
+  readonly rightPanelWidth: number;
+  readonly handleMouseDown: (e: React.MouseEvent) => void;
+  readonly activeTab: string;
+  readonly setActiveTab: (tab: string) => void;
+  readonly formData: ProblemSolvingTaskFormData;
+  readonly setFormData: (data: ProblemSolvingTaskFormData) => void;
+  readonly children?: React.ReactNode;
 }
 
 export const ProblemSolvingEditorMainContent: React.FC<MainContentProps> = ({
@@ -135,7 +137,10 @@ export const ProblemSolvingEditorMainContent: React.FC<MainContentProps> = ({
             value={formData.difficulty}
             options={["easy", "medium", "hard"]}
             onChange={(v: string) =>
-              setFormData({ ...formData, difficulty: v })
+              setFormData({
+                ...formData,
+                difficulty: v as "easy" | "medium" | "hard",
+              })
             }
             isDark={isDark}
           />

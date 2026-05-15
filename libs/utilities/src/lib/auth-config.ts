@@ -36,34 +36,39 @@ export async function authorizeCredentials(credentials: any) {
   const email = credentials.email.toLowerCase().trim();
   const password = credentials.password.trim();
 
-  if (email.endsWith("@elzatona.com") && password === "dev-access") {
-    return {
-      id: "dev-user-id",
-      email: credentials.email,
-      name: "Developer Access",
-      role: "developer",
-    };
-  }
+  // Mock user database for development and testing
+  const mockUsers = [
+    {
+      condition: email.endsWith("@elzatona.com") && password === "dev-access",
+      user: {
+        id: "dev-user-id",
+        email: credentials.email,
+        name: "Developer Access",
+        role: "developer",
+      },
+    },
+    {
+      condition: email === "admin@test.com" && password === "admin-pass",
+      user: {
+        id: "admin-user-id",
+        email: "admin@test.com",
+        name: "Test Admin",
+        role: "admin",
+      },
+    },
+    {
+      condition: email === "guest@test.com" && password === "guest-pass",
+      user: {
+        id: "guest-user-id",
+        email: "guest@test.com",
+        name: "Test Guest",
+        role: "guest",
+      },
+    },
+  ];
 
-  if (email === "admin@test.com" && password === "admin-pass") {
-    return {
-      id: "admin-user-id",
-      email: "admin@test.com",
-      name: "Test Admin",
-      role: "admin",
-    };
-  }
-
-  if (email === "guest@test.com" && password === "guest-pass") {
-    return {
-      id: "guest-user-id",
-      email: "guest@test.com",
-      name: "Test Guest",
-      role: "guest",
-    };
-  }
-
-  return null;
+  const matched = mockUsers.find((m) => m.condition);
+  return matched ? matched.user : null;
 }
 
 export const authOptions: NextAuthOptions = {

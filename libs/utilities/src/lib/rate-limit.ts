@@ -54,28 +54,14 @@ export function rateLimit(options: RateLimitOptions = {}) {
   // Periodic cleanup to prevent memory leaks
   const cleanup = () => {
     const now = Date.now();
+    if (tokenBuckets.size <= uniqueTokenPerInterval) return;
+
+    // Phase 1: Evict expired buckets
+    _evictExpired(tokenBuckets, now);
+
+    // Phase 2: If still over limit, evict oldest by reset time
     if (tokenBuckets.size > uniqueTokenPerInterval) {
-      // Remove expired entries
-      tokenBuckets.forEach((bucket, key) => {
-        if (now > bucket.resetTime) {
-          tokenBuckets.delete(key);
-        }
-      });
-      // If still over limit, remove oldest entries
-      if (tokenBuckets.size > uniqueTokenPerInterval) {
-        const entries: Array<[string, TokenBucket]> = [];
-        tokenBuckets.forEach((bucket, key) => {
-          entries.push([key, bucket]);
-        });
-        entries.sort((a, b) => a[1].resetTime - b[1].resetTime);
-        const toRemove = entries.slice(
-          0,
-          entries.length - uniqueTokenPerInterval,
-        );
-        toRemove.forEach(([key]) => {
-          tokenBuckets.delete(key);
-        });
-      }
+      _evictOldest(tokenBuckets, uniqueTokenPerInterval);
     }
   };
 
@@ -126,6 +112,29 @@ export function rateLimit(options: RateLimitOptions = {}) {
 /**
  * Pre-configured rate limiters for common use cases
  */
+
+/**
+ * Evict expired buckets from the map.
+ */
+function _evictExpired(buckets: Map<string, TokenBucket>, now: number) {
+  for (const [key, bucket] of buckets.entries()) {
+    if (now > bucket.resetTime) {
+      buckets.delete(key);
+    }
+  }
+}
+
+/**
+ * Evict oldest buckets to stay within capacity.
+ */
+function _evictOldest(buckets: Map<string, TokenBucket>, capacity: number) {
+  const entries = Array.from(buckets.entries());
+  entries.sort((a, b) => a[1].resetTime - b[1].resetTime);
+  const toRemove = entries.slice(0, entries.length - capacity);
+  for (const [key] of toRemove) {
+    buckets.delete(key);
+  }
+}
 
 /** Auth endpoints: 10 requests per minute per IP */
 export const authRateLimiter = rateLimit({

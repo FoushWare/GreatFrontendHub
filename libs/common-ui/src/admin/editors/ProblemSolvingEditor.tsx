@@ -11,25 +11,13 @@ import {
   useThemeManagement,
   useFormDataManagement,
   useCodeEditorManagement,
-  useFileExplorerManagement,
-  useDynamicFieldsManagement,
   usePanelLayout,
 } from "./ProblemSolvingEditorHooks";
 import {
   ProblemSolvingEditorHeader,
   ProblemSolvingEditorMainContent,
 } from "./ProblemSolvingEditorComponents";
-import {
-  createTestCase,
-  validateFormData,
-  copyToClipboard,
-  addConstraint,
-  removeConstraint,
-  addExample,
-  removeExample,
-  addTag,
-  removeTag,
-} from "./ProblemSolvingEditorUtils";
+import { validateFormData } from "./ProblemSolvingEditorUtils";
 
 interface ProblemSolvingEditorProps {
   task?: ProblemSolvingTask | null;
@@ -51,16 +39,7 @@ const useProblemSolvingEditorState = (task?: ProblemSolvingTask | null) => {
     activeTab,
     setActiveTab,
   } = useCodeEditorManagement(task);
-  const fileExplorerState = useFileExplorerManagement();
-  const dynamicFieldsState = useDynamicFieldsManagement();
   const { leftPanelWidth, rightPanelWidth, handleMouseDown } = usePanelLayout();
-
-  // Minimal local state
-  const [copied, setCopied] = React.useState(false);
-  const [showPreview, setShowPreview] = React.useState(true);
-  const [activeBrowserTab, setActiveBrowserTab] = React.useState<
-    "browser" | "console"
-  >("browser");
 
   return {
     // Theme management
@@ -77,20 +56,10 @@ const useProblemSolvingEditorState = (task?: ProblemSolvingTask | null) => {
     setSolutionCode,
     activeTab,
     setActiveTab,
-    // File explorer and dynamic fields
-    fileExplorerState,
-    dynamicFieldsState,
     // Panel layout
     leftPanelWidth,
     rightPanelWidth,
     handleMouseDown,
-    // Local state
-    copied,
-    setCopied,
-    showPreview,
-    setShowPreview,
-    activeBrowserTab,
-    setActiveBrowserTab,
   };
 };
 
@@ -113,12 +82,9 @@ export default function ProblemSolvingEditor({
     setSolutionCode,
     activeTab,
     setActiveTab,
-    dynamicFieldsState,
     leftPanelWidth,
     rightPanelWidth,
     handleMouseDown,
-    copied,
-    setCopied,
   } = editorState;
 
   // Simple form handlers
@@ -136,80 +102,6 @@ export default function ProblemSolvingEditor({
     };
 
     onSave(updatedFormData);
-  };
-
-  const handleCopyCode = async (code: string) => {
-    try {
-      await copyToClipboard(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy code:", err);
-    }
-  };
-
-  const handleAddTestCase = () => {
-    const newTestCase = createTestCase();
-    setFormData({
-      ...formData,
-      testCases: [...formData.testCases, newTestCase],
-    });
-  };
-
-  const handleRemoveTestCase = (index: number) => {
-    setFormData({
-      ...formData,
-      testCases: formData.testCases.filter((_, i) => i !== index),
-    });
-  };
-
-  const handleUpdateTestCase = (
-    index: number,
-    field: string,
-    value: string,
-  ) => {
-    const updatedTestCases = [...formData.testCases];
-    updatedTestCases[index] = {
-      ...updatedTestCases[index],
-      [field]: value,
-    };
-    setFormData({
-      ...formData,
-      testCases: updatedTestCases,
-    });
-  };
-
-  const handleAddConstraint = () => {
-    const updatedConstraints = addConstraint(
-      formData.constraints,
-      dynamicFieldsState.newConstraint,
-    );
-    setFormData({
-      ...formData,
-      constraints: updatedConstraints,
-    });
-    dynamicFieldsState.setNewConstraint("");
-  };
-
-  const handleAddExample = () => {
-    const updatedExamples = addExample(
-      formData.examples,
-      dynamicFieldsState.newExample,
-    );
-    setFormData({
-      ...formData,
-      examples: updatedExamples,
-    });
-    dynamicFieldsState.setNewExample("");
-  };
-
-  const handleAddTag = () => {
-    const updatedTags = addTag(formData.tags, dynamicFieldsState.newTag);
-    setFormData({
-      ...formData,
-      tags: updatedTags,
-    });
-    dynamicFieldsState.setNewTag("");
   };
 
   return (

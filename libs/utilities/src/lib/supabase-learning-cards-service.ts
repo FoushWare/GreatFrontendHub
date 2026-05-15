@@ -184,14 +184,9 @@ export class SupabaseLearningCardsService {
   static async getLearningPlanCards(
     _plan_id: string,
   ): Promise<LearningPlanCard[]> {
-    try {
-      // This would need to be implemented based on your learning plan structure
-      // For now, return empty array
-      return [];
-    } catch (error) {
-      console.error("Error fetching learning plan cards:", error);
-      throw error;
-    }
+    // This would need to be implemented based on your learning plan structure
+    // For now, return empty array
+    return [];
   }
 
   static async addCardToPlan(plan_id: string, card_id: string): Promise<void> {
@@ -222,14 +217,9 @@ export class SupabaseLearningCardsService {
     _userId: string,
     _card_id: string,
   ): Promise<CardProgress | null> {
-    try {
-      // This would need to be implemented based on your progress tracking structure
-      // For now, return null
-      return null;
-    } catch (error) {
-      console.error("Error fetching card progress:", error);
-      throw error;
-    }
+    // This would need to be implemented based on your progress tracking structure
+    // For now, return null
+    return null;
   }
 
   static async updateCardProgress(

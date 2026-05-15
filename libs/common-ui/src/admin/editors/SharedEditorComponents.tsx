@@ -12,33 +12,38 @@ export const ThemeToggle = ({
   theme: string;
   setTheme: (t: "light" | "dark" | "system") => void;
   isDark: boolean;
-}) => (
-  <div
-    className={`flex items-center gap-1 p-1 rounded-lg ${isDark ? "bg-gray-700" : "bg-gray-200"}`}
-  >
-    {[
-      { val: "light" as const, icon: Sun },
-      { val: "dark" as const, icon: Moon },
-      { val: "system" as const, icon: Monitor },
-    ].map(({ val, icon: Icon }) => (
-      <button
-        key={val}
-        onClick={() => setTheme(val)}
-        className={`p-2 rounded transition-colors ${
-          theme === val
-            ? isDark
-              ? "bg-gray-800 text-white shadow-sm"
-              : "bg-white text-gray-900 shadow-sm"
-            : isDark
-              ? "text-gray-400 hover:text-white"
-              : "text-gray-500 hover:text-gray-900"
-        }`}
-      >
-        <Icon className="w-4 h-4" />
-      </button>
-    ))}
-  </div>
-);
+}) => {
+  const getButtonClass = (val: string) => {
+    if (theme === val) {
+      return isDark
+        ? "bg-gray-800 text-white shadow-sm"
+        : "bg-white text-gray-900 shadow-sm";
+    }
+    return isDark
+      ? "text-gray-400 hover:text-white"
+      : "text-gray-500 hover:text-gray-900";
+  };
+
+  return (
+    <div
+      className={`flex items-center gap-1 p-1 rounded-lg ${isDark ? "bg-gray-700" : "bg-gray-200"}`}
+    >
+      {[
+        { val: "light" as const, icon: Sun },
+        { val: "dark" as const, icon: Moon },
+        { val: "system" as const, icon: Monitor },
+      ].map(({ val, icon: Icon }) => (
+        <button
+          key={val}
+          onClick={() => setTheme(val)}
+          className={`p-2 rounded transition-colors ${getButtonClass(val)}`}
+        >
+          <Icon className="w-4 h-4" />
+        </button>
+      ))}
+    </div>
+  );
+};
 
 /**
  * Shared styling utility for editor fields
@@ -69,10 +74,14 @@ export const InputGroup = ({
   placeholder = "",
 }: any) => {
   const styles = getFieldStyles(isDark);
+  const id = `input-${label.replaceAll(/\s+/g, "-").toLowerCase()}`;
   return (
     <div className="space-y-2">
-      <label className={styles.label}>{label}</label>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -95,10 +104,14 @@ export const TextAreaGroup = ({
   placeholder = "",
 }: any) => {
   const styles = getFieldStyles(isDark);
+  const id = `textarea-${label.replaceAll(/\s+/g, "-").toLowerCase()}`;
   return (
     <div className="space-y-2">
-      <label className={styles.label}>{label}</label>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
       <textarea
+        id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={rows}
@@ -120,10 +133,14 @@ export const SelectGroup = ({
   isDark,
 }: any) => {
   const styles = getFieldStyles(isDark);
+  const id = `select-${label.replaceAll(/\s+/g, "-").toLowerCase()}`;
   return (
     <div className="space-y-2">
-      <label className={styles.label}>{label}</label>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
       <select
+        id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={styles.select}

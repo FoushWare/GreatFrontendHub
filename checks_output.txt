@@ -1,0 +1,18 @@
+Build Admin App	fail	1m14s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779778/job/74770771887	
+SonarCloud Code Analysis	fail	1m7s	https://sonarcloud.io	
+Admin Unit Tests	pass	46s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779778/job/74770771890	
+Analyze (javascript)	pass	1m56s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779789/job/74770771899	
+Analyze (typescript)	pass	1m51s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779789/job/74770771901	
+CodeQL	pass	2s	https://github.com/FoushWare/elzatona_web/runs/74771038618	
+CodeRabbit	pass	0		Review completed
+E2E Tests (Shard 1/3)	pass	59s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779774/job/74770772128	
+E2E Tests (Shard 2/3)	pass	3m16s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779774/job/74770772160	
+E2E Tests (Shard 3/3)	pass	1m11s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779774/job/74770772156	
+GitGuardian Security Checks	pass	32s	https://dashboard.gitguardian.com	
+Gitleaks	pass	1s	https://github.com/FoushWare/elzatona_web/runs/74770815398	
+Lint, Type Check, and Build	pass	1m23s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779765/job/74770772096	
+SonarQube	pass	2m35s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779764/job/74770772089	
+Trivy	pass	2s	https://github.com/FoushWare/elzatona_web/runs/74770844477	
+auto-assign	pass	5s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779784/job/74770771882	
+security-scan	pass	40s	https://github.com/FoushWare/elzatona_web/actions/runs/25482779780/job/74770771884	
+Admin E2E Tests (Shard ${{ matrix.shard }}/${{ strategy.job-total }})	skipping	0	https://github.com/FoushWare/elzatona_web/actions/runs/25482779778/job/74770955071	
