@@ -272,7 +272,7 @@
     "ts-jest": "^29.4.5",
     "tsx": "^4.20.5",
     "typescript": "^5",
-    "vercel": "^50.44.0",
+    "vercel": "^54.1.0",
     "vite": "^7.3.2",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "3.2.4"
