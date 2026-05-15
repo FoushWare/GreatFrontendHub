@@ -17,7 +17,7 @@ NC='\033[0m' # No Color
 LANGUAGE="javascript"
 DATABASE_NAME="codeql-database"
 RESULTS_FILE="codeql-results.sarif"
-QUERY_SUITE="security-extended,security-and-quality"
+QUERY_SUITE="javascript-security-extended.qls"
 
 # Check if CodeQL CLI is installed
 check_codeql() {

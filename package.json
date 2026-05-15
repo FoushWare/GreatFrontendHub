@@ -303,7 +303,7 @@
       "react-dom": "^19.0.0",
       "@modelcontextprotocol/sdk": "1.27.1",
       "monaco-editor": "0.53.0",
-      "hono": "4.12.12",
+      "hono": "4.12.18",
       "@hono/node-server": "1.19.13",
       "immutable": "5.1.5",
       "swagger-ui-react>immutable": "3.8.3",
@@ -332,7 +332,12 @@
       "protobufjs": "7.5.6",
       "fast-uri": "3.1.2",
       "@babel/plugin-transform-modules-systemjs": "7.29.4",
-      "next": "16.2.6"
+      "next": "16.2.6",
+      "mermaid": "11.15.0",
+      "vercel": "54.1.0",
+      "ip-address": "10.1.1",
+      "uuid": "11.1.1",
+      "postcss": "8.5.10"
     }
   }
 }
