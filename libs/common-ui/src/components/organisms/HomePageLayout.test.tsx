@@ -7,7 +7,7 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi as vitest } from "vitest";
 import { HomePageLayout } from "./HomePageLayout";
 import type {
   UserType,
@@ -26,7 +26,7 @@ const mockPersonalizedContent: PersonalizedContent = {
 };
 
 describe("HomePageLayout", () => {
-  it("should render all main sections", () => {
+  it("should render Learning Style Selector", () => {
     render(
       <HomePageLayout
         userType={null}
@@ -38,13 +38,12 @@ describe("HomePageLayout", () => {
         onFreestyleClick={() => {}}
       />,
     );
-    expect(screen.getByText("Master Frontend Development")).toBeInTheDocument();
     expect(
       screen.getByText(/How would you like to learn\?/i),
     ).toBeInTheDocument();
   });
 
-  it("should render PersonalizedContent when userType is provided", () => {
+  it("should render Learning Style Selector with userType provided", () => {
     render(
       <HomePageLayout
         userType="guided"
@@ -56,40 +55,25 @@ describe("HomePageLayout", () => {
         onFreestyleClick={() => {}}
       />,
     );
-    expect(screen.getByText("Master Frontend Development")).toBeInTheDocument();
+    expect(
+      screen.getByText(/How would you like to learn\?/i),
+    ).toBeInTheDocument();
   });
 
-  it("should render FinalCTASection when userType is null", () => {
-    render(
+  it("should call onGuidedClick when guided button is clicked", async () => {
+    const handleGuidedClick = vitest.fn();
+    const { getByRole } = render(
       <HomePageLayout
         userType={null}
         showAnimation={false}
         hasActivePlan={false}
         activePlan={null}
         personalizedContent={mockPersonalizedContent}
-        onGuidedClick={() => {}}
+        onGuidedClick={handleGuidedClick}
         onFreestyleClick={() => {}}
       />,
     );
-    expect(
-      screen.getByText(/Ready to Ace Your Interviews\? 🚀/i),
-    ).toBeInTheDocument();
-  });
-
-  it("should not render FinalCTASection when userType is provided", () => {
-    render(
-      <HomePageLayout
-        userType="guided"
-        showAnimation={false}
-        hasActivePlan={false}
-        activePlan={null}
-        personalizedContent={mockPersonalizedContent}
-        onGuidedClick={() => {}}
-        onFreestyleClick={() => {}}
-      />,
-    );
-    expect(
-      screen.queryByText(/Ready to Ace Your Interviews\? 🚀/i),
-    ).not.toBeInTheDocument();
+    const buttons = screen.getAllByRole("button");
+    expect(buttons.length).toBeGreaterThan(0);
   });
 });

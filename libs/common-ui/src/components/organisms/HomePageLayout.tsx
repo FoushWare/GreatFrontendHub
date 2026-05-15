@@ -2,10 +2,7 @@
 
 import React from "react";
 import { AnimatedBackground } from "../molecules/AnimatedBackground";
-import { HeroSection } from "../molecules/HeroSection";
 import { LearningStyleSelector } from "../molecules/LearningStyleSelector";
-import { PersonalizedContent } from "./PersonalizedContent";
-import { FinalCTASection } from "./FinalCTASection";
 import type {
   UserType,
   ActivePlan,
@@ -36,19 +33,14 @@ export function HomePageLayout({
   onFreestyleClick,
 }: HomePageLayoutProps) {
   return (
-    <div className="min-h-screen bg-[#fafafa] dark:bg-[#0a0a0b] relative overflow-hidden">
+    <div className="min-h-screen bg-[#fafafa] dark:bg-[#0a0a0b] relative overflow-hidden flex items-center justify-center">
       {/* Subtle depth layer */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.1),transparent_50%)] pointer-events-none" />
 
       <AnimatedBackground />
 
-      <div className="relative z-10 space-y-24 pb-32">
-        <HeroSection
-          personalizedContent={personalizedContent}
-          showAnimation={showAnimation}
-        />
-
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24">
           <LearningStyleSelector
             userType={userType}
             onGuidedClick={onGuidedClick}
@@ -56,24 +48,6 @@ export function HomePageLayout({
             showAnimation={showAnimation}
           />
         </div>
-
-        {userType && (
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
-            <PersonalizedContent
-              userType={userType}
-              showAnimation={showAnimation}
-              hasActivePlan={hasActivePlan}
-              activePlan={activePlan}
-              personalizedContent={personalizedContent}
-            />
-          </div>
-        )}
-
-        {!userType && (
-          <div className="max-w-4xl mx-auto px-4">
-            <FinalCTASection showAnimation={showAnimation} />
-          </div>
-        )}
       </div>
     </div>
   );

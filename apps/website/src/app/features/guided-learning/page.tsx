@@ -11,7 +11,6 @@ import {
 } from "./hooks";
 import {
   GuidedLearningHeader,
-  SignInCTABanner,
   ActivePlanView,
   PlanSelectionView,
 } from "./components";
@@ -77,9 +76,6 @@ export default function GuidedLearningPage() {
           milestoneRange={milestoneRange}
         />
 
-        {/* Sign-in CTA for non-authenticated users */}
-        {!isAuthenticated && <SignInCTABanner onSignIn={handleSignIn} />}
-
         {/* Active Plan View (if user has a plan in progress) */}
         {isAuthenticated && currentPlan && (
           <ActivePlanView
@@ -91,7 +87,7 @@ export default function GuidedLearningPage() {
           />
         )}
 
-        {/* Plan Selection Grid */}
+        {/* Plan Selection Grid - Available to all users, auth required on click */}
         <PlanSelectionView
           plans={plans}
           isLoading={plansLoading}
@@ -102,7 +98,7 @@ export default function GuidedLearningPage() {
         />
       </div>
 
-      {/* Sign-in Popup */}
+      {/* Sign-in Popup - Only shown when user tries to enter a plan without auth */}
       <SignInPopup
         isOpen={showSignInPopup}
         onClose={() => setShowSignInPopup(false)}
