@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
+import { generateId, maskEmail } from "@elzatona/utilities";
 import { adminConfig, getAdminApiUrl } from "../../../admin.config";
 import { getSupabaseClient } from "./get-supabase-client";
-import { generateId } from "@elzatona/utilities";
 
 // Types
 export interface AdminCredential {
@@ -89,7 +89,7 @@ export class AdminAuthService {
         return { success: false, error: "Failed to create admin account" };
       }
 
-      console.log(`✅ Admin account created: ${email} (${role})`);
+      console.log(`✅ Admin account created: ${maskEmail(email)} (${role})`);
       return { success: true, adminId };
     } catch (error) {
       console.error("Error initializing admin credentials:", error);
@@ -116,7 +116,7 @@ export class AdminAuthService {
       const data = await response.json();
 
       if (data.success) {
-        console.log(`✅ Admin authenticated: ${email}`);
+        console.log(`✅ Admin authenticated: ${maskEmail(email)}`);
         return { success: true, admin: data.admin };
       } else {
         return { success: false, error: data.error };
@@ -172,7 +172,7 @@ export class AdminAuthService {
         return { success: false, error: "Failed to create admin account" };
       }
 
-      console.log(`✅ Admin account created: ${email} (${role})`);
+      console.log(`✅ Admin account created: ${maskEmail(email)} (${role})`);
       return { success: true, adminId };
     } catch (error) {
       console.error("Error creating admin:", error);

@@ -1,3 +1,5 @@
+import { shuffleArray } from "@elzatona/utilities";
+
 export interface CultureFitQuestion {
   id: string;
   question: string;
@@ -349,8 +351,7 @@ export const getCultureFitQuestionById = (
 export const getRandomCultureFitQuestions = (
   count: number,
 ): CultureFitQuestion[] => {
-  const shuffled = [...cultureFitQuestions].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
+  return shuffleArray(cultureFitQuestions).slice(0, count);
 };
 
 export const searchCultureFitQuestions = (

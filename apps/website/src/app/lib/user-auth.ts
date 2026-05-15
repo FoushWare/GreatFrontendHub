@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import { maskEmail } from "@elzatona/utilities";
 import { getSupabaseClient } from "./get-supabase-client";
 
 // Enhanced user types with roles
@@ -99,7 +100,7 @@ export class UserAuthService {
         created_at: new Date().toISOString(),
       });
 
-      console.log(`✅ User account created: ${email} (${role})`);
+      console.log(`✅ User account created: ${maskEmail(email)} (${role})`);
       return { success: true, userId };
     } catch (error) {
       console.error("Error creating user:", error);
@@ -143,7 +144,7 @@ export class UserAuthService {
         expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
       };
 
-      console.log(`✅ User authenticated: ${email} (${user.role})`);
+      console.log(`✅ User authenticated: ${maskEmail(email)} (${user.role})`);
       return { success: true, user: session };
     } catch (error) {
       console.error("Error authenticating user:", error);

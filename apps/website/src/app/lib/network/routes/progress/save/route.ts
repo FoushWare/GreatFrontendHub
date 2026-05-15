@@ -16,7 +16,7 @@ function devModeResponse(
 ): NextResponse {
   return NextResponse.json({
     success: true,
-    progressId: `progress_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
+    progressId: `progress_${Date.now()}_${generateId()}`,
     message: "Progress saved successfully (development mode)",
     warning,
   });

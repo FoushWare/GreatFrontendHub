@@ -1,8 +1,9 @@
 // v1.0 - Markdown Question Parser
 // Parses markdown content to extract questions in various formats
 
-import { BulkQuestionData } from "./unified-question-schema";
+import { generateId } from "./utils";
 import { FilterXSS, type IFilterXSSOptions } from "xss";
+import type { BulkQuestionData } from "./unified-question-schema";
 
 /**
  * Completely remove all HTML tags including incomplete ones
@@ -696,7 +697,7 @@ export class MarkdownQuestionParser {
         difficulty = "advanced";
       }
       return {
-        id: `md_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
+        id: `md_${Date.now()}_${generateId()}`,
         title: question.title,
         content: question.content,
         type,

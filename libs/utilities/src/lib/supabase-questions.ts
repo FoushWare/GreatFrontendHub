@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
-import { QuestionStats as UnifiedQuestionStats } from "./unified-question-schema";
+import { shuffleArray } from "./utils";
+import type { QuestionStats as UnifiedQuestionStats } from "./unified-question-schema";
 
 const supabaseUrl =
   process.env["NEXT_PUBLIC_SUPABASE_URL"] ||
@@ -147,8 +148,7 @@ export const getRandomQuestions = async (
   if (error) throw error;
 
   // Shuffle and take random questions
-  const shuffled = (data || []).sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
+  return shuffleArray(data || []).slice(0, count);
 };
 
 export const getCategories = async (): Promise<QuestionCategory[]> => {

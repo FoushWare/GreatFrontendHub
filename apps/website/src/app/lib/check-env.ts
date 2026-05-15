@@ -12,6 +12,7 @@
 import { config } from "dotenv";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
+import { maskEmail } from "@elzatona/utilities";
 import {
   getEnvironment,
   isTestEnvironment,
@@ -78,7 +79,9 @@ console.log(
 console.log("");
 
 console.log("👤 Admin Configuration:");
-console.log(`   Admin Email: ${config_data.adminEmail || "not set"}`);
+console.log(
+  `   Admin Email: ${config_data.adminEmail ? maskEmail(config_data.adminEmail) : "not set"}`,
+);
 console.log(
   `   Has Admin Password: ${config_data.adminPassword ? "✅ YES" : "❌ NO"}`,
 );

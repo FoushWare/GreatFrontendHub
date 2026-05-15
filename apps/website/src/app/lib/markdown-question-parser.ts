@@ -1,8 +1,9 @@
 // v1.0 - Markdown Question Parser
 // Parses markdown content to extract questions in various formats
 
-import { BulkQuestionData } from "./unified-question-schema";
+import { generateId } from "@elzatona/utilities";
 import { removeAllHTMLTags } from "./sanitize-server";
+import type { BulkQuestionData } from "./unified-question-schema";
 
 export interface MarkdownQuestion {
   title: string;
@@ -656,7 +657,7 @@ export class MarkdownQuestionParser {
         difficulty = "advanced";
       }
       return {
-        id: `md_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
+        id: `md_${Date.now()}_${generateId()}`,
         title: question.title,
         content: question.content,
         type,

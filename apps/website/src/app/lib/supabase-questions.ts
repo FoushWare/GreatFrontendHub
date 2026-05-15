@@ -1,5 +1,6 @@
-import { QuestionStats as UnifiedQuestionStats } from "./unified-question-schema";
+import { shuffleArray } from "@elzatona/utilities";
 import { getSupabaseClient } from "./get-supabase-client";
+import type { QuestionStats as UnifiedQuestionStats } from "./unified-question-schema";
 
 export interface Question {
   id: string;
@@ -132,8 +133,7 @@ export const getRandomQuestions = async (
   if (error) throw error;
 
   // Shuffle and take random questions
-  const shuffled = (data || []).sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
+  return shuffleArray(data || []).slice(0, count);
 };
 
 export const getCategories = async (): Promise<QuestionCategory[]> => {

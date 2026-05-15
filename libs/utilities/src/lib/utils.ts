@@ -61,6 +61,39 @@ export const generateId = (): string => {
     .substring(0, 11);
 };
 
+export const maskEmail = (email: string): string => {
+  const [localPart, domain] = email.split("@");
+  if (!localPart || !domain) {
+    return email;
+  }
+
+  const visiblePrefix = localPart.slice(0, 2);
+  const maskedLocalPart =
+    localPart.length > 2 ? `${visiblePrefix}***` : localPart;
+  return `${maskedLocalPart}@${domain}`;
+};
+
+export const shuffleArray = <T>(items: readonly T[]): T[] => {
+  const shuffled = [...items];
+
+  if (shuffled.length < 2) {
+    return shuffled;
+  }
+
+  const randomValues = new Uint32Array(shuffled.length);
+  crypto.getRandomValues(randomValues);
+
+  for (let index = shuffled.length - 1; index > 0; index--) {
+    const swapIndex = randomValues[index] % (index + 1);
+    [shuffled[index], shuffled[swapIndex]] = [
+      shuffled[swapIndex],
+      shuffled[index],
+    ];
+  }
+
+  return shuffled;
+};
+
 export const sleep = (ms: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };

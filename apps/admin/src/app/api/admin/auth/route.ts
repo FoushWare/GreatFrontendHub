@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { getRepositoryFactory } from "@elzatona/database";
 import bcrypt from "bcryptjs";
-import { authRateLimiter } from "@elzatona/utilities/server";
+import { authRateLimiter, maskEmail } from "@elzatona/utilities/server";
 
 // Admin config - using environment variables directly
 const adminConfig = {
@@ -44,7 +44,9 @@ async function checkAuthRateLimit(request: NextRequest) {
 
 async function resolveAdminByEmail(email: string) {
   if (process.env.APP_ENV === "test" && email === "test-admin@example.com") {
-    console.log("[Admin Auth API] 🛠️ E2E Auth Bypass Triggered for:", email);
+    console.log(
+      `[Admin Auth API] 🛠️ E2E Auth Bypass Triggered for: ${maskEmail(email)}`,
+    );
     return {
       id: "e2e-test-admin-id",
       email: "test-admin@example.com",
@@ -168,11 +170,9 @@ export async function POST(request: NextRequest) {
       code?: string;
       details?: string;
     };
-    console.error("[Admin Auth API] 💥 Full Error:", {
+    console.error("[Admin Auth API] 💥 Auth error:", {
       message: errorDetails.message,
-      stack: errorDetails.stack,
       code: errorDetails.code,
-      details: errorDetails.details,
     });
     return NextResponse.json(
       {
