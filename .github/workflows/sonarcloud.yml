@@ -75,6 +75,8 @@ jobs:
             libs/utilities/src/lib/rate-limit.test.ts \
             libs/utilities/src/lib/frontend-task-validator.test.ts \
             libs/utilities/src/lib/progress.test.ts \
+            libs/common-ui/src/common/GuidedTour.test.tsx \
+            libs/common-ui/src/admin/editors/SharedEditorComponents.test.tsx \
             --coverage \
             --coverage.provider=v8 \
             --coverage.reporter=lcov \
