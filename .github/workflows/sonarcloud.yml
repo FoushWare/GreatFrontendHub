@@ -77,6 +77,13 @@ jobs:
             libs/utilities/src/lib/progress.test.ts \
             libs/common-ui/src/common/GuidedTour.test.tsx \
             libs/common-ui/src/admin/editors/SharedEditorComponents.test.tsx \
+            libs/common-ui/src/admin/editors/FrontendTaskEditorComponents.test.tsx \
+            libs/common-ui/src/admin/editors/ProblemSolvingEditorComponents.test.tsx \
+            libs/common-ui/src/admin/editors/ProblemSolvingEditor.test.tsx \
+            apps/website/src/app/lib/network/routes/dashboard/stats/route.test.ts \
+            libs/common-ui/src/admin/content-management/LearningCardsManager.test.tsx \
+            libs/common-ui/src/admin/content-management/modals/QuestionFormModal.test.tsx \
+            libs/utilities/src/lib/auth-config.test.ts \
             --coverage \
             --coverage.provider=v8 \
             --coverage.reporter=lcov \

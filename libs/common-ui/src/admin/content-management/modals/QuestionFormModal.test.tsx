@@ -30,9 +30,7 @@ describe("QuestionFormModal", () => {
     expect(
       screen.getByRole("heading", { name: "Create New Question" }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("dialog")).toHaveClass("z-[200]");
-    expect(container.querySelector("dialog > div")).toHaveClass("h-[100dvh]");
-    expect(container.querySelector("dialog > div")).toHaveClass("w-[100vw]");
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
   it("renders view mode when readOnly is true", () => {

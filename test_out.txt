@@ -1,0 +1,39 @@
+
+ RUN  v3.2.4 /Users/a.fouad/S/New_elzatona
+
+ ❯ libs/common-ui/src/admin/editors/ProblemSolvingEditor.test.tsx (2 tests | 2 failed) 49ms
+   × ProblemSolvingEditor > renders editor and handles save 38ms
+     → globalThis.window.matchMedia is not a function
+   × ProblemSolvingEditor > handles validation error without saving 9ms
+     → globalThis.window.matchMedia is not a function
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  libs/common-ui/src/admin/editors/ProblemSolvingEditor.test.tsx > ProblemSolvingEditor > renders editor and handles save
+ FAIL  libs/common-ui/src/admin/editors/ProblemSolvingEditor.test.tsx > ProblemSolvingEditor > handles validation error without saving
+TypeError: globalThis.window.matchMedia is not a function
+ ❯ libs/common-ui/src/admin/editors/SharedEditorHooks.ts:11:42
+      9| 
+     10|   useEffect(() => {
+     11|     const mediaQuery = globalThis.window.matchMedia(
+       |                                          ^
+     12|       "(prefers-color-scheme: dark)",
+     13|     );
+ ❯ Object.react_stack_bottom_frame node_modules/.pnpm/react-dom@19.2.4_react@19.2.4/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20
+ ❯ runWithFiberInDEV node_modules/.pnpm/react-dom@19.2.4_react@19.2.4/node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ commitHookEffectListMount node_modules/.pnpm/react-dom@19.2.4_react@19.2.4/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29
+ ❯ commitHookPassiveMountEffects node_modules/.pnpm/react-dom@19.2.4_react@19.2.4/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11
+ ❯ commitPassiveMountOnFiber node_modules/.pnpm/react-dom@19.2.4_react@19.2.4/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13
+ ❯ recursivelyTraversePassiveMountEffects node_modules/.pnpm/react-dom@19.2.4_react@19.2.4/node_modules/react-dom/cjs/react-dom-client.development.js:15439:11
+ ❯ commitPassiveMountOnFiber node_modules/.pnpm/react-dom@19.2.4_react@19.2.4/node_modules/react-dom/cjs/react-dom-client.development.js:15519:11
+ ❯ flushPassiveEffects node_modules/.pnpm/react-dom@19.2.4_react@19.2.4/node_modules/react-dom/cjs/react-dom-client.development.js:18432:9
+ ❯ node_modules/.pnpm/react-dom@19.2.4_react@19.2.4/node_modules/react-dom/cjs/react-dom-client.development.js:17923:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  01:30:38
+   Duration  1.57s (transform 97ms, setup 211ms, collect 243ms, tests 49ms, environment 492ms, prepare 72ms)
+
