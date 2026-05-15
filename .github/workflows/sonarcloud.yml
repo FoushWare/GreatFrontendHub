@@ -64,8 +64,6 @@ jobs:
             libs/contexts/src/lib/AdminNavbarVisibilityContext.test.tsx \
             apps/admin/src/app/AdminShell.test.tsx \
             libs/common-ui/src/components/ui/dialog.test.tsx \
-            apps/website/src/app/lib/frontend-task-validator.test.ts \
-            apps/website/src/app/lib/frontend-task-validator-coverage.test.ts \
             libs/utilities/src/lib/api/questions-handler.test.ts \
             libs/utilities/src/lib/api/sanitize-server.test.ts \
             libs/utilities/src/lib/api/validation.test.ts \
@@ -73,6 +71,10 @@ jobs:
             libs/utilities/src/lib/api/__tests__/api-config.test.ts \
             apps/website/src/app/lib/network/routes/questions/unified/route.test.ts \
             libs/utilities/src/lib/api/__tests__/stats-utils.test.ts \
+            libs/utilities/src/lib/supabase-learning-cards-service.test.ts \
+            libs/utilities/src/lib/rate-limit.test.ts \
+            libs/utilities/src/lib/frontend-task-validator.test.ts \
+            libs/utilities/src/lib/progress.test.ts \
             --coverage \
             --coverage.provider=v8 \
             --coverage.reporter=lcov \
