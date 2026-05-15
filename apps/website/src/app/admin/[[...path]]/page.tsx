@@ -11,8 +11,18 @@ type Props = {
 function getAdminBaseUrl(): string {
   const configured = process.env.ADMIN_URL?.trim().replace(/\/+$/, "");
 
-  if (configured && !configured.includes("elzatona-web.com")) {
-    return configured;
+  if (configured) {
+    try {
+      const url = new URL(configured);
+      if (
+        url.hostname !== "elzatona-web.com" &&
+        !url.hostname.endsWith(".elzatona-web.com")
+      ) {
+        return configured;
+      }
+    } catch {
+      // If it's a relative path or invalid URL, fallback to default
+    }
   }
 
   return "https://elzatona-admin.vercel.app";
