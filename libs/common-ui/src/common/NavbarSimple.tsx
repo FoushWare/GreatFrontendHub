@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   useAuth,
   useTheme,
@@ -249,6 +249,7 @@ export const NavbarSimple: React.FC = () => {
   // NOSONAR
   // NOSONAR
   // NOSONAR
+  const router = useRouter();
   const {
     isScrolled,
     setIsScrolled,
@@ -389,6 +390,19 @@ export const NavbarSimple: React.FC = () => {
     userType === "self-directed"
       ? "/browse-practice-questions"
       : "/features/guided-learning";
+
+  const handleGuidedModeSelect = () => {
+    setUserType("guided");
+    setIsOpen(false);
+    router.push("/features/guided-learning");
+  };
+
+  const handleFreeStyleModeSelect = () => {
+    setUserType("self-directed");
+    setIsOpen(false);
+    router.push("/browse-practice-questions");
+  };
+
   const mobileLearningLinkClasses = isPathActive(pathname, learningTargetHref)
     ? "text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 font-semibold"
     : "text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800";
@@ -409,7 +423,7 @@ export const NavbarSimple: React.FC = () => {
             href="/"
             className={`flex items-center transition-colors duration-200 ${getLogoStyles(isScrolled)}`}
           >
-            <AlzatonaLogo size="sm" showText={false} />
+            <AlzatonaLogo size="sm" showText />
           </Link>
 
           {/* Desktop Navigation - Only show for authenticated users */}
@@ -454,7 +468,11 @@ export const NavbarSimple: React.FC = () => {
           <div className="hidden lg:flex items-center space-x-4">
             {/* Language Switcher */}
             {/* Learning Mode Switcher - Always show */}
-            <LearningModeSwitcher isScrolled={isScrolled} />
+            <LearningModeSwitcher
+              isScrolled={isScrolled}
+              onGuidedSelect={handleGuidedModeSelect}
+              onFreeStyleSelect={handleFreeStyleModeSelect}
+            />
 
             {/* Sign In / Logout Link */}
             <AuthSection
@@ -484,7 +502,11 @@ export const NavbarSimple: React.FC = () => {
           <div className="flex items-center space-x-1 sm:space-x-2 lg:hidden">
             {/* Learning Mode Switcher for Mobile/Tablet - Hidden on very small screens */}
             <div className="hidden xs:block">
-              <LearningModeSwitcher isScrolled={isScrolled} />
+              <LearningModeSwitcher
+                isScrolled={isScrolled}
+                onGuidedSelect={handleGuidedModeSelect}
+                onFreeStyleSelect={handleFreeStyleModeSelect}
+              />
             </div>
 
             {/* Theme Toggle for Mobile/Tablet */}
@@ -530,7 +552,7 @@ export const NavbarSimple: React.FC = () => {
           <div className="flex flex-col h-full">
             {/* Mobile Header */}
             <div className="flex items-center justify-between p-3 sm:p-4 border-b border-gray-200 dark:border-gray-700">
-              <AlzatonaLogo size="sm" showText={false} />
+              <AlzatonaLogo size="sm" showText />
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"

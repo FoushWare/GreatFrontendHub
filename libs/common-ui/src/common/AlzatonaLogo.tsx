@@ -47,7 +47,11 @@ export const AlzatonaLogo: React.FC<AlzatonaLogoProps> = ({
   const logoAlt = "Elzatona Logo";
 
   return (
-    <div className={`${className}`}>
+    <div
+      className={`${className} flex items-center ${
+        variant === "stacked" ? "flex-col" : "flex-row"
+      } ${showText ? "gap-3" : ""}`}
+    >
       <Image
         src={logoSrc}
         alt={logoAlt}
@@ -57,6 +61,16 @@ export const AlzatonaLogo: React.FC<AlzatonaLogoProps> = ({
         priority
         suppressHydrationWarning
       />
+      {showText && (
+        <div className="leading-tight">
+          <div className="text-sm sm:text-base font-semibold tracking-[0.18em] uppercase text-gray-900 dark:text-white">
+            Elzatona-web
+          </div>
+          <div className="text-[0.7rem] sm:text-xs text-gray-500 dark:text-gray-400">
+            Learn. Practice. Build.
+          </div>
+        </div>
+      )}
     </div>
   );
 };
