@@ -73,7 +73,7 @@ export const maskEmail = (email: string): string => {
   return `${maskedLocalPart}@${domain}`;
 };
 
-export const shuffleArray = <T>(items: readonly T[]): T[] => {
+export function shuffleArray<T>(items: readonly T[]): T[] {
   const shuffled = [...items];
 
   if (shuffled.length < 2) {
@@ -92,7 +92,7 @@ export const shuffleArray = <T>(items: readonly T[]): T[] => {
   }
 
   return shuffled;
-};
+}
 
 export const sleep = (ms: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, ms));
