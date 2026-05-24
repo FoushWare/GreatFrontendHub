@@ -101,6 +101,7 @@ jobs:
 
   admin-e2e-tests:
     name: Admin E2E Tests (Shard ${{ matrix.shard }}/${{ strategy.job-total }})
+    if: github.actor != 'dependabot[bot]'
     needs: build-admin
     runs-on: ubuntu-latest
     timeout-minutes: 20
