@@ -6,6 +6,8 @@ import { Compass, Map } from "lucide-react";
 
 interface LearningModeSwitcherProps {
   isScrolled?: boolean;
+  onGuidedSelect?: () => void;
+  onFreeStyleSelect?: () => void;
 }
 
 /**
@@ -14,6 +16,8 @@ interface LearningModeSwitcherProps {
  */
 export const LearningModeSwitcher: React.FC<LearningModeSwitcherProps> = ({
   isScrolled,
+  onGuidedSelect,
+  onFreeStyleSelect,
 }) => {
   const { userType, setUserType } = useUserType();
 
@@ -47,6 +51,16 @@ export const LearningModeSwitcher: React.FC<LearningModeSwitcherProps> = ({
     ? "bg-indigo-600"
     : "bg-white/90 dark:bg-indigo-500";
 
+  const handleGuidedSelect = () => {
+    setUserType("guided");
+    onGuidedSelect?.();
+  };
+
+  const handleFreeStyleSelect = () => {
+    setUserType("self-directed");
+    onFreeStyleSelect?.();
+  };
+
   return (
     <div
       aria-label="Learning Mode Selection"
@@ -61,7 +75,7 @@ export const LearningModeSwitcher: React.FC<LearningModeSwitcherProps> = ({
 
       {/* Guided Option */}
       <button
-        onClick={() => setUserType("guided")}
+        onClick={handleGuidedSelect}
         aria-pressed={isGuided}
         className={`relative z-10 flex items-center justify-center space-x-2 px-4 py-1.5 rounded-lg transition-colors duration-300 ${getGuidedTextColor()}`}
       >
@@ -71,7 +85,7 @@ export const LearningModeSwitcher: React.FC<LearningModeSwitcherProps> = ({
 
       {/* Free Style Option */}
       <button
-        onClick={() => setUserType("self-directed")}
+        onClick={handleFreeStyleSelect}
         aria-pressed={isSelfDirected}
         className={`relative z-10 flex items-center justify-center space-x-2 px-4 py-1.5 rounded-lg transition-colors duration-300 ${getSelfDirectedTextColor()}`}
       >
