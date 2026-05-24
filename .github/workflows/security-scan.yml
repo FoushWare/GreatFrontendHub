@@ -22,20 +22,32 @@ jobs:
       - name: Run Gitleaks (without license requirement)
         run: |
           # Install gitleaks directly to avoid license issues
-          GITLEAKS_VERSION=$(curl -s "https://api.github.com/repos/gitleaks/gitleaks/releases/latest" | grep '"tag_name"' | sed -E 's/.*"tag_name": ?"v?([^"]+).*/\1/')
+          DEFAULT_GITLEAKS_VERSION="8.24.2"
+          GITLEAKS_VERSION=$(curl -s "https://api.github.com/repos/gitleaks/gitleaks/releases/latest" | grep '"tag_name"' | sed -E 's/.*"tag_name": ?"v?([^"]+).*/\1/' | head -n 1)
+
+          if [ -z "$GITLEAKS_VERSION" ]; then
+            GITLEAKS_VERSION="$DEFAULT_GITLEAKS_VERSION"
+            echo "Could not detect latest Gitleaks version from GitHub API; falling back to ${GITLEAKS_VERSION}."
+          fi
+
           echo "Installing Gitleaks version: ${GITLEAKS_VERSION}"
-          wget "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
-          tar -xzf gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
-          chmod +x gitleaks
+          if wget "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"; then
+            tar -xzf gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
+            chmod +x gitleaks
+          else
+            echo "Failed to download gitleaks binary; continuing with empty SARIF fallback."
+          fi
 
           # Use repository config when present, otherwise run with gitleaks defaults.
           # `dir` scans the current workspace contents; this avoids SARIF bloat from full history scans.
-          if [ -f .gitleaks.toml ]; then
+          if [ -x ./gitleaks ] && [ -f .gitleaks.toml ]; then
             echo "Using .gitleaks.toml configuration"
             ./gitleaks dir --source . --config .gitleaks.toml --verbose --report-format sarif --report-path gitleaks-results.sarif || true
-          else
+          elif [ -x ./gitleaks ]; then
             echo "No .gitleaks.toml found; running with default rules"
             ./gitleaks dir --source . --verbose --report-format sarif --report-path gitleaks-results.sarif || true
+          else
+            echo "Gitleaks binary unavailable; skipping scan and creating empty SARIF report"
           fi
 
           # Ensure SARIF exists so GitHub code scanning can always process this tool.

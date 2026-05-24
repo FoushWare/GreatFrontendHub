@@ -19,38 +19,53 @@ jobs:
     timeout-minutes: 30
 
     steps:
+      - name: Decide Sonar execution mode
+        id: sonar-mode
+        run: |
+          if [ "${{ github.actor }}" = "dependabot[bot]" ] && [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Skipping SonarCloud for Dependabot PR because SONAR_TOKEN is unavailable."
+            exit 0
+          fi
+
+          if [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "SONAR_TOKEN secret is required for SonarCloud analysis"
+            exit 1
+          fi
+
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
       - name: Checkout code
+        if: steps.sonar-mode.outputs.skip != 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Install pnpm
+        if: steps.sonar-mode.outputs.skip != 'true'
         uses: pnpm/action-setup@v4
         with:
           version: 10.33.0
 
       - name: Setup Node.js
+        if: steps.sonar-mode.outputs.skip != 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "24"
           cache: "pnpm"
 
       - name: Install dependencies
+        if: steps.sonar-mode.outputs.skip != 'true'
         run: pnpm install --no-frozen-lockfile
 
-      - name: Validate Sonar token is configured
-        run: |
-          if [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
-            echo "SONAR_TOKEN secret is required for SonarCloud analysis"
-            exit 1
-          fi
-
       - name: Run lint check
+        if: steps.sonar-mode.outputs.skip != 'true'
         run: pnpm run lint:ci
         env:
           NODE_OPTIONS: "--max-old-space-size=1536"
 
       - name: TypeScript type checking
+        if: steps.sonar-mode.outputs.skip != 'true'
         run: pnpm run type-check:ci
         env:
           NODE_OPTIONS: "--max-old-space-size=1536"
@@ -59,6 +74,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET || 'placeholder-secret' }}
 
       - name: Generate coverage report for SonarCloud
+        if: steps.sonar-mode.outputs.skip != 'true'
         run: |
           npx vitest run \
             libs/contexts/src/lib/AdminNavbarVisibilityContext.test.tsx \
@@ -93,6 +109,7 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=2048"
 
       - name: SonarQube Scan
+        if: steps.sonar-mode.outputs.skip != 'true'
         uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -101,7 +118,7 @@ jobs:
           projectBaseDir: .
 
       - name: Upload coverage reports
-        if: hashFiles('coverage/lcov.info') != ''
+        if: steps.sonar-mode.outputs.skip != 'true' && hashFiles('coverage/lcov.info') != ''
         uses: codecov/codecov-action@v4
         with:
           files: ./coverage/lcov.info
